@@ -38,9 +38,9 @@
 		3FF4B61D28608DAC00E3C0E5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3FF4B61F28608DAC00E3C0E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55DD6D7363232430C92C35B0 /* Pods_FreeTreeApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FreeTreeApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EEBD82DD286347E9006AE4FA /* ExampleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleModel.swift; sourceTree = "<group>"; };
 		73E5C7092862026D001309AB /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		73E5C70B286203B5001309AB /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		EEBD82DD286347E9006AE4FA /* ExampleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleModel.swift; sourceTree = "<group>"; };
 		F12C4569DD3D0F4FF5BAE880 /* Pods-FreeTreeApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FreeTreeApp.debug.xcconfig"; path = "Target Support Files/Pods-FreeTreeApp/Pods-FreeTreeApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -78,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				73E5C7062862023A001309AB /* MapView */,
+				73E5C70B286203B5001309AB /* MapViewController.swift */,
 				28C0B8EF2861EA6E00F48FCA /* ExampleView */,
 			);
 			path = Presentation;
@@ -129,7 +130,6 @@
 		73E5C7062862023A001309AB /* MapView */ = {
 			isa = PBXGroup;
 			children = (
-				73E5C7082862025A001309AB /* Controller  */,
 				73E5C70728620250001309AB /* View */,
 			);
 			path = MapView;
@@ -139,16 +139,8 @@
 			isa = PBXGroup;
 			children = (
 				73E5C7092862026D001309AB /* MapView.swift */,
-				73E5C70B286203B5001309AB /* MapViewController.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		73E5C7082862025A001309AB /* Controller  */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Controller ";
 			sourceTree = "<group>";
 		};
 		86F68E218976289595452229 /* Frameworks */ = {
