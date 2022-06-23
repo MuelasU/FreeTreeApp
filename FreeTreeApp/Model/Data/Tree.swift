@@ -26,9 +26,9 @@ private struct Location: Codable {
     static let zero = Location(lat: 0, lgt: 0)
 }
 
-struct Tree: Mockable {
-    typealias U = Self
-    static var mockName: String = "tree"
+struct Tree: Storable {
+    typealias Item = Self
+    static var itemName: String = "tree"
 
     let name: String
     let date: Date

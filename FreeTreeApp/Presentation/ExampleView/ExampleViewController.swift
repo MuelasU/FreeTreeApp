@@ -14,22 +14,13 @@ class ExampleViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let currentData = Tree.data
+        let currentData = Tree.store
+        print(currentData)
         let treeTest = Tree(name: "Teste2", date: .now, tag: ["teste1", "teste2"], advices: [])
         Tree.saveEntry(treeTest)
-        let newData = Tree.data
+        let newData = Tree.store
+        print(newData)
     }
-
-//    private func getTrees() -> [Tree] {
-//        if
-//            let path = Bundle.main.path(forResource: "mock_test", ofType: "json"),
-//            let json = try? String(contentsOfFile: path).data(using: .utf8)
-//        {
-//            let trees = Tree.decode(json: json)
-//            return trees
-//        }
-//        return []
-//    }
 }
 
 extension ExampleViewController: ExampleViewDelegate {

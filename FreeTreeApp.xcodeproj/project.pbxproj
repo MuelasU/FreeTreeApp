@@ -12,9 +12,10 @@
 		28C0B8F12861EA8100F48FCA /* ExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C0B8F02861EA8100F48FCA /* ExampleView.swift */; };
 		28C0B8F32861EA8E00F48FCA /* ExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C0B8F22861EA8E00F48FCA /* ExampleViewController.swift */; };
 		28C0B8F52861F95200F48FCA /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C0B8F42861F95200F48FCA /* UIColor+Extensions.swift */; };
+		3F3EFDF428648EAD0093F657 /* Coder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3EFDF328648EAD0093F657 /* Coder.swift */; };
+		3F3EFDF628648EC90093F657 /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3EFDF528648EC90093F657 /* Storable.swift */; };
 		3F7E8FCA286204910057B59E /* Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7E8FC9286204910057B59E /* Tree.swift */; };
 		3F7E8FCC2862054D0057B59E /* tree.json in Resources */ = {isa = PBXBuildFile; fileRef = 3F7E8FCB2862054D0057B59E /* tree.json */; };
-		3FBF07B428637F77000F8CA0 /* Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBF07B328637F77000F8CA0 /* Decoder.swift */; };
 		3FF4B60F28608DA800E3C0E5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF4B60E28608DA800E3C0E5 /* AppDelegate.swift */; };
 		3FF4B61128608DA800E3C0E5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF4B61028608DA800E3C0E5 /* SceneDelegate.swift */; };
 		3FF4B61928608DA800E3C0E5 /* FreeTreeApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3FF4B61728608DA800E3C0E5 /* FreeTreeApp.xcdatamodeld */; };
@@ -30,9 +31,10 @@
 		28C0B8F22861EA8E00F48FCA /* ExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleViewController.swift; sourceTree = "<group>"; };
 		28C0B8F42861F95200F48FCA /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		38E665DF6C09CD4071318ADA /* Pods-FreeTreeApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FreeTreeApp.release.xcconfig"; path = "Target Support Files/Pods-FreeTreeApp/Pods-FreeTreeApp.release.xcconfig"; sourceTree = "<group>"; };
+		3F3EFDF328648EAD0093F657 /* Coder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coder.swift; sourceTree = "<group>"; };
+		3F3EFDF528648EC90093F657 /* Storable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storable.swift; sourceTree = "<group>"; };
 		3F7E8FC9286204910057B59E /* Tree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tree.swift; sourceTree = "<group>"; };
 		3F7E8FCB2862054D0057B59E /* tree.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = tree.json; sourceTree = "<group>"; };
-		3FBF07B328637F77000F8CA0 /* Decoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decoder.swift; sourceTree = "<group>"; };
 		3FF4B60B28608DA800E3C0E5 /* FreeTreeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FreeTreeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FF4B60E28608DA800E3C0E5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FF4B61028608DA800E3C0E5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -91,11 +93,20 @@
 			path = ExampleView;
 			sourceTree = "<group>";
 		};
+		3F3EFDF228648C700093F657 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				3F3EFDF328648EAD0093F657 /* Coder.swift */,
+				3F3EFDF528648EC90093F657 /* Storable.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		3F7E8FC8286204810057B59E /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				3F3EFDF228648C700093F657 /* Services */,
 				3F7E8FC9286204910057B59E /* Tree.swift */,
-				3FBF07B328637F77000F8CA0 /* Decoder.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -278,12 +289,13 @@
 				28C0B8F32861EA8E00F48FCA /* ExampleViewController.swift in Sources */,
 				3FF4B60F28608DA800E3C0E5 /* AppDelegate.swift in Sources */,
 				28C0B8ED2861EA2C00F48FCA /* UIKit+Extensions.swift in Sources */,
+				3F3EFDF628648EC90093F657 /* Storable.swift in Sources */,
 				3F7E8FCA286204910057B59E /* Tree.swift in Sources */,
 				28C0B8F52861F95200F48FCA /* UIColor+Extensions.swift in Sources */,
 				28C0B8EA2861E9F600F48FCA /* ViewCoding.swift in Sources */,
 				3FF4B61128608DA800E3C0E5 /* SceneDelegate.swift in Sources */,
 				28C0B8F12861EA8100F48FCA /* ExampleView.swift in Sources */,
-				3FBF07B428637F77000F8CA0 /* Decoder.swift in Sources */,
+				3F3EFDF428648EAD0093F657 /* Coder.swift in Sources */,
 				3FF4B61928608DA800E3C0E5 /* FreeTreeApp.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
