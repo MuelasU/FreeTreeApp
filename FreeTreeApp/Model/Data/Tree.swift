@@ -19,7 +19,7 @@ struct TreeAdvice: Codable {
     }
 }
 
-private struct Location: Codable {
+struct Location: Codable {
     let lat: Double
     let lgt: Double
 
@@ -34,8 +34,8 @@ struct Tree: Mockable {
     let date: Date
     let tag: [String]
     let advices: [TreeAdvice]
+    var coordinates: Location = Location(lat: 0, lgt: 0)
     private var images: [String] = []
-    private var coordinates: Location = .zero
 
     init(name: String, date: Date, tag: [String], advices: [TreeAdvice]) {
         self.name = name

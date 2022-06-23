@@ -18,17 +18,23 @@ class TreeServices {
     init() {
         collectionRef = db.collection(collectionName)
     }
-    func create(name: String) {
-        let dataToSave: [String: Any] = [
-            "name" : name
-        ]
-        docRef = collectionRef?.addDocument(data: dataToSave) { (error) in
-            if let error = error {
-                print("Error adding document: \(error.localizedDescription)")
-            } else {
-                print("Document added with ID: \(docRef!.documentID)")
+    func create(tree: Tree) {
+        do {
+            let JSONTree = try JSONEncoder().encode(tree)
+            guard let dictionary = try JSONSerialization.jsonObject(with: JSONTree, options:.allowFragments) as? [String:Any] else {
+                print("Não foi possível transformar em dicionário")
+                return
             }
+            docRef = collectionRef?.addDocument(data: dictionary) { (error) in
+                if let error = error {
+                    print("Error adding document: \(error.localizedDescription)")
+                } else {
+                    print("Document added with ID: \(docRef!.documentID)")
+                }
 
+            }
+        } catch {
+            print(error)
         }
     }
 }
