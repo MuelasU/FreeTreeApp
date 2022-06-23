@@ -7,12 +7,14 @@
 
 import Firebase
 import FirebaseFirestore
+import CoreLocation
 
 private let collectionName = "trees"
 private var docRef: DocumentReference? = nil
 private var collectionRef: CollectionReference? = nil
 private let db = Firestore.firestore()
 class TreeServices {
+    
     init() {
         collectionRef = db.collection(collectionName)
     }
