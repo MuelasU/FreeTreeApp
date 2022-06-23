@@ -11,8 +11,13 @@ import MapKit
 protocol MapViewDelegate: AnyObject {
 }
 
+protocol MapViewConfig {
+    func setRegion(region: MKCoordinateRegion)
+}
+
 final class MapView: UIView {
-    private weak var delegate: MapViewDelegate?
+    weak var delegate: MapViewDelegate?
+    
     init(delegate: MapViewDelegate) {
         super.init(frame: .zero)
         self.delegate = delegate
@@ -24,14 +29,20 @@ final class MapView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private lazy var mapView: MKMapView = {
+    var mapView: MKMapView = {
         let mapView = MKMapView()
         mapView.mapType = MKMapType.standard
         mapView.isZoomEnabled = true
         mapView.isScrollEnabled = true
-        
+        mapView.setUserTrackingMode(.followWithHeading, animated: true)
         return mapView
     }()
+}
+
+extension MapView: MapViewConfig {
+    func setRegion(region: MKCoordinateRegion) {
+        mapView.setRegion(region, animated: true)
+    }
 }
 
 extension MapView: ViewCodeContract {
@@ -47,5 +58,10 @@ extension MapView: ViewCodeContract {
               view.trailingAnchor.constraint(equalTo: trailingAnchor)]
         }
     }
+    
+    func additionalSetup() {
+        mapView.showsUserLocation = true
+        mapView.isZoomEnabled = true
+        mapView.isPitchEnabled = true
+    }
 }
-

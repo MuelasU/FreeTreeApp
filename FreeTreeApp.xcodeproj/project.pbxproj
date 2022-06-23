@@ -19,6 +19,7 @@
 		3FF4B61E28608DAC00E3C0E5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FF4B61C28608DAC00E3C0E5 /* LaunchScreen.storyboard */; };
 		73E5C70A2862026D001309AB /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E5C7092862026D001309AB /* MapView.swift */; };
 		73E5C70C286203B5001309AB /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E5C70B286203B5001309AB /* MapViewController.swift */; };
+		73F591D02863464200AC7E42 /* MapKit+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F591CF2863464200AC7E42 /* MapKit+Extensions.swift */; };
 		AB4C0659B110DB0F1DB71F73 /* Pods_FreeTreeApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55DD6D7363232430C92C35B0 /* Pods_FreeTreeApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +40,7 @@
 		55DD6D7363232430C92C35B0 /* Pods_FreeTreeApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FreeTreeApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		73E5C7092862026D001309AB /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		73E5C70B286203B5001309AB /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		73F591CF2863464200AC7E42 /* MapKit+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapKit+Extensions.swift"; sourceTree = "<group>"; };
 		F12C4569DD3D0F4FF5BAE880 /* Pods-FreeTreeApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FreeTreeApp.debug.xcconfig"; path = "Target Support Files/Pods-FreeTreeApp/Pods-FreeTreeApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -68,6 +70,7 @@
 			children = (
 				28C0B8EC2861EA2C00F48FCA /* UIKit+Extensions.swift */,
 				28C0B8F42861F95200F48FCA /* UIColor+Extensions.swift */,
+				73F591CF2863464200AC7E42 /* MapKit+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -282,6 +285,7 @@
 				28C0B8F32861EA8E00F48FCA /* ExampleViewController.swift in Sources */,
 				3FF4B60F28608DA800E3C0E5 /* AppDelegate.swift in Sources */,
 				28C0B8ED2861EA2C00F48FCA /* UIKit+Extensions.swift in Sources */,
+				73F591D02863464200AC7E42 /* MapKit+Extensions.swift in Sources */,
 				73E5C70C286203B5001309AB /* MapViewController.swift in Sources */,
 				28C0B8F52861F95200F48FCA /* UIColor+Extensions.swift in Sources */,
 				28C0B8EA2861E9F600F48FCA /* ViewCoding.swift in Sources */,
@@ -428,9 +432,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = P952S3W7DW;
+				DEVELOPMENT_TEAM = 957V8XAP33;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FreeTreeApp/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to show you the trees around you.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -456,9 +461,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = P952S3W7DW;
+				DEVELOPMENT_TEAM = 957V8XAP33;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FreeTreeApp/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to show you the trees around you.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
