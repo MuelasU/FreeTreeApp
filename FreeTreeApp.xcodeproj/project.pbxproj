@@ -87,7 +87,7 @@
 		28C0B8EF2861EA6E00F48FCA /* ExampleView */ = {
 			isa = PBXGroup;
 			children = (
-				28C0B8F02861EA8100F48FCA /* ExampleView.swift */,
+				EEBD82DB286347A0006AE4FA /* Views */,
 				28C0B8F22861EA8E00F48FCA /* ExampleViewController.swift */,
 			);
 			path = ExampleView;
@@ -169,6 +169,14 @@
 				38E665DF6C09CD4071318ADA /* Pods-FreeTreeApp.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		EEBD82DB286347A0006AE4FA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				28C0B8F02861EA8100F48FCA /* ExampleView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
