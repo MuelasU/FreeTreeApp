@@ -16,7 +16,10 @@ class ExampleViewController: UIViewController {
         super.viewDidLoad()
         let treeTest = Tree(name: "Teste2", date: .now, tag: ["teste1", "teste2"], advices: [])
         let treeService = TreeServices()
-        //treeService.create(tree: treeTest)
+        let test = treeService.read()
+        for t in test {
+            print(t)
+        }
     }
 }
 
