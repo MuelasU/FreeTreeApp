@@ -18,7 +18,6 @@
 		3FF4B61B28608DAC00E3C0E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FF4B61A28608DAC00E3C0E5 /* Assets.xcassets */; };
 		3FF4B61E28608DAC00E3C0E5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FF4B61C28608DAC00E3C0E5 /* LaunchScreen.storyboard */; };
 		AB4C0659B110DB0F1DB71F73 /* Pods_FreeTreeApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55DD6D7363232430C92C35B0 /* Pods_FreeTreeApp.framework */; };
-		EEBD82DE286347E9006AE4FA /* ExampleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBD82DD286347E9006AE4FA /* ExampleModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,7 +35,6 @@
 		3FF4B61D28608DAC00E3C0E5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3FF4B61F28608DAC00E3C0E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55DD6D7363232430C92C35B0 /* Pods_FreeTreeApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FreeTreeApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EEBD82DD286347E9006AE4FA /* ExampleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleModel.swift; sourceTree = "<group>"; };
 		F12C4569DD3D0F4FF5BAE880 /* Pods-FreeTreeApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FreeTreeApp.debug.xcconfig"; path = "Target Support Files/Pods-FreeTreeApp/Pods-FreeTreeApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -108,7 +106,6 @@
 		3FF4B60D28608DA800E3C0E5 /* FreeTreeApp */ = {
 			isa = PBXGroup;
 			children = (
-				EEBD82DC286347B2006AE4FA /* Model */,
 				28C0B8EE2861EA6000F48FCA /* Presentation */,
 				28C0B8E82861E9DA00F48FCA /* Structure */,
 				3FF4B60E28608DA800E3C0E5 /* AppDelegate.swift */,
@@ -144,14 +141,6 @@
 				28C0B8F02861EA8100F48FCA /* ExampleView.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		EEBD82DC286347B2006AE4FA /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				EEBD82DD286347E9006AE4FA /* ExampleModel.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -270,7 +259,6 @@
 			files = (
 				28C0B8F32861EA8E00F48FCA /* ExampleViewController.swift in Sources */,
 				3FF4B60F28608DA800E3C0E5 /* AppDelegate.swift in Sources */,
-				EEBD82DE286347E9006AE4FA /* ExampleModel.swift in Sources */,
 				28C0B8ED2861EA2C00F48FCA /* UIKit+Extensions.swift in Sources */,
 				28C0B8F52861F95200F48FCA /* UIColor+Extensions.swift in Sources */,
 				28C0B8EA2861E9F600F48FCA /* ViewCoding.swift in Sources */,
