@@ -3,8 +3,8 @@
         "name":"Limoeiro da Prefeitura",
         "date":"2019-01-12",
         "coordinates": {
-            "lat":-23.5489,
-            "lng":-46.6388
+            "lgt":-46.6388,
+            "lat":-23.5489
         },
         "tag": [
             "Limoeiro",

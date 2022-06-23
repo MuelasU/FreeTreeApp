@@ -9,39 +9,6 @@ import Foundation
 import CoreLocation
 import UIKit
 
-struct Tree: Codable {
-    let name: String
-    let date: Date
-    let tag: [String]
-    let advices: [TreeAdvice]
-    private let images: [String]
-    private let coordinates: Location
-
-    var treeImages: [UIImage?] {
-        images.map { UIImage(named: $0) }
-    }
-
-    var location: CLLocation {
-        CLLocation(latitude: coordinates.lat, longitude: coordinates.lng)
-    }
-
-    static func decode(from json: Data) -> [Tree]? {
-        do {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd"
-
-            let decoder = JSONDecoder()
-            decoder.dateDecodingStrategy = .formatted(dateFormatter)
-
-            let decodedData = try decoder.decode([Tree].self, from: json)
-            return decodedData
-        } catch {
-            print(error.localizedDescription)
-            return nil
-        }
-    }
-}
-
 struct TreeAdvice: Codable {
     let username: String
     let date: Date
@@ -54,5 +21,36 @@ struct TreeAdvice: Codable {
 
 private struct Location: Codable {
     let lat: Double
-    let lng: Double
+    let lgt: Double
+
+    static let zero = Location(lat: 0, lgt: 0)
+}
+
+struct Tree: Mockable {
+    typealias U = Self
+    static var mockName: String = "tree"
+
+    let name: String
+    let date: Date
+    let tag: [String]
+    let advices: [TreeAdvice]
+    private var images: [String] = []
+    private var coordinates: Location = .zero
+
+    init(name: String, date: Date, tag: [String], advices: [TreeAdvice]) {
+        self.name = name
+        self.date = date
+        self.tag = tag
+        self.advices = advices
+    }
+
+    var treeImages: [UIImage?] {
+        get { images.map { UIImage(named: $0) } }
+        // TODO: implement set logic: save images
+    }
+
+    var location: CLLocationCoordinate2D {
+        get { CLLocationCoordinate2D(latitude: coordinates.lat, longitude: coordinates.lgt) }
+        set { coordinates = Location(lat: newValue.latitude, lgt: newValue.longitude) }
+    }
 }
