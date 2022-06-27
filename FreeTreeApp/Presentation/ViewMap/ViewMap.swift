@@ -17,18 +17,18 @@ protocol MapViewConfig {
 
 final class MapView: UIView {
     weak var delegate: MapViewDelegate?
-    
+
     init(delegate: MapViewDelegate) {
         super.init(frame: .zero)
         self.delegate = delegate
         buildView()
         backgroundColor = .white
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     var mapView: MKMapView = {
         let mapView = MKMapView()
         mapView.mapType = MKMapType.standard
@@ -49,7 +49,7 @@ extension MapView: ViewCodeContract {
     func setupHierarchy() {
         addSubview(mapView)
     }
-    
+
     func setupConstraints() {
         mapView.constraint { view in
             [view.topAnchor.constraint(equalTo: topAnchor),
@@ -58,7 +58,7 @@ extension MapView: ViewCodeContract {
              view.trailingAnchor.constraint(equalTo: trailingAnchor)]
         }
     }
-    
+
     func additionalSetup() {
         mapView.showsUserLocation = true
         mapView.isZoomEnabled = true
