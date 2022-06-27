@@ -14,7 +14,7 @@ struct TreeAdvice: Codable {
     let date: Date
     let text: String
     private let avatar: String?
-    
+
     var avatarImage: UIImage {
         get {
             guard let avatar = avatar else {
