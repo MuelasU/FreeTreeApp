@@ -7,6 +7,7 @@
 
 import Firebase
 import FirebaseFirestore
+import FirebaseFirestoreSwift
 import CoreLocation
 
 class TreeServices {
@@ -22,11 +23,13 @@ class TreeServices {
     
     func create(tree: Tree) {
         do {
-            let JSONTree = try JSONEncoder().encode(tree)
-            guard let dictionary = try JSONSerialization.jsonObject(with: JSONTree, options:.allowFragments) as? [String : Any] else {
-                print("Não foi possível transformar em dicionário")
-                return
-            }
+            var dictionary = try Firestore.Encoder().encode(tree)
+            print(dictionary)
+//            JSONTree = try JSONEncoder().encode(tree)
+//            guard let dictionary = try JSONSerialization.jsonObject(with: JSONTree, options:.allowFragments) as? [String : Any] else {
+//                print("Não foi possível transformar em dicionário")
+//                return
+//            }
             docRef = collectionRef?.addDocument(data: dictionary) { (error) in
                 if let error = error {
                     print("Error adding document: \(error.localizedDescription)")
@@ -50,7 +53,8 @@ class TreeServices {
                 guard let querySnapshot = querySnapshot else { return }
                 var trees: [Tree] = []
                 for document in querySnapshot.documents {
-                    guard let tree: Tree = try? document.toObject() else { continue }
+                    guard var tree: Tree = try? document.toObject() else { continue }
+                    //tree.id = document.documentID
                     trees.append(tree)
                 }
                 completion(.success(trees))
@@ -58,14 +62,30 @@ class TreeServices {
         }
 
     }
+    
+    func delete(tree: Tree) {
+        collectionRef?.document(tree.id!).delete() { (error) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                print("Tree deleted")
+            }
+            
+        }
+    }
 }
 
 extension QueryDocumentSnapshot {
-    func toObject<T: Decodable>() throws -> T {
-        let jsonData = try JSONSerialization.data(withJSONObject: data(), options: [])
-        let object = try JSONDecoder().decode(T.self, from: jsonData)
-        
-        return object
+    func toObject<T: Decodable>() throws -> T  where T:UpdatableIdentifiable, T.ID == String? {
+        //let jsonData = try JSONSerialization.data(withJSONObject: data(), options: [])
+        do {
+            var object = try Firestore.Decoder().decode(T.self, from: data())
+                object.id = self.documentID
+            return object
+        } catch {
+            print(error)
+            throw error
+        }
     }
 }
 

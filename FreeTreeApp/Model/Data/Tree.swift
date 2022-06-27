@@ -8,6 +8,7 @@
 import Foundation
 import CoreLocation
 import UIKit
+import FirebaseFirestoreSwift
 
 struct TreeAdvice: Codable {
     let username: String
@@ -26,9 +27,17 @@ struct Location: Codable {
     static let zero = Location(lat: 0, lgt: 0)
 }
 
-struct Tree: Mockable {
+protocol UpdatableIdentifiable: Identifiable {
+
+
+    /// The stable identity of the entity associated with this instance.
+    var id: Self.ID { get set }
+}
+
+struct Tree: Mockable, UpdatableIdentifiable {
     typealias U = Self
     static var mockName: String = "tree"
+    @DocumentID var id: String?
     let name: String
     let date: Date
     let tag: [String]
@@ -37,6 +46,7 @@ struct Tree: Mockable {
     private var images: [String] = []
 
     init(name: String, date: Date, tag: [String], advices: [TreeAdvice]) {
+        //self.id = UUID().uuidString
         self.name = name
         self.date = date
         self.tag = tag
