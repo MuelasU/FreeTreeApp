@@ -9,10 +9,16 @@ import UIKit
 import MapKit
 
 protocol MapViewDelegate: AnyObject {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation)-> MKAnnotationView? 
 }
 
-final class MapView: UIView {
+protocol MapViewConfig: AnyObject {
+    func treePins(_ treesInfo: [TreeAnnotation])
+}
+
+final class MapView: UIView, MKMapViewDelegate {
     private weak var delegate: MapViewDelegate?
+    
     init(delegate: MapViewDelegate) {
         super.init(frame: .zero)
         self.delegate = delegate
@@ -29,9 +35,11 @@ final class MapView: UIView {
         mapView.mapType = MKMapType.standard
         mapView.isZoomEnabled = true
         mapView.isScrollEnabled = true
-        
+        mapView.register(TreeMarkerView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
+ 
         return mapView
     }()
+    
 }
 
 extension MapView: ViewCodeContract {
@@ -49,3 +57,9 @@ extension MapView: ViewCodeContract {
     }
 }
 
+extension MapView: MapViewConfig {
+    func treePins(_ treesInfo: [TreeAnnotation]) {
+       mapView.delegate = self
+       mapView.addAnnotations(treesInfo)
+   }
+}

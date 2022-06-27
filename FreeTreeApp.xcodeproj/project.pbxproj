@@ -21,6 +21,9 @@
 		73E5C70C286203B5001309AB /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E5C70B286203B5001309AB /* MapViewController.swift */; };
 		AB4C0659B110DB0F1DB71F73 /* Pods_FreeTreeApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55DD6D7363232430C92C35B0 /* Pods_FreeTreeApp.framework */; };
 		EEBD82DE286347E9006AE4FA /* ExampleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBD82DD286347E9006AE4FA /* ExampleModel.swift */; };
+		EEBD82E42863564F006AE4FA /* MapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBD82E32863564F006AE4FA /* MapModel.swift */; };
+		EEBD82E628635663006AE4FA /* TreeAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBD82E528635663006AE4FA /* TreeAnnotation.swift */; };
+		EEBD82E92864A86F006AE4FA /* TreeMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBD82E82864A86F006AE4FA /* TreeMarkerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +44,9 @@
 		73E5C7092862026D001309AB /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		73E5C70B286203B5001309AB /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		EEBD82DD286347E9006AE4FA /* ExampleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleModel.swift; sourceTree = "<group>"; };
+		EEBD82E32863564F006AE4FA /* MapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapModel.swift; sourceTree = "<group>"; };
+		EEBD82E528635663006AE4FA /* TreeAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeAnnotation.swift; sourceTree = "<group>"; };
+		EEBD82E82864A86F006AE4FA /* TreeMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeMarkerView.swift; sourceTree = "<group>"; };
 		F12C4569DD3D0F4FF5BAE880 /* Pods-FreeTreeApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FreeTreeApp.debug.xcconfig"; path = "Target Support Files/Pods-FreeTreeApp/Pods-FreeTreeApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -139,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				73E5C7092862026D001309AB /* MapView.swift */,
+				EEBD82E82864A86F006AE4FA /* TreeMarkerView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -171,9 +178,19 @@
 		EEBD82DC286347B2006AE4FA /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				EEBD82E7286356B8006AE4FA /* Class */,
 				EEBD82DD286347E9006AE4FA /* ExampleModel.swift */,
+				EEBD82E32863564F006AE4FA /* MapModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		EEBD82E7286356B8006AE4FA /* Class */ = {
+			isa = PBXGroup;
+			children = (
+				EEBD82E528635663006AE4FA /* TreeAnnotation.swift */,
+			);
+			path = Class;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -294,9 +311,12 @@
 				3FF4B60F28608DA800E3C0E5 /* AppDelegate.swift in Sources */,
 				EEBD82DE286347E9006AE4FA /* ExampleModel.swift in Sources */,
 				28C0B8ED2861EA2C00F48FCA /* UIKit+Extensions.swift in Sources */,
+				EEBD82E42863564F006AE4FA /* MapModel.swift in Sources */,
 				73E5C70C286203B5001309AB /* MapViewController.swift in Sources */,
+				EEBD82E92864A86F006AE4FA /* TreeMarkerView.swift in Sources */,
 				28C0B8F52861F95200F48FCA /* UIColor+Extensions.swift in Sources */,
 				28C0B8EA2861E9F600F48FCA /* ViewCoding.swift in Sources */,
+				EEBD82E628635663006AE4FA /* TreeAnnotation.swift in Sources */,
 				3FF4B61128608DA800E3C0E5 /* SceneDelegate.swift in Sources */,
 				28C0B8F12861EA8100F48FCA /* ExampleView.swift in Sources */,
 				73E5C70A2862026D001309AB /* MapView.swift in Sources */,
