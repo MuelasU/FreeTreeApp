@@ -29,7 +29,6 @@ struct Location: Codable {
 struct Tree: Mockable {
     typealias U = Self
     static var mockName: String = "tree"
-
     let name: String
     let date: Date
     let tag: [String]

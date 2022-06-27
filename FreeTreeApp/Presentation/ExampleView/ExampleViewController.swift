@@ -19,7 +19,7 @@ class ExampleViewController: UIViewController {
         //Tenta inserir uma árvore no banco
         //treeService.create(tree: treeTest)
         //Carrega todas as árvores do banco
-        let test = treeService.read { result in
+        treeService.read { result in
             switch result {
             case let .success(trees):
                 print(trees)
@@ -27,7 +27,6 @@ class ExampleViewController: UIViewController {
                 print(error)
             }
         }
-        print(test)
     }
 }
 
