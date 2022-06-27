@@ -21,7 +21,7 @@
 		3FF4B61928608DA800E3C0E5 /* FreeTreeApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3FF4B61728608DA800E3C0E5 /* FreeTreeApp.xcdatamodeld */; };
 		3FF4B61B28608DAC00E3C0E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FF4B61A28608DAC00E3C0E5 /* Assets.xcassets */; };
 		3FF4B61E28608DAC00E3C0E5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FF4B61C28608DAC00E3C0E5 /* LaunchScreen.storyboard */; };
-		732A94B72869D05B0097AFFA /* ViewMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732A94B62869D05B0097AFFA /* ViewMap.swift */; };
+		732A94B72869D05B0097AFFA /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732A94B62869D05B0097AFFA /* MapView.swift */; };
 		732A94B92869D0C10097AFFA /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732A94B82869D0C10097AFFA /* MapViewController.swift */; };
 		AB4C0659B110DB0F1DB71F73 /* Pods_FreeTreeApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55DD6D7363232430C92C35B0 /* Pods_FreeTreeApp.framework */; };
 /* End PBXBuildFile section */
@@ -45,7 +45,7 @@
 		3FF4B61D28608DAC00E3C0E5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3FF4B61F28608DAC00E3C0E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55DD6D7363232430C92C35B0 /* Pods_FreeTreeApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FreeTreeApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		732A94B62869D05B0097AFFA /* ViewMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewMap.swift; sourceTree = "<group>"; };
+		732A94B62869D05B0097AFFA /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		732A94B82869D0C10097AFFA /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		F12C4569DD3D0F4FF5BAE880 /* Pods-FreeTreeApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FreeTreeApp.debug.xcconfig"; path = "Target Support Files/Pods-FreeTreeApp/Pods-FreeTreeApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -162,7 +162,7 @@
 		732A94BA2869D0DB0097AFFA /* ViewMap */ = {
 			isa = PBXGroup;
 			children = (
-				732A94B62869D05B0097AFFA /* ViewMap.swift */,
+				732A94B62869D05B0097AFFA /* MapView.swift */,
 				732A94B82869D0C10097AFFA /* MapViewController.swift */,
 			);
 			path = ViewMap;
@@ -313,7 +313,7 @@
 				28C0B8ED2861EA2C00F48FCA /* UIKit+Extensions.swift in Sources */,
 				3F3EFDF628648EC90093F657 /* Storable.swift in Sources */,
 				3F7E8FCA286204910057B59E /* Tree.swift in Sources */,
-				732A94B72869D05B0097AFFA /* ViewMap.swift in Sources */,
+				732A94B72869D05B0097AFFA /* MapView.swift in Sources */,
 				732A94B92869D0C10097AFFA /* MapViewController.swift in Sources */,
 				28C0B8F52861F95200F48FCA /* UIColor+Extensions.swift in Sources */,
 				28C0B8EA2861E9F600F48FCA /* ViewCoding.swift in Sources */,

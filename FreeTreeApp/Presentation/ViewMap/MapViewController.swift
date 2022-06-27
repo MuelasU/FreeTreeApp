@@ -32,7 +32,9 @@ class MapViewController: UIViewController {
 
     func followUserLocation() {
         if let location = locationManager.location {
-            let region = MKCoordinateRegion.init(center: location.coordinate, latitudinalMeters: 100, longitudinalMeters: 100)
+            let region = MKCoordinateRegion.init(center: location.coordinate,
+                                                 latitudinalMeters: 100,
+                                                 longitudinalMeters: 100)
             mapViewConfig?.setRegion(region: region)
         }
     }
@@ -41,7 +43,9 @@ class MapViewController: UIViewController {
 extension MapViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
-            let region = MKCoordinateRegion.init(center: location.coordinate, latitudinalMeters: 100, longitudinalMeters: 100)
+            let region = MKCoordinateRegion.init(center: location.coordinate,
+                                                 latitudinalMeters: 100,
+                                                 longitudinalMeters: 100)
             mapViewConfig?.setRegion(region: region)
         }
     }

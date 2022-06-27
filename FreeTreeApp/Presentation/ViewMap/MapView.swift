@@ -22,7 +22,6 @@ final class MapView: UIView {
         super.init(frame: .zero)
         self.delegate = delegate
         buildView()
-        backgroundColor = .white
     }
 
     required init?(coder: NSCoder) {
@@ -31,10 +30,13 @@ final class MapView: UIView {
 
     var mapView: MKMapView = {
         let mapView = MKMapView()
+
         mapView.mapType = MKMapType.standard
         mapView.isZoomEnabled = true
         mapView.isScrollEnabled = true
+        mapView.isPitchEnabled = true
         mapView.setUserTrackingMode(.followWithHeading, animated: true)
+
         return mapView
     }()
 }
@@ -57,11 +59,5 @@ extension MapView: ViewCodeContract {
              view.leadingAnchor.constraint(equalTo: leadingAnchor),
              view.trailingAnchor.constraint(equalTo: trailingAnchor)]
         }
-    }
-
-    func additionalSetup() {
-        mapView.showsUserLocation = true
-        mapView.isZoomEnabled = true
-        mapView.isPitchEnabled = true
     }
 }
