@@ -14,12 +14,20 @@ class ExampleViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let treeTest = Tree(name: "Teste2", date: .now, tag: ["teste1", "teste2"], advices: [])
+        let treeTest = Tree(name: "laranjeira do norte", date: .now, tag: ["a, b"], advices: [])
         let treeService = TreeServices()
-        let test = treeService.read()
-        for t in test {
-            print(t)
+        //Tenta inserir uma árvore no banco
+        //treeService.create(tree: treeTest)
+        //Carrega todas as árvores do banco
+        let test = treeService.read { result in
+            switch result {
+            case let .success(trees):
+                print(trees)
+            case let .failure(error):
+                print(error)
+            }
         }
+        print(test)
     }
 }
 

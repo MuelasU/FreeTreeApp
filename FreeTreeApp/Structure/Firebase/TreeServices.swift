@@ -40,25 +40,33 @@ class TreeServices {
         }
     }
 
-    func read() -> [Tree] {
-        var trees: [Tree] = []
+    func read(completion: @escaping (Result<[Tree], Error>) -> Void ) {
+        
         collectionRef?.getDocuments() { (querySnapshot, error) in
             if let error = error {
                 print("Error getting documents: \(error.localizedDescription)")
+                completion(.failure(error))
             } else {
                 guard let querySnapshot = querySnapshot else { return }
+                var trees: [Tree] = []
                 for document in querySnapshot.documents {
-                    //TODO
-                    let readTrees = document.data().mapValues { (tree) -> Tree? in
-                        let data = try? JSONSerialization.data(withJSONObject: tree, options: .prettyPrinted)
-                        let json = try? JSONDecoder().decode(Tree.self, from: data!)
-                        trees.append(json!)
-                        return json
-                    }
+                    guard let tree: Tree = try? document.toObject() else { continue }
+                    trees.append(tree)
                 }
+                completion(.success(trees))
             }
         }
-        return trees
+
     }
 }
+
+extension QueryDocumentSnapshot {
+    func toObject<T: Decodable>() throws -> T {
+        let jsonData = try JSONSerialization.data(withJSONObject: data(), options: [])
+        let object = try JSONDecoder().decode(T.self, from: jsonData)
+        
+        return object
+    }
+}
+
 
