@@ -13,9 +13,16 @@ struct TreeAdvice: Codable {
     let username: String
     let date: Date
     let text: String
-    private let avatar: String
-    var avatarImage: UIImage? {
-        UIImage(named: avatar)
+    private let avatar: String?
+    
+    var avatarImage: UIImage {
+        get {
+            guard let avatar = avatar else {
+                return UIImage(systemName: "person.crop.circle")!
+            }
+            return UIImage(named: avatar)!
+        }
+        // TODO: - Implement setter
     }
 }
 
