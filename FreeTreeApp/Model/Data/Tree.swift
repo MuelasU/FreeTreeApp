@@ -42,7 +42,7 @@ protocol UpdatableIdentifiable: Identifiable {
 }
 
 struct Tree: Storable, UpdatableIdentifiable {
-    typealias U = Self
+    typealias Item = Self
     static var itemName: String = "tree"
     @DocumentID var id: String?
     let name: String
@@ -53,7 +53,6 @@ struct Tree: Storable, UpdatableIdentifiable {
     private var images: [String] = []
 
     init(name: String, date: Date, tag: [String], advices: [TreeAdvice]) {
-        //self.id = UUID().uuidString
         self.name = name
         self.date = date
         self.tag = tag
