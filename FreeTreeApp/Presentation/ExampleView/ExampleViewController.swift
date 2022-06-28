@@ -16,17 +16,25 @@ class ExampleViewController: UIViewController {
         super.viewDidLoad()
         let treeTest = Tree(name: "limoeiro do norte", date: .now, tag: ["a, b"], advices: [])
         let treeService = TreeServices()
-        //Tenta inserir uma árvore no banco
-        treeService.create(tree: treeTest)
-        //Carrega todas as árvores do banco
+        
+        treeService.create(tree: treeTest) { error in
+            if let error = error {
+                print("Não foi possível criar a árvore \(error.localizedDescription)")
+            }
+        }
+        
         treeService.read { result in
             switch result {
             case let .success(trees):
                 for tree in trees {
-                    treeService.delete(tree: tree)
+                    treeService.delete(tree: tree) { error in
+                        if let error = error {
+                            print("Não foi possível deletar a árvore \(error.localizedDescription)")
+                        }
+                    }
                 }
             case let .failure(error):
-                print(error)
+                print("Não foi possível ler as árvores do banco \(error.localizedDescription)")
             }
         }
     }
