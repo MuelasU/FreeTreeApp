@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		23141676286C78E900D77854 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23141675286C78E900D77854 /* SearchView.swift */; };
 		236B75F72869EB00009885DF /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236B75F62869EB00009885DF /* SearchViewController.swift */; };
 		236B75FB286B4569009885DF /* TreeCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236B75FA286B4568009885DF /* TreeCellType.swift */; };
 		28C0B8EA2861E9F600F48FCA /* ViewCoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C0B8E92861E9F600F48FCA /* ViewCoding.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		23141675286C78E900D77854 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		236B75F62869EB00009885DF /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; usesTabs = 0; };
 		236B75FA286B4568009885DF /* TreeCellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeCellType.swift; sourceTree = "<group>"; };
 		28C0B8E92861E9F600F48FCA /* ViewCoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCoding.swift; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 			children = (
 				236B75F62869EB00009885DF /* SearchViewController.swift */,
 				236B75FA286B4568009885DF /* TreeCellType.swift */,
+				23141675286C78E900D77854 /* SearchView.swift */,
 			);
 			path = SearchView;
 			sourceTree = "<group>";
@@ -334,6 +337,7 @@
 				28C0B8F52861F95200F48FCA /* UIColor+Extensions.swift in Sources */,
 				28C0B8EA2861E9F600F48FCA /* ViewCoding.swift in Sources */,
 				3FF4B61128608DA800E3C0E5 /* SceneDelegate.swift in Sources */,
+				23141676286C78E900D77854 /* SearchView.swift in Sources */,
 				28C0B8F12861EA8100F48FCA /* ExampleView.swift in Sources */,
 				3F3EFDF428648EAD0093F657 /* Coder.swift in Sources */,
 				3FF4B61928608DA800E3C0E5 /* FreeTreeApp.xcdatamodeld in Sources */,
