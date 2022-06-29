@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		236B75F72869EB00009885DF /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236B75F62869EB00009885DF /* SearchViewController.swift */; };
+		236B75FB286B4569009885DF /* TreeCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236B75FA286B4568009885DF /* TreeCellType.swift */; };
 		28C0B8EA2861E9F600F48FCA /* ViewCoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C0B8E92861E9F600F48FCA /* ViewCoding.swift */; };
 		28C0B8ED2861EA2C00F48FCA /* UIKit+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C0B8EC2861EA2C00F48FCA /* UIKit+Extensions.swift */; };
 		28C0B8F12861EA8100F48FCA /* ExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C0B8F02861EA8100F48FCA /* ExampleView.swift */; };
@@ -27,6 +29,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		236B75F62869EB00009885DF /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; usesTabs = 0; };
+		236B75FA286B4568009885DF /* TreeCellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeCellType.swift; sourceTree = "<group>"; };
 		28C0B8E92861E9F600F48FCA /* ViewCoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCoding.swift; sourceTree = "<group>"; };
 		28C0B8EC2861EA2C00F48FCA /* UIKit+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIKit+Extensions.swift"; sourceTree = "<group>"; };
 		28C0B8F02861EA8100F48FCA /* ExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleView.swift; sourceTree = "<group>"; };
@@ -62,6 +66,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		236B75F52869EAD8009885DF /* SearchView */ = {
+			isa = PBXGroup;
+			children = (
+				236B75F62869EB00009885DF /* SearchViewController.swift */,
+				236B75FA286B4568009885DF /* TreeCellType.swift */,
+			);
+			path = SearchView;
+			sourceTree = "<group>";
+		};
 		28C0B8E82861E9DA00F48FCA /* Structure */ = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +96,7 @@
 		28C0B8EE2861EA6000F48FCA /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				236B75F52869EAD8009885DF /* SearchView */,
 				732A94BA2869D0DB0097AFFA /* ViewMap */,
 				28C0B8EF2861EA6E00F48FCA /* ExampleView */,
 			);
@@ -308,11 +322,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				236B75F72869EB00009885DF /* SearchViewController.swift in Sources */,
 				28C0B8F32861EA8E00F48FCA /* ExampleViewController.swift in Sources */,
 				3FF4B60F28608DA800E3C0E5 /* AppDelegate.swift in Sources */,
 				28C0B8ED2861EA2C00F48FCA /* UIKit+Extensions.swift in Sources */,
 				3F3EFDF628648EC90093F657 /* Storable.swift in Sources */,
 				3F7E8FCA286204910057B59E /* Tree.swift in Sources */,
+				236B75FB286B4569009885DF /* TreeCellType.swift in Sources */,
 				732A94B72869D05B0097AFFA /* MapView.swift in Sources */,
 				732A94B92869D0C10097AFFA /* MapViewController.swift in Sources */,
 				28C0B8F52861F95200F48FCA /* UIColor+Extensions.swift in Sources */,
