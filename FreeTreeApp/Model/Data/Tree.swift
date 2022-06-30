@@ -46,7 +46,6 @@ struct Tree: Mockable, UpdatableIdentifiable {
     private var images: [String] = []
 
     init(name: String, date: Date, tag: [String], advices: [TreeAdvice]) {
-        //self.id = UUID().uuidString
         self.name = name
         self.date = date
         self.tag = tag
