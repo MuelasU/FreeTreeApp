@@ -12,6 +12,7 @@ protocol SearchViewDelegate: AnyObject {
 }
 
 final class SearchView: UIView {
+
     private weak var delegate: SearchViewDelegate?
     init(delegate: SearchViewDelegate) {
         super.init(frame: .zero)
@@ -24,7 +25,7 @@ final class SearchView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private lazy var treeLabel: UILabel = {
+    private lazy var favLabel: UILabel = {
         let treeLabel = UILabel()
         treeLabel.text = "Árvores favoritas"
         treeLabel.textColor = .gray
@@ -65,13 +66,20 @@ final class SearchView: UIView {
         profilePicture.setImage(image, for: .normal)
         return profilePicture
     }()
+
+    private lazy var carouselView: CarouselView = {
+        var carousel = CarouselView()
+        return carousel
+    }()
+
 }
 
 extension SearchView: ViewCodeContract {
     func setupHierarchy() {
         addSubview(treeSearch)
-        addSubview(treeLabel)
+        addSubview(favLabel)
         addSubview(profileButton)
+        addSubview(carouselView)
     }
 
     func setupConstraints() {
@@ -80,17 +88,21 @@ extension SearchView: ViewCodeContract {
              view.topAnchor.constraint(equalTo: topAnchor, constant: 8),
              view.leftAnchor.constraint(equalTo: leftAnchor, constant: 8)]
         }
-        treeLabel.constraint { view in
-            [view.leftAnchor.constraint(equalTo: leftAnchor, constant: 8),
-             view.topAnchor.constraint(equalTo: treeSearch.bottomAnchor, constant: 8)
-            ]
-        }
         profileButton.constraint { view in
             [view.topAnchor.constraint(equalTo: topAnchor, constant: 8),
              view.leftAnchor.constraint(equalTo: treeSearch.rightAnchor, constant: 8),
              view.rightAnchor.constraint(equalTo: rightAnchor, constant: -8)
             ]
         }
-
+        favLabel.constraint { view in
+            [view.leftAnchor.constraint(equalTo: leftAnchor, constant: 8),
+             view.topAnchor.constraint(equalTo: treeSearch.bottomAnchor, constant: 8)
+            ]
+        }
+        carouselView.constraint { view in
+            [view.topAnchor.constraint(equalTo: favLabel.bottomAnchor, constant: 8),
+             view.leftAnchor.constraint(equalTo: leftAnchor, constant: 8)
+            ]
+        }
     }
 }
