@@ -9,11 +9,12 @@ import UIKit
 import MapKit
 
 protocol MapViewDelegate: AnyObject {
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation)-> MKAnnotationView? 
 }
 
 protocol MapViewConfig: AnyObject {
     func treePins(_ treesInfo: [TreeAnnotation])
+    
+    func setRegion(region: MKCoordinateRegion)
 }
 
 final class MapView: UIView, MKMapViewDelegate {
@@ -23,7 +24,6 @@ final class MapView: UIView, MKMapViewDelegate {
         super.init(frame: .zero)
         self.delegate = delegate
         buildView()
-        backgroundColor = .white
     }
     
     required init?(coder: NSCoder) {
@@ -32,13 +32,28 @@ final class MapView: UIView, MKMapViewDelegate {
     
     private lazy var mapView: MKMapView = {
         let mapView = MKMapView()
+        mapView.delegate = self
+        
         mapView.mapType = MKMapType.standard
         mapView.isZoomEnabled = true
         mapView.isScrollEnabled = true
+        mapView.isPitchEnabled = true
+        mapView.setUserTrackingMode(.followWithHeading, animated: true)
         mapView.register(TreeMarkerView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
- 
+        
         return mapView
     }()
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        guard let tree = view.annotation as? TreeAnnotation else {
+            return
+        }
+
+        let launchOptions = [
+            MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving
+        ]
+        tree.mapItem?.openInMaps(launchOptions: launchOptions)
+    }
     
 }
 
@@ -49,17 +64,20 @@ extension MapView: ViewCodeContract {
     
     func setupConstraints() {
         mapView.constraint { view in
-             [view.topAnchor.constraint(equalTo: topAnchor),
-              view.bottomAnchor.constraint(equalTo: bottomAnchor),
-              view.leadingAnchor.constraint(equalTo: leadingAnchor),
-              view.trailingAnchor.constraint(equalTo: trailingAnchor)]
+            [view.topAnchor.constraint(equalTo: topAnchor),
+             view.bottomAnchor.constraint(equalTo: bottomAnchor),
+             view.leadingAnchor.constraint(equalTo: leadingAnchor),
+             view.trailingAnchor.constraint(equalTo: trailingAnchor)]
         }
     }
 }
 
 extension MapView: MapViewConfig {
     func treePins(_ treesInfo: [TreeAnnotation]) {
-       mapView.delegate = self
-       mapView.addAnnotations(treesInfo)
-   }
+        mapView.addAnnotations(treesInfo)
+    }
+    
+    func setRegion(region: MKCoordinateRegion) {
+        mapView.setRegion(region, animated: true)
+    }
 }
