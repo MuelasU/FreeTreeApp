@@ -83,7 +83,8 @@
 		28C0B8EE2861EA6000F48FCA /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				73E5C7062862023A001309AB /* MapView */,
+				73E5C7062862023A001309AB /* ViewMap */,
+				73E5C7092862026D001309AB /* MapView.swift */,
 				73E5C70B286203B5001309AB /* MapViewController.swift */,
 				28C0B8EF2861EA6E00F48FCA /* ExampleView */,
 			);
@@ -133,18 +134,17 @@
 			path = FreeTreeApp;
 			sourceTree = "<group>";
 		};
-		73E5C7062862023A001309AB /* MapView */ = {
+		73E5C7062862023A001309AB /* ViewMap */ = {
 			isa = PBXGroup;
 			children = (
 				73E5C70728620250001309AB /* View */,
 			);
-			path = MapView;
+			path = ViewMap;
 			sourceTree = "<group>";
 		};
 		73E5C70728620250001309AB /* View */ = {
 			isa = PBXGroup;
 			children = (
-				73E5C7092862026D001309AB /* MapView.swift */,
 				EEBD82E82864A86F006AE4FA /* TreeMarkerView.swift */,
 			);
 			path = View;
