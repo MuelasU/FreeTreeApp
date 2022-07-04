@@ -8,6 +8,7 @@
 import UIKit
 import MapKit
 import CoreLocation
+import SwiftUI
 
 class MapViewController: UIViewController {
     fileprivate var locationManager: CLLocationManager = CLLocationManager()
@@ -20,13 +21,14 @@ class MapViewController: UIViewController {
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        let searchButton = UIButton(
-            frame: CGRect(x: 0, y: UIScreen.main.bounds.midY, width: UIScreen.main.bounds.width, height: 80))
-        searchButton.backgroundColor = .white
-        searchButton.setTitle("Search", for: .normal)
-        searchButton.addTarget(self, action: #selector(callSearchViewController), for: .touchUpInside)
-        searchButton.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
-        self.view.addSubview(searchButton)
+//        let searchButton = UIButton(
+//            frame: CGRect(x: 0, y: UIScreen.main.bounds.midY, width: UIScreen.main.bounds.width, height: 80))
+//        searchButton.backgroundColor = .white
+//        searchButton.setTitle("Search", for: .normal)
+//        // searchButton.addTarget(self, action: #selector(callSearchViewController), for: .touchUpInside)
+//        searchButton.addTarget(self, action: buttonTapped(), for: .touchUpInside)
+//        searchButton.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
+//        self.view.addSubview(searchButton)
     }
 
     override func viewDidLoad() {
@@ -48,19 +50,19 @@ class MapViewController: UIViewController {
         }
     }
 
-    @objc func callSearchViewController() {
-        let searchVC = SearchViewController()
-        // searchVC.isModalInPresentation = true
-        if let sheet = searchVC.sheetPresentationController {
-            sheet.detents = [.medium(), .large()]
-            sheet.largestUndimmedDetentIdentifier = .medium
-            sheet.prefersScrollingExpandsWhenScrolledToEdge = false
-            sheet.prefersEdgeAttachedInCompactHeight = true
-            sheet.widthFollowsPreferredContentSizeWhenEdgeAttached = true
-
-        }
-        present(searchVC, animated: true, completion: nil)
-    }
+//    @objc func callSearchViewController() {
+//        let searchVC = SearchView()
+//        // searchVC.isModalInPresentation = true
+//        if let sheet = searchVC.sheetPresentationController {
+//            sheet.detents = [.medium(), .large()]
+//            sheet.largestUndimmedDetentIdentifier = .medium
+//            sheet.prefersScrollingExpandsWhenScrolledToEdge = false
+//            sheet.prefersEdgeAttachedInCompactHeight = true
+//            sheet.widthFollowsPreferredContentSizeWhenEdgeAttached = true
+//
+//        }
+//        present(searchVC, animated: true, completion: nil)
+//    }
 }
 
 extension MapViewController: CLLocationManagerDelegate {
@@ -72,6 +74,12 @@ extension MapViewController: CLLocationManagerDelegate {
             mapViewConfig?.setRegion(region: region)
         }
     }
+
+    @IBAction func buttonTapped(_ sender: Any) {
+        let newView = UIHostingController(rootView: HomeView(viewModel: .init()) )
+            view.window?.rootViewController = newView
+            view.window?.makeKeyAndVisible()
+        }
 }
 
 extension MapViewController: MapViewDelegate {
