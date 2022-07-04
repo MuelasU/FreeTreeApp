@@ -6,18 +6,22 @@
 //
 
 import UIKit
-
+import Firebase
 protocol ExampleViewDelegate: AnyObject {
     func didTapExemploButton()
 }
 
 final class ExampleView: UIView {
     private weak var delegate: ExampleViewDelegate?
+    let treeServices = TreeServices()
     init(delegate: ExampleViewDelegate) {
         super.init(frame: .zero)
         self.delegate = delegate
         buildView()
         backgroundColor = .white
+        
+        //add data
+        //treeServices.create(name: "bananinha")
     }
 
     required init?(coder: NSCoder) {
