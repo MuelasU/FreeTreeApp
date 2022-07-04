@@ -8,6 +8,7 @@
 import Foundation
 import CoreLocation
 import UIKit
+import FirebaseFirestoreSwift
 
 struct TreeAdvice: Codable {
     let username: String
@@ -26,23 +27,30 @@ struct TreeAdvice: Codable {
     }
 }
 
-private struct Location: Codable {
+struct Location: Codable {
     let lat: Double
     let lgt: Double
 
     static let zero = Location(lat: 0, lgt: 0)
 }
 
-struct Tree: Storable {
+protocol UpdatableIdentifiable: Identifiable {
+
+
+    /// The stable identity of the entity associated with this instance.
+    var id: Self.ID { get set }
+}
+
+struct Tree: Storable, UpdatableIdentifiable {
     typealias Item = Self
     static var itemName: String = "tree"
-
+    @DocumentID var id: String?
     let name: String
     let date: Date
     let tag: [String]
     let advices: [TreeAdvice]
+    var coordinates: Location = Location(lat: 0, lgt: 0)
     private var images: [String] = []
-    private var coordinates: Location = .zero
 
     init(name: String, date: Date, tag: [String], advices: [TreeAdvice]) {
         self.name = name
