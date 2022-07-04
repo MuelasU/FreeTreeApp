@@ -52,6 +52,8 @@ final class MapView: UIView, MKMapViewDelegate {
         let launchOptions = [
             MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving
         ]
+        
+        // TODO: it should probably go to tree information
         tree.mapItem?.openInMaps(launchOptions: launchOptions)
     }
     

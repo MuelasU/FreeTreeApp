@@ -11,8 +11,8 @@ import CoreLocation
 
 class MapViewController: UIViewController {
     let tree1 = TreeAnnotation(title: "Odin Tree", status: 1, coordinate: CLLocationCoordinate2D(latitude: -22.9519, longitude: -43.2105))
-    let tree2 = TreeAnnotation(title: "Erci Tree", status: 2, coordinate: CLLocationCoordinate2D(latitude: -21.9505, longitude: -43.2105))
-    let tree3 = TreeAnnotation(title: "Carol Tree", status: 3, coordinate: CLLocationCoordinate2D(latitude: -20.9510, longitude: -43.2105))
+    let tree2 = TreeAnnotation(title: "Erci Tree", status: 2, coordinate: CLLocationCoordinate2D(latitude: -22.950, longitude: -43.2105))
+    let tree3 = TreeAnnotation(title: "Carol Tree", status: 3, coordinate: CLLocationCoordinate2D(latitude: -22.9490, longitude: -43.2105))
     fileprivate var locationManager: CLLocationManager = CLLocationManager()
     var mapConfig : MapViewConfig?
     
@@ -56,7 +56,7 @@ extension MapViewController: CLLocationManagerDelegate {
 }
 
 extension MapViewController: MapViewDelegate {    
- 
+
 }
 
 
