@@ -21,18 +21,36 @@ class MapViewController: UIViewController {
     }
 
     override func viewDidAppear(_ animated: Bool) {
-//        let searchButton = UIButton(
-//            frame: CGRect(x: 0, y: UIScreen.main.bounds.midY, width: UIScreen.main.bounds.width, height: 80))
-//        searchButton.backgroundColor = .white
-//        searchButton.setTitle("Search", for: .normal)
-//        // searchButton.addTarget(self, action: #selector(callSearchViewController), for: .touchUpInside)
-//        searchButton.addTarget(self, action: buttonTapped(), for: .touchUpInside)
-//        searchButton.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
-//        self.view.addSubview(searchButton)
+
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // INICIO Botao temporario
+        let label = UILabel()
+        label.text = "Home View"
+        label.textColor = .black
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .boldSystemFont(ofSize: 21)
+        view.addSubview(label)
+
+        let button = UIButton()
+        button.setTitleColor(.blue, for: .normal)
+        button.setTitle("Call HomeView", for: .normal)
+        button.titleLabel?.textAlignment = .center
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(openSwiftUIScreen), for: .touchUpInside)
+        button.titleLabel?.font = .boldSystemFont(ofSize: 21)
+        button.backgroundColor = .white
+        view.addSubview(button)
+
+        NSLayoutConstraint.activate([
+            button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            button.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            button.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 64)])
+        // FIM botão temporario
 
         locationManager.requestWhenInUseAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -50,19 +68,10 @@ class MapViewController: UIViewController {
         }
     }
 
-//    @objc func callSearchViewController() {
-//        let searchVC = SearchView()
-//        // searchVC.isModalInPresentation = true
-//        if let sheet = searchVC.sheetPresentationController {
-//            sheet.detents = [.medium(), .large()]
-//            sheet.largestUndimmedDetentIdentifier = .medium
-//            sheet.prefersScrollingExpandsWhenScrolledToEdge = false
-//            sheet.prefersEdgeAttachedInCompactHeight = true
-//            sheet.widthFollowsPreferredContentSizeWhenEdgeAttached = true
-//
-//        }
-//        present(searchVC, animated: true, completion: nil)
-//    }
+    @objc func openSwiftUIScreen() {
+        let swiftUIViewController = UIHostingController(rootView: HomeView(navigationController: self.navigationController, viewModel: .init()))
+        self.navigationController?.pushViewController(swiftUIViewController, animated: true)
+    }
 }
 
 extension MapViewController: CLLocationManagerDelegate {
@@ -74,12 +83,6 @@ extension MapViewController: CLLocationManagerDelegate {
             mapViewConfig?.setRegion(region: region)
         }
     }
-
-    @IBAction func buttonTapped(_ sender: Any) {
-        let newView = UIHostingController(rootView: HomeView(viewModel: .init()) )
-            view.window?.rootViewController = newView
-            view.window?.makeKeyAndVisible()
-        }
 }
 
 extension MapViewController: MapViewDelegate {

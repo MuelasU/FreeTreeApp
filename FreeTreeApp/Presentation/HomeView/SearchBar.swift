@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SearchBar: View {
+    weak var navigationController: UINavigationController?
     @State private var searchText: String = ""
     @State var index: Int = 0
 
@@ -23,7 +24,7 @@ struct SearchBar: View {
         HStack {
             ZStack {
                 Rectangle()
-                    .foregroundColor(Constants.white)
+                    .foregroundColor(.white)
                 HStack {
                     Image(systemName: "magnifyingglass")
                         .padding(.leading, 8)
@@ -47,7 +48,7 @@ struct SearchBar: View {
 
 extension SearchBar {
     struct Constants {
-        static let white: Color = Color(uiColor: .init(red: 227/255, green: 227/255, blue: 233/255, alpha: 1))
+        // static let white: Color = Color(uiColor: .init(red: 227/255, green: 227/255, blue: 233/255, alpha: 1))
         static let textFieldPrompt: String = "Buscar árvores"
 
     }

@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct RecentList: View {
+    weak var navigationController: UINavigationController?
+
     let allTrees: [[String]]
 
     init ( allTrees: [[String]]) {

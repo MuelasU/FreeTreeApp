@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct FavoriteList: View {
+    weak var navigationController: UINavigationController?
     let allTrees: [[String]]
 
     init (
