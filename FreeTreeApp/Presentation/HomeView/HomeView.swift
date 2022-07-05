@@ -9,17 +9,28 @@ import SwiftUI
 
 struct HomeView: View {
     weak var navigationController: UINavigationController?
-
     @ObservedObject var viewModel: ViewModel
-    @State private var searchTexts: String = ""
+    @State private var searchingFor: String = ""
     @State var index: Int = 0
-
+    
     var body: some View {
-          SearchBar(profilePic: viewModel.profilePic)
-        ScrollView {
-                 FavoriteList(allTrees: viewModel.allTrees)
-                 RecentList(allTrees: viewModel.allTrees)
+        SearchBar(profilePic: viewModel.profilePic, searchingFor: self.$searchingFor)
+        if searchingFor.isEmpty {
+            ScrollView {
+                FavoriteList(allTrees: viewModel.allTrees)
+                RecentList(allTrees: viewModel.allTrees)
+            }
+        } else {
+            SearchResultList(trees: treeNames, searchingFor: self.$searchingFor)
         }
+    }
+    
+    var treeNames: [String] {
+        var namesOnly: [String] = []
+        for name in viewModel.allTrees {
+            namesOnly.append(name[0])
+        }
+        return namesOnly
     }
 }
 
@@ -32,7 +43,7 @@ extension HomeView {
         var treeLocal: String = ""
         var treePic: Image = .init(systemName: "leaf")
         var isFavorite: Bool = true
-
+        
         var allTrees: [[String]] = [
             ["Plantinha", "Instituto de pesquisas Eldorado", "treeExample", "yes"],
             ["Limoeiro", "Praça do limão", "treeExample", "no"],
