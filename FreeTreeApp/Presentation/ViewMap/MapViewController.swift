@@ -69,7 +69,9 @@ class MapViewController: UIViewController {
     }
 
     @objc func openSwiftUIScreen() {
-        let swiftUIViewController = UIHostingController(rootView: HomeView(navigationController: self.navigationController, viewModel: .init()))
+//        let swiftUIViewController = UIHostingController(rootView: HomeView(navigationController: self.navigationController, viewModel: .init()))
+        
+        let swiftUIViewController = UIHostingController(rootView: TreeRegistrationView(navigationController: self.navigationController))
         self.navigationController?.pushViewController(swiftUIViewController, animated: true)
     }
 }
