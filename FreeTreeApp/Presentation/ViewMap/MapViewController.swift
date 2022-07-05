@@ -90,4 +90,5 @@ extension MapViewController: CLLocationManagerDelegate {
 }
 
 extension MapViewController: MapViewDelegate {
+    // TODO: Remove delagate extention if not needed in the future
 }
