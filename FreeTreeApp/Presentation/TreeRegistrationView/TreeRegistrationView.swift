@@ -10,27 +10,53 @@ import SwiftUI
 
 struct TreeRegistrationView: View {
     weak var navigationController: UINavigationController?
-    @State private var treeName: String = "Name"
-    @State private var complement: String = "Complemento"
-
-        var body: some View {
-            NavigationView {
-                VStack(alignment: .leading) {
+    @State private var treeName: String = ""
+    @State private var complement: String = ""
+    @State private var numberOfTags: Int = 0
+    
+    var body: some View {
+        NavigationView {
+            Form {
+                Section {
                     TextField("Name", text: $treeName)
-                    Text("Hello, \(treeName)!")
-                    
-                    TextEditor(text: $complement)
+                        .frame(height: 44)
+                        .background(Color.white)
                 }
-            }
-            .navigationTitle("Cadastro")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Salvar") {
-                        print("Salvar tapped!")
+                Section {
+                    HStack {
+                        Image(systemName: "plus.circle.fill")
+                            .foregroundColor(.green)
+                        Button("Adicionar Tag") {
+                            numberOfTags += 1
+                            print(numberOfTags)
+                        }
+                    }
+                    ForEach((0...numberOfTags), id: \.self) { _ in
+                        TextField("Tag name", text: $treeName)
+                            .frame(height: 44)
+                            .background(Color.white)
                     }
                 }
+                Section(header: Text("Complemento")) {
+                    TextEditor(text: $complement)
+                        .frame(height: 100)
+                }
+                
+                Section(header: Text("FOTOS")) {
+                    TextEditor(text: $complement)
+                        .frame(height: 100)
+                }
             }
-            
         }
+        .navigationTitle("Cadastro")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button("Salvar") {
+                    print("Salvar tapped!")
+                }
+            }
+        }
+        
+    }
 }
