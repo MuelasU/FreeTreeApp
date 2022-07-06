@@ -56,10 +56,10 @@ extension SearchBar {
         static let textFieldPrompt: String = "Buscar árvores"
     }
 }
-//#if DEBUG
-//struct SearchBar_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SearchBar(profilePic: .init(), searchingFor: .init())
-//    }
-//}
-//#endif
+#if DEBUG
+struct SearchBar_Previews: PreviewProvider {
+    static var previews: some View {
+        SearchBar(profilePic: "profilePic", searchingFor: .constant("Limoeiro"))
+    }
+}
+#endif
