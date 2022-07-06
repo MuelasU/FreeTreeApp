@@ -35,10 +35,11 @@ struct Sheet<Content: View>: View {
     weak var delegate: SheetDelegate?
 
     @State var height: SheetHeight
-
     @ViewBuilder let content: () -> Content
+    
     @State private var translation: CGSize = .zero
     @State private var offsetY: CGFloat = .zero
+    @State private var isAnimating: Bool = false
 
     private var animation: Animation {
         .interactiveSpring(response: 0.5, dampingFraction: 1)
@@ -50,6 +51,7 @@ struct Sheet<Content: View>: View {
             .frame(width: 40, height: 5)
             .padding(8)
             .onTapGesture {
+                isAnimating = true
                 withAnimation(animation) {
                     let initialOffset = height.offset
                     
@@ -79,6 +81,7 @@ struct Sheet<Content: View>: View {
         .onAnimationCompleted(for: offsetY) {
             delegate?.didChangeHeight(to: height)
             offsetY = .zero
+            isAnimating = false
         }
         .gesture(
             DragGesture()
@@ -87,6 +90,7 @@ struct Sheet<Content: View>: View {
                     offsetY = translation.height
                 }
                 .onEnded { _ in
+                    isAnimating = true
                     withAnimation(animation) {
                         let initialOffset = height.offset
                         let snap = translation.height + initialOffset
@@ -104,6 +108,7 @@ struct Sheet<Content: View>: View {
                     }
                 }
         )
+        .allowsHitTesting(!isAnimating)
         .edgesIgnoringSafeArea(.all)
     }
 }

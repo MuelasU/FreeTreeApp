@@ -20,11 +20,12 @@ class MapViewController: UIViewController {
         followUserLocation()
     }
 
-    private lazy var heightConstraint: NSLayoutConstraint = sheetController.view.heightAnchor.constraint(
-        equalToConstant: UIScreen.main.bounds.height - sheetHeightMode.offset
+    private lazy var topConstraint: NSLayoutConstraint = sheetController.view.topAnchor.constraint(
+        equalTo: self.view.topAnchor,
+        constant: sheetHeightMode.offset
     )
 
-    private var sheetHeightMode: SheetHeight = .tall
+    private var sheetHeightMode: SheetHeight = .short
     
     private lazy var sheetController: UIViewController = {
         let sheet = Sheet(delegate: self, height: sheetHeightMode) {
@@ -45,8 +46,8 @@ class MapViewController: UIViewController {
         view.addSubview(sheetController.view)
 
         NSLayoutConstraint.activate([
-            heightConstraint,
-            sheetController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            topConstraint,
+            sheetController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 1000),
             sheetController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             sheetController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
@@ -77,7 +78,7 @@ class MapViewController: UIViewController {
 extension MapViewController: SheetDelegate {
     func didChangeHeight(to newHeight: SheetHeight) {
         sheetHeightMode = newHeight
-        heightConstraint.constant = UIScreen.main.bounds.height - sheetHeightMode.offset
+        topConstraint.constant = sheetHeightMode.offset
     }
 }
 
