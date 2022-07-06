@@ -16,19 +16,19 @@ class MapViewController: UIViewController {
     let tree3 = TreeAnnotation(title: "Carol Tree", status: 3, coordinate: CLLocationCoordinate2D(latitude: -22.9490, longitude: -43.2105))
     fileprivate var locationManager: CLLocationManager = CLLocationManager()
     var mapConfig: MapViewConfig?
-
+    
     override func loadView() {
         self.view = MapView(delegate: self)
         mapConfig = self.view as? MapViewConfig
         followUserLocation()
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // INICIO Botao temporario
         let label = UILabel()
         label.text = "Home View"
@@ -36,7 +36,7 @@ class MapViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .boldSystemFont(ofSize: 21)
         view.addSubview(label)
-
+        
         let button = UIButton()
         button.setTitleColor(.blue, for: .normal)
         button.setTitle("Call HomeView", for: .normal)
@@ -46,32 +46,32 @@ class MapViewController: UIViewController {
         button.titleLabel?.font = .boldSystemFont(ofSize: 21)
         button.backgroundColor = .white
         view.addSubview(button)
-
+        
         NSLayoutConstraint.activate([
             button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             button.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             button.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 64)])
         // FIM botão temporario
-
+        
         locationManager.requestWhenInUseAuthorization()
-                locationManager.desiredAccuracy = kCLLocationAccuracyBest
-                locationManager.distanceFilter = kCLDistanceFilterNone
-                locationManager.startUpdatingLocation()
-                locationManager.delegate = self
-
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.distanceFilter = kCLDistanceFilterNone
+        locationManager.startUpdatingLocation()
+        locationManager.delegate = self
+        
         mapConfig?.treePins([tree1, tree2, tree3])
     }
-
+    
     func followUserLocation() {
-            if let location = locationManager.location {
-                let region = MKCoordinateRegion.init(center: location.coordinate,
-                                                     latitudinalMeters: 100,
-                                                     longitudinalMeters: 100)
-                mapConfig?.setRegion(region: region)
-            }
+        if let location = locationManager.location {
+            let region = MKCoordinateRegion.init(center: location.coordinate,
+                                                 latitudinalMeters: 100,
+                                                 longitudinalMeters: 100)
+            mapConfig?.setRegion(region: region)
         }
-
+    }
+    
     @objc func openSwiftUIScreen() {
         let swiftUIViewController = UIHostingController(rootView: HomeView(navigationController: self.navigationController, viewModel: .init()))
         self.navigationController?.pushViewController(swiftUIViewController, animated: true)
