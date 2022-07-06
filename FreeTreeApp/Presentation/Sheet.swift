@@ -50,15 +50,20 @@ struct Sheet<Content: View>: View {
             .frame(width: 40, height: 5)
             .padding(8)
             .onTapGesture {
-                switch height {
-                case .bottom:
-                    height = .short
-                case .short:
-                    height = .tall
-                case .tall:
-                    height = .bottom
+                withAnimation(animation) {
+                    let initialOffset = height.offset
+                    
+                    switch height {
+                    case .bottom:
+                        height = .short
+                    case .short:
+                        height = .tall
+                    case .tall:
+                        height = .bottom
+                    }
+
+                    offsetY = height.offset - initialOffset
                 }
-                delegate?.didChangeHeight(to: height)
             }
     }
 
