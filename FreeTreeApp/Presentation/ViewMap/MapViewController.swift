@@ -40,7 +40,7 @@ class MapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         addChild(sheetController)
         view.addSubview(sheetController.view)
 
@@ -78,7 +78,6 @@ extension MapViewController: SheetDelegate {
     func didChangeHeight(to newHeight: SheetHeight) {
         sheetHeightMode = newHeight
         heightConstraint.constant = UIScreen.main.bounds.height - sheetHeightMode.offset
-        view.layoutIfNeeded()
     }
 }
 

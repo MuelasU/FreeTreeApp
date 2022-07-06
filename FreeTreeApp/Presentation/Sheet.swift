@@ -9,7 +9,6 @@ import SwiftUI
 
 protocol SheetDelegate: AnyObject {
     func didChangeHeight(to newHeight: SheetHeight)
-//    func isChangingHeight(by offset: CGFloat)
 }
 
 enum SheetHeight {
@@ -26,7 +25,7 @@ enum SheetHeight {
         case .short:
             return UIScreen.main.bounds.height/2 + 60
         case .tall:
-            return 200
+            return 60
         }
     }
 }
@@ -35,15 +34,11 @@ struct Sheet<Content: View>: View {
 
     weak var delegate: SheetDelegate?
 
-    @State var height: SheetHeight {
-        didSet {
-            delegate?.didChangeHeight(to: height)
-        }
-    }
+    @State var height: SheetHeight
 
     @ViewBuilder let content: () -> Content
     @State private var translation: CGSize = .zero
-//    @State private var offsetY: CGFloat = 0
+    @State private var offsetY: CGFloat = .zero
 
     private var animation: Animation {
         .interactiveSpring(response: 0.5, dampingFraction: 1)
@@ -55,16 +50,15 @@ struct Sheet<Content: View>: View {
             .frame(width: 40, height: 5)
             .padding(8)
             .onTapGesture {
-                withAnimation(animation) {
-                    switch height {
-                    case .bottom:
-                        height = .short
-                    case .short:
-                        height = .tall
-                    case .tall:
-                        height = .bottom
-                    }
+                switch height {
+                case .bottom:
+                    height = .short
+                case .short:
+                    height = .tall
+                case .tall:
+                    height = .bottom
                 }
+                delegate?.didChangeHeight(to: height)
             }
     }
 
@@ -76,23 +70,21 @@ struct Sheet<Content: View>: View {
         }
         .background(Color(uiColor: .systemBackground))
         .cornerRadius(20)
-//        .offset(y: translation.height + height.offset)
-        .offset(y: translation.height)
+        .offset(y: offsetY)
+        .onAnimationCompleted(for: offsetY) {
+            delegate?.didChangeHeight(to: height)
+            offsetY = .zero
+        }
         .gesture(
             DragGesture()
                 .onChanged { value in
-//                    let diff: CGFloat = (value.location.y - value.startLocation.y)
-//
-//                    if height == .tall && diff < 0 {
-//                        return
-//                    }
-
                     translation = value.translation
-//                    delegate?.isChangingHeight(by: translation.height)
+                    offsetY = translation.height
                 }
                 .onEnded { _ in
                     withAnimation(animation) {
-                        let snap = translation.height + height.offset
+                        let initialOffset = height.offset
+                        let snap = translation.height + initialOffset
 
                         if snap > 500 {
                             height = .bottom
@@ -101,27 +93,12 @@ struct Sheet<Content: View>: View {
                         } else {
                             height = .tall
                         }
-
+                        
+                        offsetY = height.offset - initialOffset
                         translation = .zero
                     }
                 }
         )
-        .edgesIgnoringSafeArea(.bottom)
-    }
-}
-
-struct Sheet_Previews: PreviewProvider {
-
-    static var previews: some View {
-        Sheet(height: .tall) {
-            VStack {
-                Button(action: { print("teste") }) {
-                    Text("ASDASDASD")
-                        .foregroundColor(.white)
-                }
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color.blue)
-        }
+        .edgesIgnoringSafeArea(.all)
     }
 }
