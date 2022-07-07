@@ -13,13 +13,28 @@ struct HomeView: View {
     @ObservedObject var viewModel: ViewModel
     @State private var searchTexts: String = ""
     @State var index: Int = 0
-
+    @EnvironmentObject var sheetManager: SheetManager
+    
+    init(viewModel: ViewModel) {
+        self.viewModel = viewModel;
+    }
+    
     var body: some View {
-          SearchBar(profilePic: viewModel.profilePic)
-        ScrollView {
+        SearchBar(profilePic: viewModel.profilePic)
+        ScrollView  {
                  FavoriteList(allTrees: viewModel.allTrees)
                  RecentList(allTrees: viewModel.allTrees)
         }
+        .overlay(alignment: .bottom) {
+            if sheetManager.action.isPresented {
+                PopUpAjustsView {
+                    withAnimation {
+                        sheetManager.dismiss()
+                    }
+                }
+            }
+        }
+        .ignoresSafeArea()
     }
 }
 
@@ -45,6 +60,7 @@ extension HomeView {
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView(viewModel: .init())
+            .environmentObject(SheetManager())
     }
 }
 #endif

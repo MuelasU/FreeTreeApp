@@ -11,13 +11,14 @@ struct SearchBar: View {
     weak var navigationController: UINavigationController?
     @State private var searchText: String = ""
     @State var index: Int = 0
-
+    @EnvironmentObject var sheetManager: SheetManager
+    
     let profilePic: String
 
     init (
         profilePic: String
     ) {
-        self.profilePic = profilePic
+        self.profilePic = profilePic;
     }
 
     var body: some View {
@@ -38,10 +39,16 @@ struct SearchBar: View {
             .frame(height: 36, alignment: .top)
             .cornerRadius(13)
             .padding(8)
-            Image(profilePic)
-                .resizable()
-                .frame(width: 45, height: 45)
-                .padding(8)
+            Button {
+                withAnimation {
+                    sheetManager.present()
+                }
+            } label: {
+                Image(profilePic)
+                    .resizable()
+                    .frame(width: 45, height: 45)
+                    .padding(8)
+            }
         }
     }
 }
@@ -50,7 +57,6 @@ extension SearchBar {
     struct Constants {
         // static let white: Color = Color(uiColor: .init(red: 227/255, green: 227/255, blue: 233/255, alpha: 1))
         static let textFieldPrompt: String = "Buscar árvores"
-
     }
 }
 

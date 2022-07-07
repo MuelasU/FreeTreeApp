@@ -13,6 +13,7 @@ import SwiftUI
 class MapViewController: UIViewController {
     fileprivate var locationManager: CLLocationManager = CLLocationManager()
     var mapViewConfig: MapViewConfig?
+    var sheetManager = SheetManager()
 
     override func loadView() {
         self.view = MapView(delegate: self)
@@ -69,7 +70,12 @@ class MapViewController: UIViewController {
     }
 
     @objc func openSwiftUIScreen() {
-        let swiftUIViewController = UIHostingController(rootView: HomeView(navigationController: self.navigationController, viewModel: .init()))
+        let swiftUIViewController = UIHostingController(
+            rootView: HomeView(
+                viewModel: .init()
+            )
+              .environmentObject(sheetManager)
+        )
         self.navigationController?.pushViewController(swiftUIViewController, animated: true)
     }
 }
