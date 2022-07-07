@@ -15,10 +15,12 @@ struct HomeView: View {
     @State var index: Int = 0
 
     var body: some View {
-          SearchBar(profilePic: viewModel.profilePic)
-        ScrollView {
-                 FavoriteList(allTrees: viewModel.allTrees)
-                 RecentList(allTrees: viewModel.allTrees)
+        VStack {
+            SearchBar(profilePic: viewModel.profilePic)
+            ScrollView {
+                FavoriteList(allTrees: viewModel.allTrees)
+                RecentList(allTrees: viewModel.allTrees)
+            }
         }
     }
 }
