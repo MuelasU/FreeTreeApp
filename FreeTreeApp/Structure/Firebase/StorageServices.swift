@@ -11,11 +11,20 @@ import FirebaseStorage
 class StorageServices {
     private let collectionName = "images"
     private let storage = Storage.storage()
-    private var storageRef: StorageReference? = nil
     
-    
-    init() {
-        self.storageRef = storage.reference()
-        let aux = storageRef?.child("asdad")
+    func upload(treeImage: UIImage, completion: @escaping (Error?) -> Void) {
+        let id = UUID.init().uuidString
+        let uploadRef = storage.reference(withPath: "\(id).jpg")
+        guard let imageData = treeImage.jpegData(compressionQuality: 0.75) else {
+            print("Não foi possível pegar os dados da imagem")
+            return
+        }
+        let uploadMetadata = StorageMetadata.init()
+        uploadMetadata.contentType = "image/jpeg"
+        uploadRef.putData(imageData, metadata: uploadMetadata) { (downloadMetaData, error) in
+            if let error = error {
+                completion(error)
+            }
+        }
     }
 }
