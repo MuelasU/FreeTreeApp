@@ -52,11 +52,22 @@ class TreeServices {
                 completion(.success(trees))
             }
         }
-
+    }
+    
+    func update(tree: Tree, data: [String: Any], completion: @escaping (Error?) -> Void) {
+        let document = collectionRef?.document(tree.id ?? "None")
+        document?.updateData(data) { error in
+            if let error = error {
+                completion(error)
+            } else {
+                print("Documento atualizado")
+            }
+        }
+        
     }
     
     func delete(tree: Tree, completion: @escaping (Error?) -> Void) {
-        collectionRef?.document(tree.id ?? "Nil").delete() { (error) in
+        collectionRef?.document(tree.id ?? "None").delete() { (error) in
             if let error = error {
                 completion(error)
             } else {
@@ -66,6 +77,39 @@ class TreeServices {
         }
     }
     
+}
+
+extension TreeServices {
+    //Use essa função para testar o firebase
+    func testes(tree: Tree) {
+        self.create(tree: tree) { error in
+            if let error = error {
+                print("Não foi possível criar a árvore \(error.localizedDescription)")
+            } else {
+                self.read() { result in
+                    switch result {
+                    case let .success(trees):
+                        for tree in trees {
+                            self.update(tree: tree, data: ["name" : "balinha \(tree.name)"]) { error in
+                                if let error = error {
+                                    print("Não foi possível atualizar os campos da árvore \(error.localizedDescription)")
+                                }
+                            }
+                        }
+                        for tree in trees {
+                            self.delete(tree: tree) { error in
+                                if let error = error {
+                                    print("Não foi possível deletar a árvore \(error.localizedDescription)")
+                                }
+                            }
+                        }
+                    case let .failure(error):
+                        print("Não foi possível ler as árvores do banco \(error.localizedDescription)")
+                    }
+                }
+            }
+        }
+    }
 }
 
 extension QueryDocumentSnapshot {
