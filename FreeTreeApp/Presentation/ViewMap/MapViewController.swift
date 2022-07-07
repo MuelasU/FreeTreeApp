@@ -25,6 +25,10 @@ class MapViewController: UIViewController {
         equalTo: self.view.topAnchor,
         constant: sheetHeightMode.offset
     )
+    private lazy var bottomConstraint: NSLayoutConstraint = sheetController.view.bottomAnchor.constraint(
+        equalTo: self.view.bottomAnchor,
+        constant: 0
+    )
 
     private var sheetHeightMode: SheetHeight = .short
     
@@ -32,6 +36,7 @@ class MapViewController: UIViewController {
         let sheet = Sheet(delegate: self, height: sheetHeightMode) {
             HomeView(viewModel: .init())
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .environmentObject(self.sheetManager)
         }
 
         let hostingController = UIHostingController(rootView: sheet)
@@ -48,7 +53,7 @@ class MapViewController: UIViewController {
 
         NSLayoutConstraint.activate([
             topConstraint,
-            sheetController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 1000),
+            bottomConstraint,
             sheetController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             sheetController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
@@ -76,21 +81,15 @@ class MapViewController: UIViewController {
     }
 }
 
-    @objc func openSwiftUIScreen() {
-        let swiftUIViewController = UIHostingController(
-            rootView: HomeView(
-                viewModel: .init()
-            )
-              .environmentObject(sheetManager)
-        )
-        self.navigationController?.pushViewController(swiftUIViewController, animated: true)
-    }
-}
-
 extension MapViewController: SheetDelegate {
     func didChangeHeight(to newHeight: SheetHeight) {
         sheetHeightMode = newHeight
         topConstraint.constant = sheetHeightMode.offset
+        bottomConstraint.constant = 0
+    }
+    
+    func didStartDragGesture() {
+        bottomConstraint.constant = 1000
     }
 }
 
