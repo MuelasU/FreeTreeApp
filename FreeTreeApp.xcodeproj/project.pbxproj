@@ -25,6 +25,8 @@
 		3F3EFDF628648EC90093F657 /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3EFDF528648EC90093F657 /* Storable.swift */; };
 		3F7E8FCA286204910057B59E /* Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7E8FC9286204910057B59E /* Tree.swift */; };
 		3F7E8FCC2862054D0057B59E /* tree.json in Resources */ = {isa = PBXBuildFile; fileRef = 3F7E8FCB2862054D0057B59E /* tree.json */; };
+		3F95B1152874601F00BEDF69 /* Sheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F95B1142874601F00BEDF69 /* Sheet.swift */; };
+		3F95B1182874815900BEDF69 /* AnimationCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F95B1172874815900BEDF69 /* AnimationCompletion.swift */; };
 		3FF4B60F28608DA800E3C0E5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF4B60E28608DA800E3C0E5 /* AppDelegate.swift */; };
 		3FF4B61128608DA800E3C0E5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF4B61028608DA800E3C0E5 /* SceneDelegate.swift */; };
 		3FF4B61B28608DAC00E3C0E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FF4B61A28608DAC00E3C0E5 /* Assets.xcassets */; };
@@ -61,6 +63,8 @@
 		3F3EFDF528648EC90093F657 /* Storable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storable.swift; sourceTree = "<group>"; };
 		3F7E8FC9286204910057B59E /* Tree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tree.swift; sourceTree = "<group>"; };
 		3F7E8FCB2862054D0057B59E /* tree.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = tree.json; sourceTree = "<group>"; };
+		3F95B1142874601F00BEDF69 /* Sheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sheet.swift; sourceTree = "<group>"; };
+		3F95B1172874815900BEDF69 /* AnimationCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationCompletion.swift; sourceTree = "<group>"; };
 		3FF4B60B28608DA800E3C0E5 /* FreeTreeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FreeTreeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FF4B60E28608DA800E3C0E5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FF4B61028608DA800E3C0E5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -128,9 +132,11 @@
 		28C0B8EE2861EA6000F48FCA /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				3F95B1162874814300BEDF69 /* Utils */,
 				236B75F52869EAD8009885DF /* HomeView */,
 				732A94BA2869D0DB0097AFFA /* ViewMap */,
 				28C0B8EF2861EA6E00F48FCA /* ExampleView */,
+				3F95B1142874601F00BEDF69 /* Sheet.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -170,6 +176,14 @@
 				3F7E8FC8286204810057B59E /* Data */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		3F95B1162874814300BEDF69 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				3F95B1172874815900BEDF69 /* AnimationCompletion.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		3FF4B60228608DA800E3C0E5 = {
@@ -379,9 +393,11 @@
 				3FF4B60F28608DA800E3C0E5 /* AppDelegate.swift in Sources */,
 				28C0B8ED2861EA2C00F48FCA /* UIKit+Extensions.swift in Sources */,
 				3F3EFDF628648EC90093F657 /* Storable.swift in Sources */,
+				3F95B1182874815900BEDF69 /* AnimationCompletion.swift in Sources */,
 				23DE3AE228707095007EA77A /* HomeView.swift in Sources */,
 				3F7E8FCA286204910057B59E /* Tree.swift in Sources */,
 				28C7B5C6287463C300D1B302 /* PopUpAjustsView.swift in Sources */,
+				3F95B1152874601F00BEDF69 /* Sheet.swift in Sources */,
 				3F3EFDF628648EC90093F657 /* Storable.swift in Sources */,
 				3F7E8FCA286204910057B59E /* Tree.swift in Sources */,
 				732A94B72869D05B0097AFFA /* MapView.swift in Sources */,

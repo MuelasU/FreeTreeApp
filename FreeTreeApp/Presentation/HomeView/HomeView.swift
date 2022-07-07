@@ -20,10 +20,12 @@ struct HomeView: View {
     }
     
     var body: some View {
-        SearchBar(profilePic: viewModel.profilePic)
-        ScrollView  {
-                 FavoriteList(allTrees: viewModel.allTrees)
-                 RecentList(allTrees: viewModel.allTrees)
+        VStack {
+            SearchBar(profilePic: viewModel.profilePic)
+            ScrollView {
+                FavoriteList(allTrees: viewModel.allTrees)
+                RecentList(allTrees: viewModel.allTrees)
+            }
         }
         .overlay(alignment: .bottom) {
             if sheetManager.action.isPresented {
