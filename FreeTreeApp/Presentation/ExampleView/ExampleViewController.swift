@@ -14,9 +14,8 @@ class ExampleViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let treeTest = Tree(name: "limoeiro do norte", date: .now, tag: ["a, b"], advices: [])
-        let treeService = TreeServices()
-        treeService.testes(tree: treeTest)
+        let storageService = StorageServices()
+        storageService.teste()
     }
 }
 

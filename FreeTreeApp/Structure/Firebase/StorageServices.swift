@@ -28,3 +28,16 @@ class StorageServices {
         }
     }
 }
+
+extension StorageServices {
+    func teste() {
+        let image = UIImage(systemName: "circle.fill")
+        upload(treeImage: image!) { error in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                print("Deu bom brasil")
+            }
+        }
+    }
+}
