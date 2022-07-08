@@ -9,6 +9,7 @@ import UIKit
 import MapKit
 
 protocol MapViewDelegate: AnyObject {
+    func didTapCreateTreeButton()
 }
 
 protocol MapViewConfig {
@@ -39,6 +40,20 @@ final class MapView: UIView {
 
         return mapView
     }()
+    
+    var button: UIButton = {
+        let button = UIButton()
+        button.setTitle("Create Tree", for: .normal)
+        button.backgroundColor = .orange
+        button.layer.cornerRadius = 10
+        button.addTarget(self, action: #selector(didTapCreateTreeButton), for: .touchUpInside)
+
+        return button
+    }()
+    
+    @objc func didTapCreateTreeButton() {
+        delegate?.didTapCreateTreeButton()
+    }
 }
 
 extension MapView: MapViewConfig {
@@ -50,6 +65,7 @@ extension MapView: MapViewConfig {
 extension MapView: ViewCodeContract {
     func setupHierarchy() {
         addSubview(mapView)
+        addSubview(button)
     }
 
     func setupConstraints() {
@@ -58,6 +74,11 @@ extension MapView: ViewCodeContract {
              view.bottomAnchor.constraint(equalTo: bottomAnchor),
              view.leadingAnchor.constraint(equalTo: leadingAnchor),
              view.trailingAnchor.constraint(equalTo: trailingAnchor)]
+        }
+        
+        button.constraint { view in
+            [view.topAnchor.constraint(equalTo: topAnchor, constant: 48),
+             view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)]
         }
     }
 }

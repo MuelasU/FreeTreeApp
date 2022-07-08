@@ -39,6 +39,13 @@ class MapViewController: UIViewController {
         return hostingController
     }()
     
+    private lazy var registerTreeController: UIViewController = {
+        let hostingController = UIHostingController(rootView: TreeRegistrationView())
+        hostingController.view.backgroundColor = .clear
+        hostingController.view.translatesAutoresizingMaskIntoConstraints = false
+        return hostingController
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -73,6 +80,10 @@ class MapViewController: UIViewController {
             mapViewConfig?.setRegion(region: region)
         }
     }
+    
+    func presentRegisterTreeVC() {
+        self.present(registerTreeController, animated: true)
+    }
 }
 
 extension MapViewController: SheetDelegate {
@@ -94,5 +105,8 @@ extension MapViewController: CLLocationManagerDelegate {
 }
 
 extension MapViewController: MapViewDelegate {
-
+    func didTapCreateTreeButton() {
+        presentRegisterTreeVC()
+        print("button clicked")
+    }
 }
