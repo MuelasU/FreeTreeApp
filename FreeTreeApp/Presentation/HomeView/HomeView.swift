@@ -14,6 +14,8 @@ struct HomeView: View {
     @State private var searchTexts: String = ""
     @State var index: Int = 0
 
+    
+    
     var body: some View {
         VStack {
             SearchBar(profilePic: viewModel.profilePic)
@@ -43,10 +45,8 @@ extension HomeView {
     }
 }
 
-#if DEBUG
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView(viewModel: .init())
     }
 }
-#endif
