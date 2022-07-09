@@ -9,14 +9,14 @@ import SwiftUI
 
 struct FavoriteList: View {
     weak var navigationController: UINavigationController?
-    let allTrees: [[String]]
-
+    let allTrees: [Tree]
+    
     init (
-        allTrees: [[String]]
+        allTrees: [Tree]
     ) {
         self.allTrees = allTrees
     }
-
+    
     var body: some View {
         Text("Árvores favoritas")
             .bold()
@@ -24,45 +24,42 @@ struct FavoriteList: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .foregroundColor(.gray)
             .padding([.leading], 9)
-        ScrollView(.horizontal) {
+        ScrollView(.horizontal, showsIndicators: false) {
             HStack {
-                ForEach(0...allTrees.count, id: \.self) { index in
-                    if index < allTrees.count {
-                        if allTrees[index][3] == "yes"{
-                            ZStack {
-                                VStack {
-                                    Image(allTrees[index][2])
-                                        .resizable()
-                                        .scaledToFill()
-                                    Text(allTrees[index][0])
-                                        .font(.system(size: 12))
-                                        .lineLimit(1)
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                        .padding([.leading], 9)
-                                }
-                            }
-                            .background(Constants.white)
-                            .frame(width: 115, height: 115, alignment: .bottom)
-                            .cornerRadius(10)
+                ForEach(allTrees.prefix(3)) { tree in
+                    ZStack {
+                        VStack {
+                            Image("treeExample")
+                                .resizable()
+                                .scaledToFill()
+                            Text(tree.name)
+                                .font(.system(size: 12))
+                                .lineLimit(1)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding([.leading], 9)
                         }
-                    } else {
-                        ZStack {
-                            Rectangle()
-                                .foregroundColor(.gray)
-                            VStack {
-                                Image(systemName: "plus")
-                                Text("Adicionar")
-                                    .font(.system(size: 11))
-                            }
-                        }
-                        .frame(width: 115, height: 115, alignment: .top)
-                        .cornerRadius(10)
+                    }
+                    .background(Constants.white)
+                    .frame(width: 115, height: 115, alignment: .bottom)
+                    .cornerRadius(10)
+                }
+                ZStack {
+                    Rectangle()
+                        .foregroundColor(.gray)
+                    VStack {
+                        Image(systemName: "plus")
+                        Text("Adicionar")
+                            .font(.system(size: 11))
                     }
                 }
+                .frame(width: 115, height: 115, alignment: .top)
+                .cornerRadius(10)
             }
-        } .padding([.leading], 17)
+        }.padding([.leading], 17)
     }
 }
+
+
 
 extension FavoriteList {
     struct Constants {
