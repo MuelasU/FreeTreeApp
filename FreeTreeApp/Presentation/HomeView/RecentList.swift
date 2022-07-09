@@ -10,9 +10,9 @@ import SwiftUI
 struct RecentList: View {
     weak var navigationController: UINavigationController?
 
-    let allTrees: [[String]]
+    let allTrees: [Tree]
 
-    init ( allTrees: [[String]]) {
+    init ( allTrees: [Tree]) {
         self.allTrees = allTrees
     }
 
@@ -24,19 +24,20 @@ struct RecentList: View {
             .foregroundColor(.gray)
             .padding([.leading], 9)
         ScrollView {
-            ForEach(0..<allTrees.count, id: \.self) { index in
+            ForEach(allTrees.prefix(3)) { tree in
                 HStack {
-                    Image(allTrees[index][2])
+                    //TODO: recebe uma UIImage, muda a Tree ou pensa em outra saída?
+                    Image("treeExample")
                         .resizable()
                         .scaledToFit()
                         .cornerRadius(100)
                     VStack {
-                        Text(allTrees[index][0])
+                        Text(tree.name)
                             .font(.system(size: 17))
                             .lineLimit(1)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding([.leading], 9)
-                        Text(allTrees[index][1])
+                        Text(tree.name)
                             .font(.system(size: 11))
                             .lineLimit(1)
                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -44,10 +45,10 @@ struct RecentList: View {
                             .foregroundColor(.gray)
                     }
                 } .frame(height: 55, alignment: .center)
-            }
         }.padding([.leading], 17)
             .cornerRadius(10)
             .background(Constants.white)
+        }
     }
 }
 

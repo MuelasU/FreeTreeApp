@@ -10,10 +10,10 @@ import SwiftUI
 
 struct SearchResultList: View {
     @Binding var searchingFor: String
-    let trees: [String]
+    let trees: [Tree]
     
     init (
-        trees: [String],
+        trees: [Tree],
         searchingFor: Binding<String>
     ) {
         self.trees = trees
@@ -22,21 +22,20 @@ struct SearchResultList: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(searchResults, id: \.self) { tree in
-                    NavigationLink (destination: Text(tree)) {
-                        Text(tree)
+                ForEach(searchResults) { tree in
+                    NavigationLink (destination: Text(tree.name)) {
+                        Text(tree.name)
                     }
                 }
             }
         }
-        .navigationTitle("Arvores")
     }
     
-    var searchResults: [String] {
+    var searchResults: [Tree] {
         if searchingFor.isEmpty {
             return trees
         } else {
-            return trees.filter { $0.lowercased().contains(searchingFor.lowercased()) }
+            return trees.filter { $0.name.lowercased().contains(searchingFor.lowercased()) }
         }
     }
 }
