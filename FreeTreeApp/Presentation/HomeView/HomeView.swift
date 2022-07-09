@@ -21,6 +21,12 @@ struct HomeView: View {
             }
         } else {
             SearchResultList(trees: viewModel.allTrees ?? [], searchingFor: self.$searchingFor)
+        VStack {
+            SearchBar(profilePic: viewModel.profilePic)
+            ScrollView {
+                FavoriteList(allTrees: viewModel.allTrees)
+                RecentList(allTrees: viewModel.allTrees)
+            }
         }
         Button("Pega as arvores") {
             viewModel.getTrees(completion: { trees in
