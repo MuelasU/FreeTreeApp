@@ -34,6 +34,8 @@ enum SheetHeight {
 struct Sheet<Content: View>: View {
 
     weak var delegate: SheetDelegate?
+    
+    @EnvironmentObject var sheetManager: SheetManager
 
     @State var height: SheetHeight
     @ViewBuilder let content: () -> Content

@@ -40,9 +40,9 @@ struct SearchBar: View {
             .cornerRadius(13)
             .padding(8)
             Button {
-                withAnimation {
+//                withAnimation {
                     sheetManager.present()
-                }
+//                }
             } label: {
                 Image(profilePic)
                     .resizable()

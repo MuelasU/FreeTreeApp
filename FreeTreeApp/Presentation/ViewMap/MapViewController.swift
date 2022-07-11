@@ -9,11 +9,14 @@ import UIKit
 import MapKit
 import CoreLocation
 import SwiftUI
+import Combine
 
 class MapViewController: UIViewController {
     fileprivate var locationManager: CLLocationManager = CLLocationManager()
     var mapViewConfig: MapViewConfig?
+    
     var sheetManager = SheetManager()
+    var anyCancellables = Set<AnyCancellable>()
 
     override func loadView() {
         self.view = MapView(delegate: self)
@@ -36,8 +39,13 @@ class MapViewController: UIViewController {
         let sheet = Sheet(delegate: self, height: sheetHeightMode) {
             HomeView(viewModel: .init())
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .environmentObject(self.sheetManager)
         }
+        .environmentObject(self.sheetManager)
+        
+        self.sheetManager.$action.sink { action in
+            print(action)
+        }
+        .store(in: &anyCancellables)
 
         let hostingController = UIHostingController(rootView: sheet)
         hostingController.view.backgroundColor = .clear
