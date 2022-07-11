@@ -16,7 +16,16 @@ class ExampleViewController: UIViewController {
         super.viewDidLoad()
         let storageService = StorageServices()
         let images = [UIImage(systemName: "circle.fill")!, UIImage(systemName: "trash")!, UIImage(systemName: "plus")!, UIImage(systemName: "person.fill")!]
-        storageService.teste(images: images)
+        let treeService = TreeServices()
+        let tree = Tree(name: "limoeiro da goiabeira", date: .now, tag: ["limão"], advices: [])
+        treeService.create(tree: tree, treeImages: images) { error in
+            if let error = error {
+                print("Não foi possivel gravar a árvore \(tree.name)\n\(error.localizedDescription)")
+            } else {
+                print("Árvore gravada com sucesso")
+            }
+            
+        }
     }
 }
 

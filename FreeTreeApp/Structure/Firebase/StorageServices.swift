@@ -11,8 +11,6 @@ import FirebaseStorage
 class StorageServices {
     private let collectionName = "images"
     private let storage = Storage.storage()
-    private let group = DispatchGroup()
-    
     
     public func upload(treeImage: UIImage, completion: @escaping (Result<String, Error>) -> Void) {
         let id = UUID.init().uuidString

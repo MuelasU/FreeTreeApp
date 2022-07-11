@@ -21,7 +21,7 @@ class TreeServices {
         collectionRef = db.collection(collectionName)
     }
     
-    func create(tree: Tree, completion: @escaping (Error?) -> Void) {
+    func create(tree: Tree, treeImages: [UIImage], completion: @escaping (Error?) -> Void) {
         do {
             let dictionary = try Firestore.Encoder().encode(tree)
             docRef = collectionRef?.addDocument(data: dictionary) { (error) in
@@ -29,6 +29,11 @@ class TreeServices {
                     completion(error)
                 } else {
                     print("Documento adicionado com o ID: \(self.docRef!.documentID)")
+                    for image in treeImages {
+                        var treeAux = tree
+                        treeAux.id = self.docRef!.documentID
+                        self.addImage(tree: treeAux, treeImage: image)
+                    }
                     completion(nil)
                 }
             }
@@ -66,6 +71,36 @@ class TreeServices {
         
     }
     
+    private func addImageID(tree: Tree, imageID: String, completion: @escaping(Error?) -> Void) {
+        let document = collectionRef?.document(tree.id ?? "None")
+        print(document?.documentID)
+        document?.updateData([
+            "imagesID" : FieldValue.arrayUnion([imageID])
+        ]) { error in
+            if let error = error {
+                completion(error)
+            }
+        }
+    }
+    
+    private func addImage(tree: Tree, treeImage: UIImage) {
+        let storage = StorageServices()
+        storage.upload(treeImage: treeImage) { result in
+            switch result {
+            case let .success(id):
+                self.addImageID(tree: tree, imageID: id) { error in
+                    if let error = error {
+                        print("Não foi possível atualizar o id da imagem na árvore \(tree.name) \(error.localizedDescription)")
+                    } else {
+                        print("Imagem adicionada a árvore \(tree.name)")
+                    }
+                }
+            case let .failure(error):
+                print("Não foi possível dar upload na imagem da árvore \(tree.name) \(error.localizedDescription)")
+            }
+        }
+    }
+    
     func delete(tree: Tree, completion: @escaping (Error?) -> Void) {
         collectionRef?.document(tree.id ?? "None").delete() { (error) in
             if let error = error {
@@ -82,7 +117,7 @@ class TreeServices {
 extension TreeServices {
     //Use essa função para testar o firebase
     func testes(tree: Tree) {
-        self.create(tree: tree) { error in
+        self.create(tree: tree, treeImages: []) { error in
             if let error = error {
                 print("Não foi possível criar a árvore \(error.localizedDescription)")
             } else {

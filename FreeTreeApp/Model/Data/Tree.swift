@@ -51,18 +51,13 @@ struct Tree: Storable, UpdatableIdentifiable {
     let advices: [TreeAdvice]
     var coordinates: Location = Location(lat: 0, lgt: 0)
     //uuid de cada imagem
-    public var imagesID: [String] = []
+    var imagesID: [String] = []
 
     init(name: String, date: Date, tag: [String], advices: [TreeAdvice]) {
         self.name = name
         self.date = date
         self.tag = tag
         self.advices = advices
-    }
-
-    var treeImages: [UIImage?] {
-        get { imagesID.map { UIImage(named: $0) } }
-        // TODO: implement set logic: save images
     }
 
     var location: CLLocationCoordinate2D {
