@@ -17,6 +17,7 @@ class MapViewController: UIViewController {
     
     var sheetManager = SheetManager()
     var anyCancellables = Set<AnyCancellable>()
+    private var ajustsViewController: UIViewController?
 
     override func loadView() {
         self.view = MapView(delegate: self)
@@ -43,7 +44,15 @@ class MapViewController: UIViewController {
         .environmentObject(self.sheetManager)
         
         self.sheetManager.$action.sink { action in
-            print(action)
+            switch action {
+            case .present:
+                self.presentAdjusts()
+            case .dismiss:
+                print(action)
+                self.removeAdjusts()
+            default:
+                break
+            }
         }
         .store(in: &anyCancellables)
 
@@ -85,6 +94,39 @@ class MapViewController: UIViewController {
                                                  latitudinalMeters: 100,
                                                  longitudinalMeters: 100)
             mapViewConfig?.setRegion(region: region)
+        }
+    }
+}
+
+extension MapViewController {
+    private func presentAdjusts() {
+        let popUpAjusts = PopUpAjustsView(didClose: {
+            self.sheetManager.dismiss()
+        })
+        
+        let hostingController = UIHostingController(rootView: popUpAjusts)
+        self.ajustsViewController = hostingController
+//        hostingController.view.backgroundColor = .clear
+        hostingController.view.translatesAutoresizingMaskIntoConstraints = false
+        
+        addChild(hostingController)
+        view.addSubview(hostingController.view)
+
+        NSLayoutConstraint.activate([
+            hostingController.view.topAnchor.constraint(equalTo: view.topAnchor),
+            hostingController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            hostingController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            hostingController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+
+        sheetController.didMove(toParent: self)
+    }
+    
+    private func removeAdjusts() {
+        if let adjustsViewController = ajustsViewController {
+            adjustsViewController.willMove(toParent: nil)
+            adjustsViewController.view.removeFromSuperview()
+            adjustsViewController.removeFromParent()
         }
     }
 }
