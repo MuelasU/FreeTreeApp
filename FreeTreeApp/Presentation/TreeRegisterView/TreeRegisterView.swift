@@ -17,6 +17,7 @@ struct TreeRegistrationView: View {
     var TreeRegisterVM: TreeRegisterViewModel
     
     @State private var treeName: String = ""
+    @State private var presentAlert: Bool = false
     @State private var tags: [String] = [""]
     @State private var complement: String = ""
     @State private var numberOfTags: Int = 0
@@ -40,16 +41,20 @@ struct TreeRegistrationView: View {
                     Spacer()
                     
                     Button("Salvar") {
-                        // TODO: deixar botão enabled apenas quando o campo de nome estiver preenchido
                         let tree = Tree(name: treeName, date: .now, tag: tags, advices: [])
                         let treeService = TreeServices()
                         
                         treeService.create(tree: tree) { error in
                             if let error = error {
                                 print("Não foi possível criar a árvore \(error.localizedDescription)")
+                                self.presentAlert = false
                             }
                         }
-                    }.padding(.trailing, 16)
+                        
+                        self.TreeRegisterVM.closeAction()
+                    }
+                    .padding(.trailing, 16)
+                    .disabled(treeName.isEmpty)
                 }.padding(.top, 16)
                 
                 Form {
