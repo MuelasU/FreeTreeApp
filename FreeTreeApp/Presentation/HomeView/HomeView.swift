@@ -13,14 +13,32 @@ struct HomeView: View {
     @State private var searchingFor: String = ""
     var allTrees: [Tree]
     
+    private func sectionTitle(_ title: String) -> some View {
+        return Text(title)
+            .font(.headline.weight(.semibold))
+            .foregroundColor(Color(uiColor: .secondaryLabel))
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.horizontal, 20)
+    }
+    
     var body: some View {
-        SearchBar(profilePic: viewModel.profilePic, searchingFor: self.$searchingFor)
+        VStack {
+            SearchBar(profilePic: viewModel.profilePic, searchingFor: self.$searchingFor)
+            
             if searchingFor.isEmpty {
-                FavoriteList(allTrees: allTrees)
-                RecentList(allTrees: allTrees)
+                VStack {
+                    sectionTitle("Árvores favoritas")
+                    FavoriteList(allTrees: allTrees)
+                    
+                    Spacer(minLength: 20)
+                    
+                    sectionTitle("Recentes")
+                    RecentList(allTrees: allTrees)
+                }
             } else {
                 SearchResultList(trees: allTrees, searchingFor: self.$searchingFor)
             }
+        }
     }
 }
 

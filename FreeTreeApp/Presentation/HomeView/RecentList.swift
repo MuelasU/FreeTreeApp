@@ -15,46 +15,41 @@ struct RecentList: View {
     init ( allTrees: [Tree]) {
         self.allTrees = allTrees
     }
-
-    var body: some View {
-        Text("Recentes")
-            .bold()
-            .font(.system(size: 15))
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .foregroundColor(.gray)
-            .padding([.leading], 9)
-        ScrollView {
-            ForEach(allTrees.prefix(3)) { tree in
-                HStack {
-                    //TODO: recebe uma UIImage, muda a Tree ou pensa em outra saída?
-                    Image("treeExample")
-                        .resizable()
-                        .scaledToFit()
-                        .cornerRadius(100)
-                    VStack {
-                        Text(tree.name)
-                            .font(.system(size: 17))
-                            .lineLimit(1)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding([.leading], 9)
-                        Text(tree.name)
-                            .font(.system(size: 11))
-                            .lineLimit(1)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding([.leading], 9)
-                            .foregroundColor(.gray)
-                    }
-                } .frame(height: 55, alignment: .center)
-        }.padding([.leading], 17)
-            .cornerRadius(10)
-            .background(Constants.white)
+    
+    func rowFor(tree: Tree) -> some View {
+        HStack {
+            Image("treeExample")
+                .resizable()
+                .scaledToFill()
+                .frame(width: 50, height: 50)
+                .clipShape(Circle())
+            
+            VStack {
+                Text(tree.name)
+                    .font(.headline)
+                    .lineLimit(1)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
+                //TODO: Change for adress string
+                Text(tree.name)
+                    .font(.caption)
+                    .lineLimit(1)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .foregroundColor(.secondary)
+            }
         }
     }
-}
 
-extension RecentList {
-    struct Constants {
-        static let white: Color = Color(uiColor: .init(red: 255/255, green: 255/255, blue: 255/255, alpha: 1))
+    var body: some View {
+        List {
+            ForEach(allTrees.prefix(3)) { tree in
+                rowFor(tree: tree)
+            }
+        }
+        .onAppear(perform: {
+                UITableView.appearance().contentInset.top = -35
+                UITableView.appearance().isScrollEnabled = false
+        })
     }
 }
 

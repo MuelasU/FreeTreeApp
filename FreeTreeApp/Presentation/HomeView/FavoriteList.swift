@@ -16,56 +16,56 @@ struct FavoriteList: View {
     ) {
         self.allTrees = allTrees
     }
+
+    func cellFor(tree: Tree) -> some View {
+        return ZStack(alignment: .bottom) {
+            Image("treeExample")
+                .resizable()
+                .scaledToFill()
+                .frame(width: 120, height: 120)
+            
+            Text(tree.name)
+                .font(.subheadline)
+                .padding(.horizontal, 10)
+                .padding(.vertical, 5)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(.regularMaterial)
+        }
+        .clipShape(RoundedRectangle(cornerRadius: 10))
+    }
     
     var body: some View {
-        Text("Árvores favoritas")
-            .bold()
-            .font(.system(size: 15))
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .foregroundColor(.gray)
-            .padding([.leading], 9)
         ScrollView(.horizontal, showsIndicators: false) {
-            HStack {
+            HStack(spacing: 8) {
                 ForEach(allTrees.prefix(3)) { tree in
-                    ZStack {
-                        VStack {
-                            Image("treeExample")
-                                .resizable()
-                                .scaledToFill()
-                            Text(tree.name)
-                                .font(.system(size: 12))
-                                .lineLimit(1)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding([.leading], 9)
-                        }
+                    cellFor(tree: tree)
+                }
+                
+                Button(action: {}) {
+                    VStack(spacing: 8) {
+                        Image(systemName: "plus")
+                            .font(.largeTitle.weight(.semibold))
+                        
+                        Text("Adicionar")
+                            .font(.subheadline.weight(.semibold))
                     }
-                    .background(Constants.white)
-                    .frame(width: 115, height: 115, alignment: .bottom)
+                    .foregroundColor(.orange)
+                    .frame(width: 120, height: 120)
+                    .background(Color.white)
                     .cornerRadius(10)
                 }
-                ZStack {
-                    Rectangle()
-                        .foregroundColor(.gray)
-                    VStack {
-                        Image(systemName: "plus")
-                        Text("Adicionar")
-                            .font(.system(size: 11))
-                    }
-                }
-                .frame(width: 115, height: 115, alignment: .top)
-                .cornerRadius(10)
             }
-        }.padding([.leading], 17)
+            .padding(.horizontal, 20)
+        }
     }
 }
-
-
 
 extension FavoriteList {
     struct Constants {
         static let white: Color = Color(uiColor: .init(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.9))
     }
 }
+
 struct FavoriteList_Previews: PreviewProvider {
     static var previews: some View {
         FavoriteList(allTrees: .init())
