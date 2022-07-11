@@ -35,35 +35,27 @@ struct FavoriteList: View {
     }
     
     var body: some View {
-        VStack {
-            Text("Árvores favoritas")
-                .font(.headline.weight(.semibold))
-                .foregroundColor(Color(uiColor: .secondaryLabel))
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal, 20)
-            
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 8) {
-                    ForEach(0..<allTrees.count, id: \.self) { index in
-                        cellFor(index: index)
-                    }
-                    
-                    Button(action: {}) {
-                        VStack(spacing: 8) {
-                            Image(systemName: "plus")
-                                .font(.largeTitle.weight(.semibold))
-                            
-                            Text("Adicionar")
-                                .font(.subheadline.weight(.semibold))
-                        }
-                        .foregroundColor(.orange)
-                        .frame(width: 120, height: 120)
-                        .background(Color.white)
-                        .cornerRadius(10)
-                    }
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 8) {
+                ForEach(0..<allTrees.count, id: \.self) { index in
+                    cellFor(index: index)
                 }
-                .padding(.horizontal, 20)
+                
+                Button(action: {}) {
+                    VStack(spacing: 8) {
+                        Image(systemName: "plus")
+                            .font(.largeTitle.weight(.semibold))
+                        
+                        Text("Adicionar")
+                            .font(.subheadline.weight(.semibold))
+                    }
+                    .foregroundColor(.orange)
+                    .frame(width: 120, height: 120)
+                    .background(Color.white)
+                    .cornerRadius(10)
+                }
             }
+            .padding(.horizontal, 20)
         }
     }
 }

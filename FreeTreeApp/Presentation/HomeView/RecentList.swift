@@ -15,39 +15,40 @@ struct RecentList: View {
     init ( allTrees: [[String]]) {
         self.allTrees = allTrees
     }
+    
+    func rowFor(index: Int) -> some View {
+        HStack {
+            Image(allTrees[index][2])
+                .resizable()
+                .scaledToFill()
+                .frame(width: 50, height: 50)
+                .clipShape(Circle())
+            
+            VStack {
+                Text(allTrees[index][0])
+                    .font(.headline)
+                    .lineLimit(1)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
+                Text(allTrees[index][1])
+                    .font(.caption)
+                    .lineLimit(1)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .foregroundColor(.secondary)
+            }
+        }
+    }
 
     var body: some View {
-        Text("Recentes")
-            .bold()
-            .font(.system(size: 15))
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .foregroundColor(.gray)
-            .padding([.leading], 9)
-        ScrollView {
+        List {
             ForEach(0..<allTrees.count, id: \.self) { index in
-                HStack {
-                    Image(allTrees[index][2])
-                        .resizable()
-                        .scaledToFit()
-                        .cornerRadius(100)
-                    VStack {
-                        Text(allTrees[index][0])
-                            .font(.system(size: 17))
-                            .lineLimit(1)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding([.leading], 9)
-                        Text(allTrees[index][1])
-                            .font(.system(size: 11))
-                            .lineLimit(1)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding([.leading], 9)
-                            .foregroundColor(.gray)
-                    }
-                } .frame(height: 55, alignment: .center)
+                rowFor(index: index)
             }
-        }.padding([.leading], 17)
-            .cornerRadius(10)
-            .background(Constants.white)
+        }
+        .onAppear(perform: {
+                UITableView.appearance().contentInset.top = -35
+                UITableView.appearance().isScrollEnabled = false
+        })
     }
 }
 

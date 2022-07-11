@@ -13,14 +13,26 @@ struct HomeView: View {
     @ObservedObject var viewModel: ViewModel
     @State private var searchTexts: String = ""
     @State var index: Int = 0
-
     
+    private func sectionTitle(_ title: String) -> some View {
+        return Text(title)
+            .font(.headline.weight(.semibold))
+            .foregroundColor(Color(uiColor: .secondaryLabel))
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.horizontal, 20)
+    }
     
     var body: some View {
         VStack {
             SearchBar(profilePic: viewModel.profilePic)
-            ScrollView {
+            
+            VStack {
+                sectionTitle("Árvores favoritas")
                 FavoriteList(allTrees: viewModel.allTrees)
+                
+                Spacer(minLength: 20)
+                
+                sectionTitle("Recentes")
                 RecentList(allTrees: viewModel.allTrees)
             }
         }
