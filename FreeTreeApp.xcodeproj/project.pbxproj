@@ -17,6 +17,10 @@
 		28C0B8F12861EA8100F48FCA /* ExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C0B8F02861EA8100F48FCA /* ExampleView.swift */; };
 		28C0B8F32861EA8E00F48FCA /* ExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C0B8F22861EA8E00F48FCA /* ExampleViewController.swift */; };
 		28C0B8F52861F95200F48FCA /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C0B8F42861F95200F48FCA /* UIColor+Extensions.swift */; };
+		28C7B5C6287463C300D1B302 /* PopUpAjustsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C7B5C5287463C300D1B302 /* PopUpAjustsView.swift */; };
+		28C7B5C82874812900D1B302 /* SheetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C7B5C72874812900D1B302 /* SheetManager.swift */; };
+		28C7B5CA2875BA5900D1B302 /* Ajusts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C7B5C92875BA5900D1B302 /* Ajusts.swift */; };
+		28C7B5CE2876F9C400D1B302 /* RoundedCorners+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C7B5CD2876F9C400D1B302 /* RoundedCorners+Extensions.swift */; };
 		3F3EFDF428648EAD0093F657 /* Coder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3EFDF328648EAD0093F657 /* Coder.swift */; };
 		3F3EFDF628648EC90093F657 /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3EFDF528648EC90093F657 /* Storable.swift */; };
 		3F7E8FCA286204910057B59E /* Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7E8FC9286204910057B59E /* Tree.swift */; };
@@ -50,6 +54,10 @@
 		28C0B8F02861EA8100F48FCA /* ExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleView.swift; sourceTree = "<group>"; };
 		28C0B8F22861EA8E00F48FCA /* ExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleViewController.swift; sourceTree = "<group>"; };
 		28C0B8F42861F95200F48FCA /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
+		28C7B5C5287463C300D1B302 /* PopUpAjustsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpAjustsView.swift; sourceTree = "<group>"; };
+		28C7B5C72874812900D1B302 /* SheetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetManager.swift; sourceTree = "<group>"; };
+		28C7B5C92875BA5900D1B302 /* Ajusts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ajusts.swift; sourceTree = "<group>"; };
+		28C7B5CD2876F9C400D1B302 /* RoundedCorners+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RoundedCorners+Extensions.swift"; sourceTree = "<group>"; };
 		38E665DF6C09CD4071318ADA /* Pods-FreeTreeApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FreeTreeApp.release.xcconfig"; path = "Target Support Files/Pods-FreeTreeApp/Pods-FreeTreeApp.release.xcconfig"; sourceTree = "<group>"; };
 		3F3EFDF328648EAD0093F657 /* Coder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coder.swift; sourceTree = "<group>"; };
 		3F3EFDF528648EC90093F657 /* Storable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storable.swift; sourceTree = "<group>"; };
@@ -95,6 +103,7 @@
 				23742B8D2873166900A83327 /* SearchBar.swift */,
 				23742B8F287316B700A83327 /* FavoriteList.swift */,
 				23742B91287316DC00A83327 /* RecentList.swift */,
+				28C7B5C5287463C300D1B302 /* PopUpAjustsView.swift */,
 				23742B9528732BFF00A83327 /* ExampleSwiftUIView.swift */,
 			);
 			path = HomeView;
@@ -115,6 +124,7 @@
 			children = (
 				28C0B8EC2861EA2C00F48FCA /* UIKit+Extensions.swift */,
 				28C0B8F42861F95200F48FCA /* UIColor+Extensions.swift */,
+				28C7B5CD2876F9C400D1B302 /* RoundedCorners+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -154,6 +164,8 @@
 			children = (
 				3F3EFDF228648C700093F657 /* Services */,
 				3F7E8FC9286204910057B59E /* Tree.swift */,
+				28C7B5C92875BA5900D1B302 /* Ajusts.swift */,
+				28C7B5C72874812900D1B302 /* SheetManager.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -384,18 +396,22 @@
 				3F95B1182874815900BEDF69 /* AnimationCompletion.swift in Sources */,
 				23DE3AE228707095007EA77A /* HomeView.swift in Sources */,
 				3F7E8FCA286204910057B59E /* Tree.swift in Sources */,
+				28C7B5C6287463C300D1B302 /* PopUpAjustsView.swift in Sources */,
 				3F95B1152874601F00BEDF69 /* Sheet.swift in Sources */,
 				3F3EFDF628648EC90093F657 /* Storable.swift in Sources */,
 				3F7E8FCA286204910057B59E /* Tree.swift in Sources */,
 				732A94B72869D05B0097AFFA /* MapView.swift in Sources */,
 				23742B90287316B700A83327 /* FavoriteList.swift in Sources */,
+				28C7B5C82874812900D1B302 /* SheetManager.swift in Sources */,
 				23742B92287316DC00A83327 /* RecentList.swift in Sources */,
+				28C7B5CE2876F9C400D1B302 /* RoundedCorners+Extensions.swift in Sources */,
 				732A94B92869D0C10097AFFA /* MapViewController.swift in Sources */,
 				28C0B8F52861F95200F48FCA /* UIColor+Extensions.swift in Sources */,
 				23742B9628732BFF00A83327 /* ExampleSwiftUIView.swift in Sources */,
 				59B4C0062863594C00563E60 /* TreeServices.swift in Sources */,
 				28C0B8EA2861E9F600F48FCA /* ViewCoding.swift in Sources */,
 				3FF4B61128608DA800E3C0E5 /* SceneDelegate.swift in Sources */,
+				28C7B5CA2875BA5900D1B302 /* Ajusts.swift in Sources */,
 				28C0B8F12861EA8100F48FCA /* ExampleView.swift in Sources */,
 				3F3EFDF428648EAD0093F657 /* Coder.swift in Sources */,
 				23742B8E2873166900A83327 /* SearchBar.swift in Sources */,

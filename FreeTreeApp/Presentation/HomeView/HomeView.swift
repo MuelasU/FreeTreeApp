@@ -13,7 +13,12 @@ struct HomeView: View {
     @ObservedObject var viewModel: ViewModel
     @State private var searchTexts: String = ""
     @State var index: Int = 0
-
+    
+    
+    init(viewModel: ViewModel) {
+        self.viewModel = viewModel;
+    }
+    
     var body: some View {
         VStack {
             SearchBar(profilePic: viewModel.profilePic)
@@ -22,6 +27,17 @@ struct HomeView: View {
                 RecentList(allTrees: viewModel.allTrees)
             }
         }
+//        .overlay(alignment: .bottom) {
+//            if sheetManager.action.isPresented {
+//                PopUpAjustsView {
+//                    withAnimation {
+//                        sheetManager.dismiss()
+//                    }
+//                }
+//                
+//            }
+//        }
+        .ignoresSafeArea()
     }
 }
 
@@ -47,6 +63,7 @@ extension HomeView {
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView(viewModel: .init())
+            .environmentObject(SheetManager())
     }
 }
 #endif

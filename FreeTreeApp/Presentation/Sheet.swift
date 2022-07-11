@@ -9,6 +9,7 @@ import SwiftUI
 
 protocol SheetDelegate: AnyObject {
     func didChangeHeight(to newHeight: SheetHeight)
+    func didStartDragGesture()
 }
 
 enum SheetHeight {
@@ -33,6 +34,8 @@ enum SheetHeight {
 struct Sheet<Content: View>: View {
 
     weak var delegate: SheetDelegate?
+    
+    @EnvironmentObject var sheetManager: SheetManager
 
     @State var height: SheetHeight
     @ViewBuilder let content: () -> Content
@@ -40,6 +43,13 @@ struct Sheet<Content: View>: View {
     @State private var translation: CGSize = .zero
     @State private var offsetY: CGFloat = .zero
     @State private var isAnimating: Bool = false
+    @State private var isDragging: Bool = false {
+        didSet {
+            if isDragging {
+                delegate?.didStartDragGesture()
+            }
+        }
+    }
 
     private var animation: Animation {
         .interactiveSpring(response: 0.5, dampingFraction: 1)
@@ -86,10 +96,14 @@ struct Sheet<Content: View>: View {
         .gesture(
             DragGesture()
                 .onChanged { value in
+                    if !isDragging {
+                        isDragging = true
+                    }
                     translation = value.translation
                     offsetY = translation.height
                 }
                 .onEnded { _ in
+                    isDragging = false
                     isAnimating = true
                     withAnimation(animation) {
                         let initialOffset = height.offset
