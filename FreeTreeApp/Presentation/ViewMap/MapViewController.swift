@@ -76,7 +76,10 @@ class MapViewController: UIViewController {
     
     @objc func showRegisterTreeVC () {
         let bridge = TreeRegisterViewModel()
-        let vc = UIHostingController(rootView: TreeRegistrationView(TreeRegisterVM: bridge))
+        
+        let userLong = locationManager.location?.coordinate.longitude as? Double ?? 0
+        let userLat = locationManager.location?.coordinate.latitude as? Double ?? 0
+        let vc = UIHostingController(rootView: TreeRegistrationView(TreeRegisterVM: bridge, lat: userLat, long: userLong))
         
         bridge.closeAction = { [weak vc] in
             vc?.dismiss(animated: true)

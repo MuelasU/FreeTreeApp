@@ -8,13 +8,16 @@
 import Foundation
 import SwiftUI
 
-class TreeRegisterViewModel {
+class TreeRegisterViewModel: ObservableObject {
     var closeAction: () -> Void = {}
 }
 
 struct TreeRegistrationView: View {
     weak var navigationController: UINavigationController?
     var TreeRegisterVM: TreeRegisterViewModel
+    
+    @State var lat: Double
+    @State var long: Double
     
     @State private var treeName: String = ""
     @State private var presentAlert: Bool = false
@@ -85,6 +88,10 @@ struct TreeRegistrationView: View {
                     }
                 }
             }
+        } .onAppear {
+            print("TESTING LOCATION")
+            print(lat)
+            print(long)
         }
     }
 }
