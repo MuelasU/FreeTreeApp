@@ -43,7 +43,7 @@ final class MapView: UIView {
     
     var button: UIButton = {
         let button = UIButton()
-        button.setTitle("Create Tree", for: .normal)
+        button.setImage(UIImage(named: "treeIcon"), for: .normal)
         button.backgroundColor = .orange
         button.layer.cornerRadius = 10
         button.addTarget(self, action: #selector(didTapCreateTreeButton), for: .touchUpInside)
@@ -77,7 +77,7 @@ extension MapView: ViewCodeContract {
         }
         
         button.constraint { view in
-            [view.topAnchor.constraint(equalTo: topAnchor, constant: 48),
+            [view.topAnchor.constraint(equalTo: topAnchor, constant: 60),
              view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)]
         }
     }

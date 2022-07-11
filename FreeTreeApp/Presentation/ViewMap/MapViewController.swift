@@ -39,13 +39,6 @@ class MapViewController: UIViewController {
         return hostingController
     }()
     
-    private lazy var registerTreeController: UIViewController = {
-        let hostingController = UIHostingController(rootView: TreeRegistrationView())
-        hostingController.view.backgroundColor = .clear
-        hostingController.view.translatesAutoresizingMaskIntoConstraints = false
-        return hostingController
-    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -81,8 +74,15 @@ class MapViewController: UIViewController {
         }
     }
     
-    func presentRegisterTreeVC() {
-        self.present(registerTreeController, animated: true)
+    @objc func showRegisterTreeVC () {
+        let bridge = TreeRegisterViewModel()
+        let vc = UIHostingController(rootView: TreeRegistrationView(TreeRegisterVM: bridge))
+        
+        bridge.closeAction = { [weak vc] in
+            vc?.dismiss(animated: true)
+        }
+        
+        self.present(vc, animated: true, completion: nil)
     }
 }
 
@@ -106,7 +106,6 @@ extension MapViewController: CLLocationManagerDelegate {
 
 extension MapViewController: MapViewDelegate {
     func didTapCreateTreeButton() {
-        presentRegisterTreeVC()
-        print("button clicked")
+        self.showRegisterTreeVC()
     }
 }

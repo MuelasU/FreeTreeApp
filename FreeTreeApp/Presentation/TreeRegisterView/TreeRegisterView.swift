@@ -8,21 +8,28 @@
 import Foundation
 import SwiftUI
 
+class TreeRegisterViewModel {
+    var closeAction: () -> Void = {}
+}
+
 struct TreeRegistrationView: View {
     weak var navigationController: UINavigationController?
+    var TreeRegisterVM: TreeRegisterViewModel
+    
     @State private var treeName: String = ""
     @State private var tags: [String] = [""]
     @State private var complement: String = ""
     @State private var numberOfTags: Int = 0
     
+    @State private var showingImagePicker = false
+    
     var body: some View {
-//        NavigationView {
         ZStack {
             Color.white
             VStack {
                 HStack {
                     Button("Cancelar") {
-                        
+                        self.TreeRegisterVM.closeAction()
                     }.padding(.leading, 16)
                     
                     Spacer()
@@ -74,78 +81,5 @@ struct TreeRegistrationView: View {
                 }
             }
         }
-            
-//            }
-//        }
-//        .navigationTitle("Cadastro")
-//        .navigationBarTitleDisplayMode(.inline)
-//        .toolbar {
-//            ToolbarItem(placement: .navigationBarTrailing) {
-//                Button("Salvar") {
-//                    let tree = Tree(name: treeName, date: .now, tag: tags, advices: [])
-//                    let treeService = TreeServices()
-//
-//                    treeService.create(tree: tree) { error in
-//                        if let error = error {
-//                            print("Não foi possível criar a árvore \(error.localizedDescription)")
-//                        }
-//                    }
-//                }
-//            }
-//        }
     }
 }
-
-//VStack {
-//    HStack {
-//        Button("Cancelar") {
-//
-//        }.padding(.leading, 16)
-//
-//        Spacer()
-//
-//        Text("Cadastrar")
-//            .bold()
-//
-//        Spacer()
-//
-//        Button("Salvar") {
-//            // TODO: deixar botão enabled apenas quando o campo de nome estiver preenchido
-//            let tree = Tree(name: treeName, date: .now, tag: tags, advices: [])
-//            let treeService = TreeServices()
-//
-//            treeService.create(tree: tree) { error in
-//                if let error = error {
-//                    print("Não foi possível criar a árvore \(error.localizedDescription)")
-//                }
-//            }
-//        }.padding(.trailing, 16)
-//    }
-//    Form {
-//        Section {
-//            TextField("Name", text: $treeName)
-//                .frame(height: 44)
-//                .background(Color.white)
-//        }
-//        Section {
-//            HStack {
-//                Image(systemName: "plus.circle.fill")
-//                    .foregroundColor(.green)
-//                Button("Adicionar Tag") {
-//                    tags.append("")
-//                    numberOfTags += 1
-//                    print(numberOfTags)
-//                }
-//            }
-//            ForEach((0...numberOfTags), id: \.self) { tag in
-//                TextField("Tag name", text: $tags[tag])
-//                    .frame(height: 44)
-//                    .background(Color.white)
-//            }
-//        }
-//        Section(header: Text("Complemento")) {
-//            TextEditor(text: $complement)
-//                .frame(height: 100)
-//        }
-//    }
-//}
