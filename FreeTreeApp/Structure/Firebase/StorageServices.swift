@@ -32,8 +32,38 @@ class StorageServices {
         }
     }
     
+    public func download(imageID: String, completion: @escaping (Result<UIImage, Error>) -> Void) {
+        let imageRef = storage.reference(withPath: "\(imageID).jpg")
+        imageRef.getData(maxSize: 1024 * 1024) { (data, error) in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                let image = UIImage(data: data!)!
+                completion(.success(image))
+            }
+        }
+    }
+    
 }
 
 extension StorageServices {
-    
+    func teste(images: [UIImage]) {
+        for image in images {
+            self.upload(treeImage: image) { result in
+                switch result {
+                case let .success(id):
+                    self.download(imageID: id) { result in
+                        switch result {
+                        case let .success(treeImage):
+                            print(treeImage)
+                        case let .failure(error):
+                            print("Não foi possível baixar a imagem \(error.localizedDescription)")
+                        }
+                    }
+                case let .failure(error):
+                    print("Não foi possível subir a imagem \(error.localizedDescription)")
+                }
+            }
+        }
+    }
 }

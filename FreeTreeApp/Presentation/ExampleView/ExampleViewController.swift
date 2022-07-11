@@ -16,7 +16,7 @@ class ExampleViewController: UIViewController {
         super.viewDidLoad()
         let storageService = StorageServices()
         let images = [UIImage(systemName: "circle.fill")!, UIImage(systemName: "trash")!, UIImage(systemName: "plus")!, UIImage(systemName: "person.fill")!]
-        //storageService.teste(images: images)
+        storageService.teste(images: images)
     }
 }
 
