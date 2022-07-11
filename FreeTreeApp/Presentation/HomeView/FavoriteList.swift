@@ -22,15 +22,17 @@ struct FavoriteList: View {
             Image("treeExample")
                 .resizable()
                 .scaledToFill()
-                .frame(width: 120, height: 120)
-            
+                
             Text(tree.name)
                 .font(.subheadline)
-                .padding(.horizontal, 10)
-                .padding(.vertical, 5)
+                .lineLimit(1)
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 10)
+                .padding(.top, 5)
+                .padding(.bottom, 10)
                 .background(.regularMaterial)
         }
+        .frame(width: 120, height: 120)
         .clipShape(RoundedRectangle(cornerRadius: 10))
     }
     
