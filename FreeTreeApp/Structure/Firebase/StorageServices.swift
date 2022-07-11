@@ -11,8 +11,10 @@ import FirebaseStorage
 class StorageServices {
     private let collectionName = "images"
     private let storage = Storage.storage()
+    private let group = DispatchGroup()
     
-    func upload(treeImage: UIImage, completion: @escaping (Error?) -> Void) {
+    
+    public func upload(treeImage: UIImage, completion: @escaping (Result<String, Error>) -> Void) {
         let id = UUID.init().uuidString
         let uploadRef = storage.reference(withPath: "\(id).jpg")
         guard let imageData = treeImage.jpegData(compressionQuality: 0.75) else {
@@ -23,21 +25,15 @@ class StorageServices {
         uploadMetadata.contentType = "image/jpeg"
         uploadRef.putData(imageData, metadata: uploadMetadata) { (downloadMetaData, error) in
             if let error = error {
-                completion(error)
+                completion(.failure(error))
+            } else {
+                completion(.success(id))
             }
         }
     }
+    
 }
 
 extension StorageServices {
-    func teste() {
-        let image = UIImage(systemName: "circle.fill")
-        upload(treeImage: image!) { error in
-            if let error = error {
-                print(error.localizedDescription)
-            } else {
-                print("Deu bom brasil")
-            }
-        }
-    }
+    
 }
