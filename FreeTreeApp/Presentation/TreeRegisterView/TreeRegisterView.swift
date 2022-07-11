@@ -18,6 +18,7 @@ struct TreeRegistrationView: View {
     
     @State var lat: Double
     @State var long: Double
+    @State var userAdress: String
     
     @State private var treeName: String = ""
     @State private var presentAlert: Bool = false
@@ -44,9 +45,14 @@ struct TreeRegistrationView: View {
                     Spacer()
                     
                     Button("Salvar") {
-                        let tree = Tree(name: treeName, date: .now, tag: tags, advices: [])
+                        var tree = Tree(name: treeName, date: .now, tag: tags, advices: [])
+                        
+                        // save current user location in Tree object
+                        let coordinate = Location(lat: lat, lgt: long)
+                        tree.coordinates = coordinate
                         let treeService = TreeServices()
                         
+                        // create new tree
                         treeService.create(tree: tree) { error in
                             if let error = error {
                                 print("Não foi possível criar a árvore \(error.localizedDescription)")
@@ -54,6 +60,7 @@ struct TreeRegistrationView: View {
                             }
                         }
                         
+                        // close modalView after click saving
                         self.TreeRegisterVM.closeAction()
                     }
                     .padding(.trailing, 16)
@@ -82,16 +89,17 @@ struct TreeRegistrationView: View {
                                 .background(Color.white)
                         }
                     }
+                    Section(header: Text("Your Current Location")) {
+                        TextEditor(text: $userAdress)
+                            .disabled(true)
+                            .foregroundColor(.gray)
+                    }
                     Section(header: Text("Complemento")) {
                         TextEditor(text: $complement)
                             .frame(height: 100)
                     }
                 }
             }
-        } .onAppear {
-            print("TESTING LOCATION")
-            print(lat)
-            print(long)
         }
     }
 }

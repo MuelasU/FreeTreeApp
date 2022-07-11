@@ -13,6 +13,7 @@ import SwiftUI
 class MapViewController: UIViewController {
     fileprivate var locationManager: CLLocationManager = CLLocationManager()
     var mapViewConfig: MapViewConfig?
+    var userAdress: String = ""
 
     override func loadView() {
         self.view = MapView(delegate: self)
@@ -75,17 +76,67 @@ class MapViewController: UIViewController {
     }
     
     @objc func showRegisterTreeVC () {
-        let bridge = TreeRegisterViewModel()
-        
-        let userLong = locationManager.location?.coordinate.longitude as? Double ?? 0
-        let userLat = locationManager.location?.coordinate.latitude as? Double ?? 0
-        let vc = UIHostingController(rootView: TreeRegistrationView(TreeRegisterVM: bridge, lat: userLat, long: userLong))
-        
-        bridge.closeAction = { [weak vc] in
-            vc?.dismiss(animated: true)
+        lookUpCurrentLocation { address in
+            let bridge = TreeRegisterViewModel()
+            let userLong = self.locationManager.location?.coordinate.longitude as? Double ?? 0
+            let userLat = self.locationManager.location?.coordinate.latitude as? Double ?? 0
+            
+            let vc = UIHostingController(rootView: TreeRegistrationView(TreeRegisterVM: bridge, lat: userLat, long: userLong, userAdress: address))
+            
+            bridge.closeAction = { [weak vc] in
+                vc?.dismiss(animated: true)
+            }
+            
+            self.present(vc, animated: true, completion: nil)
         }
-        
-        self.present(vc, animated: true, completion: nil)
+    }
+    
+    func lookUpCurrentLocation(completionHandler: @escaping (String)
+                               -> Void ) {
+        // Use the last reported location.
+        if let lastLocation = self.locationManager.location {
+            let geocoder = CLGeocoder()
+            
+            // Look up the location and return completion with address
+            geocoder.reverseGeocodeLocation(lastLocation,
+                                            completionHandler: { (placemarks, error) in
+                
+                if (error != nil)
+                {
+                    print("reverse geodcode fail: \(error!.localizedDescription)")
+                }
+                let pm = placemarks! as [CLPlacemark]
+                
+                if pm.count > 0 {
+                    let pm = placemarks![0]
+                    
+                    var addressString : String = ""
+                    if pm.subLocality != nil {
+                        addressString = addressString + pm.subLocality! + ", "
+                    }
+                    if pm.thoroughfare != nil {
+                        addressString = addressString + pm.thoroughfare! + ", "
+                    }
+                    if pm.locality != nil {
+                        addressString = addressString + pm.locality! + ", "
+                    }
+                    if pm.country != nil {
+                        addressString = addressString + pm.country! + ", "
+                    }
+                    if pm.postalCode != nil {
+                        addressString = addressString + pm.postalCode! + " "
+                    }
+                    
+                    self.userAdress = addressString
+                    completionHandler(addressString)
+                    print(addressString)
+                }
+            })
+        }
+        else {
+            // No location was available.
+            completionHandler("Wasn't able to get your location")
+        }
     }
 }
 
