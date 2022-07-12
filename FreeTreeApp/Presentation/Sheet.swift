@@ -47,7 +47,7 @@ struct Sheet<Content: View>: View {
 
     private var grabber: some View {
         RoundedRectangle(cornerRadius: 20)
-            .fill(Color.secondary)
+            .fill(Color(uiColor: .tertiaryLabel))
             .frame(width: 40, height: 5)
             .padding(8)
             .onTapGesture {
@@ -75,7 +75,7 @@ struct Sheet<Content: View>: View {
                 .frame(maxWidth: .infinity, alignment: .center)
             content()
         }
-        .background(Color(uiColor: .systemBackground))
+        .background(Color(uiColor: .systemGroupedBackground))
         .cornerRadius(20)
         .offset(y: offsetY)
         .onAnimationCompleted(for: offsetY) {
