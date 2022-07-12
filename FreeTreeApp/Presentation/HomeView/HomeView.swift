@@ -10,8 +10,8 @@ import SwiftUI
 struct HomeView: View {
     weak var navigationController: UINavigationController?
     @ObservedObject var viewModel: ViewModel
+    @ObservedObject var treesStorage: TreesStorage
     @State private var searchingFor: String = ""
-    var allTrees: [Tree]
     
     private func sectionTitle(_ title: String) -> some View {
         return Text(title)
@@ -28,15 +28,15 @@ struct HomeView: View {
             if searchingFor.isEmpty {
                 VStack {
                     sectionTitle("Árvores favoritas")
-                    FavoriteList(allTrees: allTrees)
+                    FavoriteList(allTrees: treesStorage.store)
                     
                     Spacer(minLength: 20)
                     
                     sectionTitle("Recentes")
-                    RecentList(allTrees: allTrees)
+                    RecentList(allTrees: treesStorage.store)
                 }
             } else {
-                SearchResultList(trees: allTrees, searchingFor: self.$searchingFor)
+                SearchResultList(trees: treesStorage.store, searchingFor: self.$searchingFor)
             }
         }
     }
