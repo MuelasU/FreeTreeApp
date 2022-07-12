@@ -25,6 +25,25 @@ class MapViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
     }
+
+    private lazy var topConstraint: NSLayoutConstraint = sheetController.view.topAnchor.constraint(
+        equalTo: self.view.topAnchor,
+        constant: sheetHeightMode.offset
+    )
+
+    private var sheetHeightMode: SheetHeight = .short
+    
+    private lazy var sheetController: UIViewController = {
+        let sheet = Sheet(delegate: self, height: sheetHeightMode) {
+            HomeView(viewModel: .init())
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
+
+        let hostingController = UIHostingController(rootView: sheet)
+        hostingController.view.backgroundColor = .clear
+        hostingController.view.translatesAutoresizingMaskIntoConstraints = false
+        return hostingController
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,14 +72,30 @@ class MapViewController: UIViewController {
             button.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             button.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 64)])
         // FIM botão temporario
+        addChild(sheetController)
+        view.addSubview(sheetController.view)
+
+        NSLayoutConstraint.activate([
+            topConstraint,
+            sheetController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 1000),
+            sheetController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            sheetController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+
+        sheetController.didMove(toParent: self)
         
+        configureLocationManager()
+      
+        mapConfig?.treePins([tree1, tree2, tree3])
+    }
+    
+    private func configureLocationManager() {
+      
         locationManager.requestWhenInUseAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.distanceFilter = kCLDistanceFilterNone
         locationManager.startUpdatingLocation()
         locationManager.delegate = self
-        
-        mapConfig?.treePins([tree1, tree2, tree3])
     }
     
     func followUserLocation() {
@@ -75,6 +110,15 @@ class MapViewController: UIViewController {
     @objc func openSwiftUIScreen() {
         let swiftUIViewController = UIHostingController(rootView: HomeView(navigationController: self.navigationController, viewModel: .init()))
         self.navigationController?.pushViewController(swiftUIViewController, animated: true)
+    }
+}
+  
+
+extension MapViewController: SheetDelegate {
+    func didChangeHeight(to newHeight: SheetHeight) {
+        sheetHeightMode = newHeight
+        topConstraint.constant = sheetHeightMode.offset
+
     }
 }
 
