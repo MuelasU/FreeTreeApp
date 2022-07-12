@@ -90,8 +90,9 @@ struct TreeRegistrationView: View {
                         }
                     }
                     Section(header: Text("Your Current Location")) {
-                        TextEditor(text: $userAdress)
-                            .disabled(true)
+                        Text(userAdress)
+                            .lineLimit(nil)
+                            .multilineTextAlignment(.leading)
                             .foregroundColor(.gray)
                     }
                     Section(header: Text("Complemento")) {
