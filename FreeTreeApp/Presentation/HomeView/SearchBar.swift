@@ -9,17 +9,21 @@ import SwiftUI
 
 struct SearchBar: View {
     weak var navigationController: UINavigationController?
-    @State private var searchText: String = ""
+    @State var searchText: String = ""
     @State var index: Int = 0
-
+    @State var typing: Bool = false
+    @Binding var searchingFor: String
+    
     let profilePic: String
-
+    
     init (
-        profilePic: String
+        profilePic: String,
+        searchingFor: Binding<String>
     ) {
         self.profilePic = profilePic
+        self._searchingFor = searchingFor
     }
-
+    
     var body: some View {
         HStack {
             ZStack {
@@ -28,9 +32,9 @@ struct SearchBar: View {
                 HStack {
                     Image(systemName: "magnifyingglass")
                         .padding(.leading, 8)
-                    TextField(Constants.textFieldPrompt, text: $searchText)
-                        .foregroundColor(.gray)
-                        .padding(.leading, 8)
+                    TextField(Constants.textFieldPrompt, text: $searchingFor)
+                    .foregroundColor(.gray)
+                    .padding(.leading, 8)
                     Image(systemName: "mic")
                         .padding(.trailing, 8)
                 }
@@ -50,14 +54,12 @@ extension SearchBar {
     struct Constants {
         // static let white: Color = Color(uiColor: .init(red: 227/255, green: 227/255, blue: 233/255, alpha: 1))
         static let textFieldPrompt: String = "Buscar árvores"
-
     }
 }
-
 #if DEBUG
 struct SearchBar_Previews: PreviewProvider {
     static var previews: some View {
-        SearchBar(profilePic: .init())
+        SearchBar(profilePic: "profilePic", searchingFor: .constant("Limoeiro"))
     }
 }
 #endif

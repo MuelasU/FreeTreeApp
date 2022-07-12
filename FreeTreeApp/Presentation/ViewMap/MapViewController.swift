@@ -10,10 +10,15 @@ import MapKit
 import CoreLocation
 import SwiftUI
 
+class TreesStorage: ObservableObject {
+    @Published var store: [Tree] = []
+}
+
 class MapViewController: UIViewController {
     fileprivate var locationManager: CLLocationManager = CLLocationManager()
     var mapViewConfig: MapViewConfig?
-
+    var treesStorage = TreesStorage()
+    
     override func loadView() {
         self.view = MapView(delegate: self)
         mapViewConfig = self.view as? MapViewConfig
@@ -29,10 +34,10 @@ class MapViewController: UIViewController {
     
     private lazy var sheetController: UIViewController = {
         let sheet = Sheet(delegate: self, height: sheetHeightMode) {
-            HomeView(viewModel: .init())
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            HomeView(viewModel: .init(), treesStorage: self.treesStorage)
+                .frame(alignment: .top)
         }
-
+        
         let hostingController = UIHostingController(rootView: sheet)
         hostingController.view.backgroundColor = .clear
         hostingController.view.translatesAutoresizingMaskIntoConstraints = false
@@ -41,7 +46,7 @@ class MapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        getTrees(completion: {_ in print("Yes")})
         addChild(sheetController)
         view.addSubview(sheetController.view)
 
@@ -57,6 +62,7 @@ class MapViewController: UIViewController {
         configureLocationManager()
     }
     
+    
     private func configureLocationManager() {
         locationManager.requestWhenInUseAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -71,6 +77,18 @@ class MapViewController: UIViewController {
                                                  latitudinalMeters: 100,
                                                  longitudinalMeters: 100)
             mapViewConfig?.setRegion(region: region)
+        }
+    }
+
+    public func getTrees(completion: ([Tree]) -> Void) {
+        let treeServices = TreeServices()
+        treeServices.read { result in
+            switch result {
+            case let .success(trees):
+                self.treesStorage.store = trees
+            case let .failure(error):
+                print("Não foi possível ler as árvores do banco \(error.localizedDescription)")
+            }
         }
     }
 }

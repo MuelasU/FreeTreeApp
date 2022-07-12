@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2353297C287459FD002601C9 /* SearchResultList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2353297B287459FD002601C9 /* SearchResultList.swift */; };
 		23742B8E2873166900A83327 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23742B8D2873166900A83327 /* SearchBar.swift */; };
 		23742B90287316B700A83327 /* FavoriteList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23742B8F287316B700A83327 /* FavoriteList.swift */; };
 		23742B92287316DC00A83327 /* RecentList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23742B91287316DC00A83327 /* RecentList.swift */; };
@@ -40,6 +41,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2353297B287459FD002601C9 /* SearchResultList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultList.swift; sourceTree = "<group>"; };
 		23742B8D2873166900A83327 /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		23742B8F287316B700A83327 /* FavoriteList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteList.swift; sourceTree = "<group>"; };
 		23742B91287316DC00A83327 /* RecentList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentList.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				23742B8F287316B700A83327 /* FavoriteList.swift */,
 				23742B91287316DC00A83327 /* RecentList.swift */,
 				23742B9528732BFF00A83327 /* ExampleSwiftUIView.swift */,
+				2353297B287459FD002601C9 /* SearchResultList.swift */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -383,6 +386,9 @@
 				3F3EFDF628648EC90093F657 /* Storable.swift in Sources */,
 				3F95B1182874815900BEDF69 /* AnimationCompletion.swift in Sources */,
 				23DE3AE228707095007EA77A /* HomeView.swift in Sources */,
+				3F7E8FCA286204910057B59E /* Tree.swift in Sources */,
+				3F3EFDF628648EC90093F657 /* Storable.swift in Sources */,
+				2353297C287459FD002601C9 /* SearchResultList.swift in Sources */,
 				3F7E8FCA286204910057B59E /* Tree.swift in Sources */,
 				3F95B1152874601F00BEDF69 /* Sheet.swift in Sources */,
 				3F3EFDF628648EC90093F657 /* Storable.swift in Sources */,
