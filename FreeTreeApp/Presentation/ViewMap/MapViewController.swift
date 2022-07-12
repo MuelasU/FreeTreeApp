@@ -9,13 +9,18 @@ import MapKit
 import CoreLocation
 import SwiftUI
 
+class TreesStorage: ObservableObject {
+    @Published var store: [Tree] = []
+}
+
 class MapViewController: UIViewController {
     // TODO: Remove trees and use json
     let tree1 = TreeAnnotation(title: "Odin Tree", status: 1, coordinate: CLLocationCoordinate2D(latitude: -22.9519, longitude: -43.2105))
     let tree2 = TreeAnnotation(title: "Erci Tree", status: 2, coordinate: CLLocationCoordinate2D(latitude: -22.950, longitude: -43.2105))
     let tree3 = TreeAnnotation(title: "Carol Tree", status: 3, coordinate: CLLocationCoordinate2D(latitude: -22.9490, longitude: -43.2105))
     fileprivate var locationManager: CLLocationManager = CLLocationManager()
-    var mapConfig: MapViewConfig?
+    var mapViewConfig: MapViewConfig?
+    var treesStorage = TreesStorage()
     
     override func loadView() {
         self.view = MapView(delegate: self)
@@ -35,10 +40,10 @@ class MapViewController: UIViewController {
     
     private lazy var sheetController: UIViewController = {
         let sheet = Sheet(delegate: self, height: sheetHeightMode) {
-            HomeView(viewModel: .init())
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            HomeView(viewModel: .init(), treesStorage: self.treesStorage)
+                .frame(alignment: .top)
         }
-
+        
         let hostingController = UIHostingController(rootView: sheet)
         hostingController.view.backgroundColor = .clear
         hostingController.view.translatesAutoresizingMaskIntoConstraints = false
@@ -47,31 +52,8 @@ class MapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // INICIO Botao temporario
-        let label = UILabel()
-        label.text = "Home View"
-        label.textColor = .black
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .boldSystemFont(ofSize: 21)
-        view.addSubview(label)
-        
-        let button = UIButton()
-        button.setTitleColor(.blue, for: .normal)
-        button.setTitle("Call HomeView", for: .normal)
-        button.titleLabel?.textAlignment = .center
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(openSwiftUIScreen), for: .touchUpInside)
-        button.titleLabel?.font = .boldSystemFont(ofSize: 21)
-        button.backgroundColor = .white
-        view.addSubview(button)
-        
-        NSLayoutConstraint.activate([
-            button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            button.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            button.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 64)])
-        // FIM botão temporario
+        getTrees(completion: {_ in print("Yes")})
+
         addChild(sheetController)
         view.addSubview(sheetController.view)
 
@@ -88,6 +70,7 @@ class MapViewController: UIViewController {
       
         mapConfig?.treePins([tree1, tree2, tree3])
     }
+    
     
     private func configureLocationManager() {
       
@@ -110,6 +93,17 @@ class MapViewController: UIViewController {
     @objc func openSwiftUIScreen() {
         let swiftUIViewController = UIHostingController(rootView: HomeView(navigationController: self.navigationController, viewModel: .init()))
         self.navigationController?.pushViewController(swiftUIViewController, animated: true)
+
+    public func getTrees(completion: ([Tree]) -> Void) {
+        let treeServices = TreeServices()
+        treeServices.read { result in
+            switch result {
+            case let .success(trees):
+                self.treesStorage.store = trees
+            case let .failure(error):
+                print("Não foi possível ler as árvores do banco \(error.localizedDescription)")
+            }
+        }
     }
 }
   
