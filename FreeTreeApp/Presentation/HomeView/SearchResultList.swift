@@ -10,10 +10,10 @@ import SwiftUI
 
 struct SearchResultList: View {
     @Binding var searchingFor: String
-    let trees: [Tree]
+    let trees: [TreeFB]
     
     init (
-        trees: [Tree],
+        trees: [TreeFB],
         searchingFor: Binding<String>
     ) {
         self.trees = trees
@@ -31,7 +31,7 @@ struct SearchResultList: View {
         }
     }
     
-    var searchResults: [Tree] {
+    var searchResults: [TreeFB] {
         if searchingFor.isEmpty {
             return trees
         } else {

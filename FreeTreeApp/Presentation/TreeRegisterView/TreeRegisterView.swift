@@ -45,7 +45,7 @@ struct TreeRegistrationView: View {
                     Spacer()
                     
                     Button("Salvar") {
-                        var tree = Tree(name: treeName, date: .now, tag: tags, advices: [])
+                        var tree = TreeFB(name: treeName, date: .now, tag: tags, advices: [])
                         
                         // save current user location in Tree object
                         let coordinate = Location(lat: lat, lgt: long)

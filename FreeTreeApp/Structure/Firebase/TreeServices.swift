@@ -21,7 +21,7 @@ class TreeServices {
         collectionRef = db.collection(collectionName)
     }
     
-    func create(tree: Tree, completion: @escaping (Error?) -> Void) {
+    func create(tree: TreeFB, completion: @escaping (Error?) -> Void) {
         do {
             let dictionary = try Firestore.Encoder().encode(tree)
             docRef = collectionRef?.addDocument(data: dictionary) { (error) in
@@ -37,15 +37,15 @@ class TreeServices {
         }
     }
 
-    func read(completion: @escaping (Result<[Tree], Error>) -> Void ) {
+    func read(completion: @escaping (Result<[TreeFB], Error>) -> Void ) {
         collectionRef?.getDocuments() { (querySnapshot, error) in
             if let error = error {
                 completion(.failure(error))
             } else {
                 guard let querySnapshot = querySnapshot else { return }
-                var trees: [Tree] = []
+                var trees: [TreeFB] = []
                 for document in querySnapshot.documents {
-                    guard let tree: Tree = try? document.toObject() else { continue }
+                    guard let tree: TreeFB = try? document.toObject() else { continue }
                     trees.append(tree)
                 }
                 print("Documentos carregados")
@@ -54,7 +54,7 @@ class TreeServices {
         }
     }
     
-    func update(tree: Tree, data: [String: Any], completion: @escaping (Error?) -> Void) {
+    func update(tree: TreeFB, data: [String: Any], completion: @escaping (Error?) -> Void) {
         let document = collectionRef?.document(tree.id ?? "None")
         document?.updateData(data) { error in
             if let error = error {
@@ -66,7 +66,7 @@ class TreeServices {
         
     }
     
-    func delete(tree: Tree, completion: @escaping (Error?) -> Void) {
+    func delete(tree: TreeFB, completion: @escaping (Error?) -> Void) {
         collectionRef?.document(tree.id ?? "None").delete() { (error) in
             if let error = error {
                 completion(error)
@@ -81,7 +81,7 @@ class TreeServices {
 
 extension TreeServices {
     //Use essa função para testar o firebase
-    func testes(tree: Tree) {
+    func testes(tree: TreeFB) {
         self.create(tree: tree) { error in
             if let error = error {
                 print("Não foi possível criar a árvore \(error.localizedDescription)")
