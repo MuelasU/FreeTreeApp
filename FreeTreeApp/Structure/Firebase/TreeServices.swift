@@ -16,41 +16,40 @@ class TreeServices {
     private var docRef: DocumentReference? = nil
     private var collectionRef: CollectionReference? = nil
     private let db = Firestore.firestore()
+    
+    let storage = StorageServices()
 
     init() {
         collectionRef = db.collection(collectionName)
     }
     
-    func create(tree: Tree, treeImages: [UIImage], completion: @escaping (Error?) -> Void) {
+    func create(tree: TreeFB, treeImages: [UIImage], completion: @escaping (Error?) -> Void) {
         do {
             let dictionary = try Firestore.Encoder().encode(tree)
             docRef = collectionRef?.addDocument(data: dictionary) { (error) in
                 if let error = error {
                     completion(error)
                 } else {
-                    print("Documento adicionado com o ID: \(self.docRef!.documentID)")
-                    for image in treeImages {
-                        var treeAux = tree
-                        treeAux.id = self.docRef!.documentID
-                        self.addImage(tree: treeAux, treeImage: image)
-                    }
+                    var curTree = tree
+                    curTree.id = self.docRef?.documentID
+                    self.addImage(tree: curTree, treeImages: treeImages)
                     completion(nil)
                 }
             }
         } catch {
-            print(error)
+            print(error.localizedDescription)
         }
     }
 
-    func read(completion: @escaping (Result<[Tree], Error>) -> Void ) {
+    public func read(completion: @escaping (Result<[TreeFB], Error>) -> Void ) {
         collectionRef?.getDocuments() { (querySnapshot, error) in
             if let error = error {
                 completion(.failure(error))
             } else {
                 guard let querySnapshot = querySnapshot else { return }
-                var trees: [Tree] = []
+                var trees: [TreeFB] = []
                 for document in querySnapshot.documents {
-                    guard let tree: Tree = try? document.toObject() else { continue }
+                    guard let tree: TreeFB = try? document.toObject() else { continue }
                     trees.append(tree)
                 }
                 print("Documentos carregados")
@@ -59,49 +58,60 @@ class TreeServices {
         }
     }
     
-    func update(tree: Tree, data: [String: Any], completion: @escaping (Error?) -> Void) {
-        let document = collectionRef?.document(tree.id ?? "None")
-        document?.updateData(data) { error in
-            if let error = error {
-                completion(error)
-            } else {
-                print("Documento atualizado")
-            }
-        }
+    public func read(treeFB: TreeFB, completion: @escaping (Tree) -> Void) {
         
+        var treeImages: [UIImage] = []
+        storage.download(imagesID: treeFB.imagesID) { images in
+            treeImages = images
+            let tree = Tree(tree: treeFB, images: treeImages)
+            completion(tree)
+        }
     }
     
-    private func addImageID(tree: Tree, imageID: String, completion: @escaping(Error?) -> Void) {
+    
+    func update(tree: TreeFB, data: [String: Any], completion: @escaping (Error?) -> Void) {
         let document = collectionRef?.document(tree.id ?? "None")
-        print(document?.documentID)
+        document?.updateData(data) { error in
+            completion(error)
+        }
+    }
+    
+    private func addImageID(tree: TreeFB, imageID: String, completion: @escaping(Error?) -> Void) {
+        let document = collectionRef?.document(tree.id ?? "None")
         document?.updateData([
             "imagesID" : FieldValue.arrayUnion([imageID])
         ]) { error in
-            if let error = error {
-                completion(error)
-            }
+            completion(error)
         }
     }
     
-    private func addImage(tree: Tree, treeImage: UIImage) {
+    
+    private func addImage(tree: TreeFB, treeImages: [UIImage]) {
+        if treeImages.count == 0 {
+            return
+        }
+        
+        let image = treeImages[0]
+        let newImages = Array(treeImages[1...])
         let storage = StorageServices()
-        storage.upload(treeImage: treeImage) { result in
+        storage.upload(treeImage: image) { result in
             switch result {
             case let .success(id):
                 self.addImageID(tree: tree, imageID: id) { error in
-                    if let error = error {
-                        print("Não foi possível atualizar o id da imagem na árvore \(tree.name) \(error.localizedDescription)")
+                    if error != nil {
+                        print("addImageID: Não foi possível atualizar o id da imagem na árvore \(tree.name)")
                     } else {
-                        print("Imagem adicionada a árvore \(tree.name)")
+                        print("addImageID: Imagem adicionada a árvore \(tree.name)")
                     }
                 }
-            case let .failure(error):
-                print("Não foi possível dar upload na imagem da árvore \(tree.name) \(error.localizedDescription)")
+            case .failure(_):
+                print("addImageID: Não foi possível dar upload na imagem da árvore \(tree.name)")
             }
+            self.addImage(tree: tree, treeImages: newImages)
         }
     }
     
-    func delete(tree: Tree, completion: @escaping (Error?) -> Void) {
+    func delete(tree: TreeFB, completion: @escaping (Error?) -> Void) {
         collectionRef?.document(tree.id ?? "None").delete() { (error) in
             if let error = error {
                 completion(error)
@@ -116,7 +126,7 @@ class TreeServices {
 
 extension TreeServices {
     //Use essa função para testar o firebase
-    func testes(tree: Tree) {
+    func testes(tree: TreeFB) {
         self.create(tree: tree, treeImages: []) { error in
             if let error = error {
                 print("Não foi possível criar a árvore \(error.localizedDescription)")

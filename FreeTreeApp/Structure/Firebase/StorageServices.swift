@@ -11,6 +11,7 @@ import FirebaseStorage
 class StorageServices {
     private let collectionName = "images"
     private let storage = Storage.storage()
+    private var group:DispatchGroup?
     
     public func upload(treeImage: UIImage, completion: @escaping (Result<String, Error>) -> Void) {
         let id = UUID.init().uuidString
@@ -29,6 +30,36 @@ class StorageServices {
             }
         }
     }
+    
+    public func download(imagesID: [String], completion: @escaping ([UIImage]) -> Void) {
+        var images: [UIImage] = []
+        group = DispatchGroup()
+        for _ in imagesID {
+            group?.enter()
+        }
+        
+        group?.notify(queue: DispatchQueue.global()) {
+            print("Terminei todas as imagens!!!")
+            completion(images)
+        }
+        
+        let semaphore = DispatchSemaphore(value: 1)
+        for id in imagesID {
+            download(imageID: id) { [weak self] result in
+                switch result {
+                case let .success(image):
+                    semaphore.wait()
+                    images.append(image)
+                    semaphore.signal()
+                    self?.group?.leave()
+                case .failure:
+                    print("Não foi possível baixar a foto da árvore atual")
+                    self?.group?.leave()
+                }
+            }
+        }
+    }
+    
     
     public func download(imageID: String, completion: @escaping (Result<UIImage, Error>) -> Void) {
         let imageRef = storage.reference(withPath: "\(imageID).jpg")
