@@ -9,13 +9,8 @@ import SwiftUI
 
 struct FavoriteList: View {
     weak var navigationController: UINavigationController?
-    let allTrees: [Tree]
     
-    init (
-        allTrees: [Tree]
-    ) {
-        self.allTrees = allTrees
-    }
+    @ObservedObject var treeViewModel: TreeViewModel
 
     func cellFor(tree: Tree) -> some View {
         return ZStack(alignment: .bottom) {
@@ -39,11 +34,15 @@ struct FavoriteList: View {
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 8) {
-                ForEach(allTrees.prefix(3)) { tree in
+                ForEach(treeViewModel.favorites) { tree in
                     cellFor(tree: tree)
                 }
                 
-                Button(action: {}) {
+                Button(action: {
+                    
+                    //TODO: Present add to favorites sheet
+                    
+                }) {
                     VStack(spacing: 8) {
                         Image(systemName: "plus")
                             .font(.largeTitle.weight(.semibold))
@@ -59,17 +58,5 @@ struct FavoriteList: View {
             }
             .padding(.horizontal, 20)
         }
-    }
-}
-
-extension FavoriteList {
-    struct Constants {
-        static let white: Color = Color(uiColor: .init(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.9))
-    }
-}
-
-struct FavoriteList_Previews: PreviewProvider {
-    static var previews: some View {
-        FavoriteList(allTrees: .init())
     }
 }
