@@ -9,15 +9,15 @@ import SwiftUI
 
 struct FavoriteList: View {
     weak var navigationController: UINavigationController?
-    let allTrees: [Tree]
+    let allTrees: [TreeFB]
     
     init (
-        allTrees: [Tree]
+        allTrees: [TreeFB]
     ) {
         self.allTrees = allTrees
     }
 
-    func cellFor(tree: Tree) -> some View {
+    func cellFor(tree: TreeFB) -> some View {
         return ZStack(alignment: .bottom) {
             Image("treeExample")
                 .resizable()

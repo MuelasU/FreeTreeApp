@@ -10,13 +10,13 @@ import SwiftUI
 struct RecentList: View {
     weak var navigationController: UINavigationController?
 
-    let allTrees: [Tree]
+    let allTrees: [TreeFB]
 
-    init ( allTrees: [Tree]) {
+    init ( allTrees: [TreeFB]) {
         self.allTrees = allTrees
     }
     
-    func rowFor(tree: Tree) -> some View {
+    func rowFor(tree: TreeFB) -> some View {
         HStack {
             Image("treeExample")
                 .resizable()
