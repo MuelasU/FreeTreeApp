@@ -8,6 +8,7 @@ import UIKit
 import MapKit
 
 protocol MapViewDelegate: AnyObject {
+    func didTapCreateTreeButton()
 }
 
 protocol MapViewConfig: AnyObject {
@@ -42,6 +43,20 @@ final class MapView: UIView, MKMapViewDelegate {
 
         return mapView
     }()
+    
+    var button: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "treeIcon"), for: .normal)
+        button.backgroundColor = .orange
+        button.layer.cornerRadius = 10
+        button.addTarget(self, action: #selector(didTapCreateTreeButton), for: .touchUpInside)
+
+        return button
+    }()
+    
+    @objc func didTapCreateTreeButton() {
+        delegate?.didTapCreateTreeButton()
+    }
 
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         guard let tree = view.annotation as? TreeAnnotation else {
@@ -55,12 +70,12 @@ final class MapView: UIView, MKMapViewDelegate {
         // TODO: it should probably go to tree information
         tree.mapItem?.openInMaps(launchOptions: launchOptions)
     }
-
 }
 
 extension MapView: ViewCodeContract {
     func setupHierarchy() {
         addSubview(mapView)
+        addSubview(button)
     }
 
     func setupConstraints() {
@@ -69,6 +84,11 @@ extension MapView: ViewCodeContract {
              view.bottomAnchor.constraint(equalTo: bottomAnchor),
              view.leadingAnchor.constraint(equalTo: leadingAnchor),
              view.trailingAnchor.constraint(equalTo: trailingAnchor)]
+        }
+        
+        button.constraint { view in
+            [view.topAnchor.constraint(equalTo: topAnchor, constant: 60),
+             view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)]
         }
     }
 }

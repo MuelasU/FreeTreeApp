@@ -35,8 +35,10 @@
 		591938EE2861F8D500264B04 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 591938ED2861F8D500264B04 /* FirebaseStorage */; };
 		5967DCAA2861F26A00451C6D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5967DCA92861F26A00451C6D /* GoogleService-Info.plist */; };
 		59B4C0062863594C00563E60 /* TreeServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B4C0052863594C00563E60 /* TreeServices.swift */; };
+		7312B3BC287C4774009FFAEF /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7312B3BB287C4774009FFAEF /* ImagePicker.swift */; };
 		732A94B72869D05B0097AFFA /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732A94B62869D05B0097AFFA /* MapView.swift */; };
 		732A94B92869D0C10097AFFA /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732A94B82869D0C10097AFFA /* MapViewController.swift */; };
+		738B86E0287871F4002602AB /* TreeRegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738B86DF287871F4002602AB /* TreeRegisterView.swift */; };
 		AB4C0659B110DB0F1DB71F73 /* Pods_FreeTreeApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55DD6D7363232430C92C35B0 /* Pods_FreeTreeApp.framework */; };
 		EEBD82F2287319FE006AE4FA /* TreeAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBD82F1287319FE006AE4FA /* TreeAnnotation.swift */; };
 		EEBD82F428731A50006AE4FA /* TreeMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBD82F328731A50006AE4FA /* TreeMarkerView.swift */; };
@@ -74,8 +76,10 @@
 		EEBD82F328731A50006AE4FA /* TreeMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeMarkerView.swift; sourceTree = "<group>"; };
 		5967DCA92861F26A00451C6D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		59B4C0052863594C00563E60 /* TreeServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeServices.swift; sourceTree = "<group>"; };
+		7312B3BB287C4774009FFAEF /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		732A94B62869D05B0097AFFA /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		732A94B82869D0C10097AFFA /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		738B86DF287871F4002602AB /* TreeRegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeRegisterView.swift; sourceTree = "<group>"; };
 		F12C4569DD3D0F4FF5BAE880 /* Pods-FreeTreeApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FreeTreeApp.debug.xcconfig"; path = "Target Support Files/Pods-FreeTreeApp/Pods-FreeTreeApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -131,6 +135,7 @@
 		28C0B8EE2861EA6000F48FCA /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				738B86DE287871C7002602AB /* TreeRegisterView */,
 				3F95B1162874814300BEDF69 /* Utils */,
 				236B75F52869EAD8009885DF /* HomeView */,
 				732A94BA2869D0DB0097AFFA /* ViewMap */,
@@ -234,6 +239,15 @@
 				732A94B82869D0C10097AFFA /* MapViewController.swift */,
 			);
 			path = ViewMap;
+			sourceTree = "<group>";
+		};
+		738B86DE287871C7002602AB /* TreeRegisterView */ = {
+			isa = PBXGroup;
+			children = (
+				738B86DF287871F4002602AB /* TreeRegisterView.swift */,
+				7312B3BB287C4774009FFAEF /* ImagePicker.swift */,
+			);
+			path = TreeRegisterView;
 			sourceTree = "<group>";
 		};
 		86F68E218976289595452229 /* Frameworks */ = {
@@ -400,6 +414,7 @@
 				3FF4B60F28608DA800E3C0E5 /* AppDelegate.swift in Sources */,
 				28C0B8ED2861EA2C00F48FCA /* UIKit+Extensions.swift in Sources */,
 				3F3EFDF628648EC90093F657 /* Storable.swift in Sources */,
+				738B86E0287871F4002602AB /* TreeRegisterView.swift in Sources */,
 				3F95B1182874815900BEDF69 /* AnimationCompletion.swift in Sources */,
 				23DE3AE228707095007EA77A /* HomeView.swift in Sources */,
 				3F7E8FCA286204910057B59E /* Tree.swift in Sources */,
@@ -421,6 +436,7 @@
 				3FF4B61128608DA800E3C0E5 /* SceneDelegate.swift in Sources */,
 				EEBD82F2287319FE006AE4FA /* TreeAnnotation.swift in Sources */,
 				28C0B8F12861EA8100F48FCA /* ExampleView.swift in Sources */,
+				7312B3BC287C4774009FFAEF /* ImagePicker.swift in Sources */,
 				3F3EFDF428648EAD0093F657 /* Coder.swift in Sources */,
 				23742B8E2873166900A83327 /* SearchBar.swift in Sources */,
 			);
@@ -562,7 +578,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = P952S3W7DW;
+				DEVELOPMENT_TEAM = 957V8XAP33;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FreeTreeApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -591,7 +607,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = P952S3W7DW;
+				DEVELOPMENT_TEAM = 957V8XAP33;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FreeTreeApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
