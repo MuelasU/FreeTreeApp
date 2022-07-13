@@ -1,10 +1,9 @@
 //
-//  ViewMap.swift
+//  MapView.swift
 //  FreeTreeApp
 //
-//  Created by Caroline Andreoni Barcat Intaschi on 27/06/22.
+//  Created by Caroline Andreoni Barcat Intaschi on 21/06/22.
 //
-
 import UIKit
 import MapKit
 
@@ -12,12 +11,14 @@ protocol MapViewDelegate: AnyObject {
     func didTapCreateTreeButton()
 }
 
-protocol MapViewConfig {
+protocol MapViewConfig: AnyObject {
+    func treePins(_ treesInfo: [TreeAnnotation])
+
     func setRegion(region: MKCoordinateRegion)
 }
 
-final class MapView: UIView {
-    weak var delegate: MapViewDelegate?
+final class MapView: UIView, MKMapViewDelegate {
+    private weak var delegate: MapViewDelegate?
 
     init(delegate: MapViewDelegate) {
         super.init(frame: .zero)
@@ -29,14 +30,16 @@ final class MapView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    var mapView: MKMapView = {
+    private lazy var mapView: MKMapView = {
         let mapView = MKMapView()
+        mapView.delegate = self
 
         mapView.mapType = MKMapType.standard
         mapView.isZoomEnabled = true
         mapView.isScrollEnabled = true
         mapView.isPitchEnabled = true
         mapView.setUserTrackingMode(.followWithHeading, animated: true)
+        mapView.register(TreeMarkerView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
 
         return mapView
     }()
@@ -56,10 +59,19 @@ final class MapView: UIView {
     }
 }
 
-extension MapView: MapViewConfig {
-    func setRegion(region: MKCoordinateRegion) {
-        mapView.setRegion(region, animated: true)
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        guard let tree = view.annotation as? TreeAnnotation else {
+            return
+        }
+
+        let launchOptions = [
+            MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving
+        ]
+
+        // TODO: it should probably go to tree information
+        tree.mapItem?.openInMaps(launchOptions: launchOptions)
     }
+
 }
 
 extension MapView: ViewCodeContract {
@@ -80,5 +92,15 @@ extension MapView: ViewCodeContract {
             [view.topAnchor.constraint(equalTo: topAnchor, constant: 60),
              view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)]
         }
+    }
+}
+
+extension MapView: MapViewConfig {
+    func treePins(_ treesInfo: [TreeAnnotation]) {
+        mapView.addAnnotations(treesInfo)
+    }
+
+    func setRegion(region: MKCoordinateRegion) {
+        mapView.setRegion(region, animated: true)
     }
 }
