@@ -24,7 +24,7 @@ class MapViewController: UIViewController {
     
     override func loadView() {
         self.view = MapView(delegate: self)
-        mapConfig = self.view as? MapViewConfig
+        mapViewConfig = self.view as? MapViewConfig
         followUserLocation()
     }
     
@@ -68,7 +68,7 @@ class MapViewController: UIViewController {
         
         configureLocationManager()
       
-        mapConfig?.treePins([tree1, tree2, tree3])
+        mapViewConfig?.treePins([tree1, tree2, tree3])
     }
     
     
@@ -86,13 +86,14 @@ class MapViewController: UIViewController {
             let region = MKCoordinateRegion.init(center: location.coordinate,
                                                  latitudinalMeters: 100,
                                                  longitudinalMeters: 100)
-            mapConfig?.setRegion(region: region)
+            mapViewConfig?.setRegion(region: region)
         }
     }
     
     @objc func openSwiftUIScreen() {
-        let swiftUIViewController = UIHostingController(rootView: HomeView(navigationController: self.navigationController, viewModel: .init()))
+        let swiftUIViewController = UIHostingController(rootView: HomeView(navigationController: self.navigationController, viewModel: .init(), treesStorage: treesStorage))
         self.navigationController?.pushViewController(swiftUIViewController, animated: true)
+    }
 
     public func getTrees(completion: ([Tree]) -> Void) {
         let treeServices = TreeServices()
@@ -122,7 +123,7 @@ extension MapViewController: CLLocationManagerDelegate {
             let region = MKCoordinateRegion.init(center: location.coordinate,
                                                  latitudinalMeters: 100,
                                                  longitudinalMeters: 100)
-            mapConfig?.setRegion(region: region)
+            mapViewConfig?.setRegion(region: region)
         }
     }
 }
@@ -130,3 +131,4 @@ extension MapViewController: CLLocationManagerDelegate {
 extension MapViewController: MapViewDelegate {
     // TODO: Remove delagate extention if not needed in the future
 }
+
