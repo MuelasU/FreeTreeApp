@@ -22,6 +22,7 @@ class MapViewController: UIViewController {
     var mapViewConfig: MapViewConfig?
     var userAdress: String = ""
     var treesStorage = TreesStorage()
+    
     override func loadView() {
         self.view = MapView(delegate: self)
         mapViewConfig = self.view as? MapViewConfig
@@ -151,6 +152,8 @@ class MapViewController: UIViewController {
         else {
             // No location was available.
             completionHandler("Wasn't able to get your location")
+        }
+    }
             
     @objc func openSwiftUIScreen() {
         let swiftUIViewController = UIHostingController(rootView: HomeView(navigationController: self.navigationController, viewModel: .init(), treesStorage: treesStorage))

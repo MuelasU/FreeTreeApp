@@ -57,7 +57,6 @@ final class MapView: UIView, MKMapViewDelegate {
     @objc func didTapCreateTreeButton() {
         delegate?.didTapCreateTreeButton()
     }
-}
 
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         guard let tree = view.annotation as? TreeAnnotation else {
@@ -71,7 +70,6 @@ final class MapView: UIView, MKMapViewDelegate {
         // TODO: it should probably go to tree information
         tree.mapItem?.openInMaps(launchOptions: launchOptions)
     }
-
 }
 
 extension MapView: ViewCodeContract {
