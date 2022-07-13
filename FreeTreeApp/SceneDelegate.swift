@@ -10,7 +10,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+// swiftlint:disable line_length
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
@@ -19,10 +19,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = UIWindow(frame: UIScreen.main.bounds)
 
         let window = UIWindow(windowScene: windowScene)
-        let navigationController = UINavigationController()
         let viewController = MapViewController()
-        navigationController.viewControllers = [viewController]
-        window.rootViewController = navigationController // Your initial view controller.
+        window.rootViewController = viewController // Your initial view controller.
         window.makeKeyAndVisible()
         self.window = window
     }

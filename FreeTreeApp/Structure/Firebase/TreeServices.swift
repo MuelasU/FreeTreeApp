@@ -67,8 +67,7 @@ class TreeServices {
             completion(tree)
         }
     }
-    
-    
+
     func update(tree: TreeFB, data: [String: Any], completion: @escaping (Error?) -> Void) {
         let document = collectionRef?.document(tree.id ?? "None")
         document?.updateData(data) { error in
