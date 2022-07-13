@@ -38,11 +38,6 @@ class StorageServices {
             group?.enter()
         }
         
-        group?.notify(queue: DispatchQueue.global()) {
-            print("Terminei todas as imagens!!!")
-            completion(images)
-        }
-        
         let semaphore = DispatchSemaphore(value: 1)
         for id in imagesID {
             download(imageID: id) { [weak self] result in
@@ -57,6 +52,11 @@ class StorageServices {
                     self?.group?.leave()
                 }
             }
+        }
+        
+        group?.notify(queue: DispatchQueue.global()) {
+            print("Terminei todas as imagens!!!")
+            completion(images)
         }
     }
     
