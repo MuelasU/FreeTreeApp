@@ -28,6 +28,7 @@ class TreeViewModel: ObservableObject {
         self.favorites = favoritesTrees
     }
     
+    //TODO: Test it
     func removeFromFavorites(tree: Tree) {
         if
             var userFavorites = favoritesId,

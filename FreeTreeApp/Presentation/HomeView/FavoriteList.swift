@@ -11,6 +11,7 @@ struct FavoriteList: View {
     weak var navigationController: UINavigationController?
     
     @ObservedObject var treeViewModel: TreeViewModel
+    @State var showAddFavoritesSheet = false
 
     func cellFor(tree: Tree) -> some View {
         return ZStack(alignment: .bottom) {
@@ -41,6 +42,7 @@ struct FavoriteList: View {
                 Button(action: {
                     
                     //TODO: Present add to favorites sheet
+                    showAddFavoritesSheet.toggle()
                     
                 }) {
                     VStack(spacing: 8) {
@@ -54,6 +56,9 @@ struct FavoriteList: View {
                     .frame(width: 120, height: 120)
                     .background(Color.white)
                     .cornerRadius(10)
+                }
+                .sheet(isPresented: $showAddFavoritesSheet) {
+                    AddFavorites(treeViewModel: treeViewModel, showAddFavoritesSheet: $showAddFavoritesSheet)
                 }
             }
             .padding(.horizontal, 20)
