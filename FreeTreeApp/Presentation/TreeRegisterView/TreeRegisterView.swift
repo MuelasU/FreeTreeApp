@@ -53,7 +53,7 @@ struct TreeRegistrationView: View {
                         let treeService = TreeServices()
                         
                         // create new tree
-                        treeService.create(tree: tree) { error in
+                        treeService.create(tree: tree, treeImages: []) { error in
                             if let error = error {
                                 print("Não foi possível criar a árvore \(error.localizedDescription)")
                                 self.presentAlert = false

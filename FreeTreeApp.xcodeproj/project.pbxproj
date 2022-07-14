@@ -35,6 +35,7 @@
 		591938EE2861F8D500264B04 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 591938ED2861F8D500264B04 /* FirebaseStorage */; };
 		5967DCAA2861F26A00451C6D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5967DCA92861F26A00451C6D /* GoogleService-Info.plist */; };
 		59B4C0062863594C00563E60 /* TreeServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B4C0052863594C00563E60 /* TreeServices.swift */; };
+		59FA5E25287460B600052B53 /* StorageServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FA5E24287460B600052B53 /* StorageServices.swift */; };
 		7312B3BC287C4774009FFAEF /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7312B3BB287C4774009FFAEF /* ImagePicker.swift */; };
 		732A94B72869D05B0097AFFA /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732A94B62869D05B0097AFFA /* MapView.swift */; };
 		732A94B92869D0C10097AFFA /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732A94B82869D0C10097AFFA /* MapViewController.swift */; };
@@ -72,6 +73,7 @@
 		55DD6D7363232430C92C35B0 /* Pods_FreeTreeApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FreeTreeApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5967DCA92861F26A00451C6D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		59B4C0052863594C00563E60 /* TreeServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeServices.swift; sourceTree = "<group>"; };
+		59FA5E24287460B600052B53 /* StorageServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageServices.swift; sourceTree = "<group>"; };
 		7312B3BB287C4774009FFAEF /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		732A94B62869D05B0097AFFA /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		732A94B82869D0C10097AFFA /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 			isa = PBXGroup;
 			children = (
 				59B4C0052863594C00563E60 /* TreeServices.swift */,
+				59FA5E24287460B600052B53 /* StorageServices.swift */,
 			);
 			path = Firebase;
 			sourceTree = "<group>";
@@ -412,6 +415,7 @@
 				3FF4B60F28608DA800E3C0E5 /* AppDelegate.swift in Sources */,
 				28C0B8ED2861EA2C00F48FCA /* UIKit+Extensions.swift in Sources */,
 				3F3EFDF628648EC90093F657 /* Storable.swift in Sources */,
+				59FA5E25287460B600052B53 /* StorageServices.swift in Sources */,
 				738B86E0287871F4002602AB /* TreeRegisterView.swift in Sources */,
 				3F95B1182874815900BEDF69 /* AnimationCompletion.swift in Sources */,
 				23DE3AE228707095007EA77A /* HomeView.swift in Sources */,
