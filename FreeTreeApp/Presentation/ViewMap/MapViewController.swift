@@ -43,10 +43,7 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         getTrees { trees in
-            //TODO: Remove after testing
-            if let trees = trees {
-                self.treesViewModel.addToFavorites(tree: trees[0])
-            }
+            print("Get \(String(describing: trees?.count)) trees")
         }
         addChild(sheetController)
         view.addSubview(sheetController.view)
