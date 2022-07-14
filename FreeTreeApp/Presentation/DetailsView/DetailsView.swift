@@ -74,7 +74,9 @@ struct DetailsView: View {
                 Spacer().frame(width: 10)
                 
                 Button(action: {
-                    print("Share it")
+                    let text = "Venha se conectar com a natureza você também!. Disponível para iOS 15.0 na App Store: https://apps.apple.com/app/XXXXXXXX"
+                    // Add activity call here
+                     
                 },label: {
                     Image(systemName: "square.and.arrow.up" )
                         .font(Font.system(size: 20, weight: .regular))
