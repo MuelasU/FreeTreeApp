@@ -9,8 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     weak var navigationController: UINavigationController?
-    @ObservedObject var viewModel: ViewModel
-    @ObservedObject var treesStorage: TreesStorage
+    @ObservedObject var treeViewModel: TreeViewModel
     @State private var searchingFor: String = ""
     
     private func sectionTitle(_ title: String) -> some View {
@@ -23,28 +22,27 @@ struct HomeView: View {
     
     var body: some View {
         VStack {
-            SearchBar(profilePic: viewModel.profilePic, searchingFor: self.$searchingFor)
+            SearchBar(profilePic: Configuration.profilePic, searchingFor: self.$searchingFor)
             
             if searchingFor.isEmpty {
                 VStack {
                     sectionTitle("Árvores favoritas")
-                    FavoriteList(allTrees: treesStorage.store)
+                    FavoriteList(treeViewModel: treeViewModel)
                     
                     Spacer(minLength: 20)
                     
                     sectionTitle("Recentes")
-                    RecentList(allTrees: treesStorage.store)
+                    RecentList(allTrees: treeViewModel.store)
                 }
             } else {
-                SearchResultList(trees: treesStorage.store, searchingFor: self.$searchingFor)
+                SearchResultList(trees: treeViewModel.store, searchingFor: self.$searchingFor)
             }
         }
     }
 }
 
 extension HomeView {
-    class ViewModel: ObservableObject {
-        var profilePic: String = "profilePic"
-        
+    enum Configuration {
+        static let profilePic = "profilePic"
     }
 }

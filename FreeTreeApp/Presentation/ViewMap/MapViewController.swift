@@ -20,8 +20,8 @@ class MapViewController: UIViewController {
     let tree3 = TreeAnnotation(title: "Carol Tree", status: 3, coordinate: CLLocationCoordinate2D(latitude: -22.9490, longitude: -43.2105))
     fileprivate var locationManager: CLLocationManager = CLLocationManager()
     var mapViewConfig: MapViewConfig?
+    var treesViewModel = TreeViewModel()
     var userAdress: String = ""
-    var treesStorage = TreesStorage()
     
     override func loadView() {
         self.view = MapView(delegate: self)
@@ -41,7 +41,7 @@ class MapViewController: UIViewController {
     
     private lazy var sheetController: UIViewController = {
         let sheet = Sheet(delegate: self, height: sheetHeightMode) {
-            HomeView(viewModel: .init(), treesStorage: self.treesStorage)
+            HomeView(treeViewModel: self.treesViewModel)
                 .frame(alignment: .top)
         }
         
@@ -53,9 +53,9 @@ class MapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getTrees(completion: {_ in print("Yes")})
-
-        addChild(sheetController)
+        getTrees { trees in
+            print("Get \(String(describing: trees?.count)) trees")
+        }
         view.addSubview(sheetController.view)
 
         NSLayoutConstraint.activate([
@@ -154,20 +154,17 @@ class MapViewController: UIViewController {
             completionHandler("Wasn't able to get your location")
         }
     }
-            
-    @objc func openSwiftUIScreen() {
-        let swiftUIViewController = UIHostingController(rootView: HomeView(navigationController: self.navigationController, viewModel: .init(), treesStorage: treesStorage))
-        self.navigationController?.pushViewController(swiftUIViewController, animated: true)
-    }
 
-    public func getTrees(completion: ([TreeFB]) -> Void) {
+    public func getTrees(completion: @escaping ([TreeFB]?) -> Void) {
         let treeServices = TreeServices()
         treeServices.read { result in
             switch result {
             case let .success(trees):
-                self.treesStorage.store = trees
+                self.treesViewModel.store = trees
+                completion(trees)
             case let .failure(error):
                 print("Não foi possível ler as árvores do banco \(error.localizedDescription)")
+                completion(nil)
             }
         }
     }
