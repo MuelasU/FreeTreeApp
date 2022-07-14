@@ -10,7 +10,7 @@ import CoreLocation
 import SwiftUI
 
 class TreesStorage: ObservableObject {
-    @Published var store: [Tree] = []
+    @Published var store: [TreeFB] = []
 }
 
 class MapViewController: UIViewController {
@@ -160,7 +160,7 @@ class MapViewController: UIViewController {
         self.navigationController?.pushViewController(swiftUIViewController, animated: true)
     }
 
-    public func getTrees(completion: ([Tree]) -> Void) {
+    public func getTrees(completion: ([TreeFB]) -> Void) {
         let treeServices = TreeServices()
         treeServices.read { result in
             switch result {

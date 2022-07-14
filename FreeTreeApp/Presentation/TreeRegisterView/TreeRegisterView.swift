@@ -47,7 +47,7 @@ struct TreeRegistrationView: View {
                     Spacer()
                     
                     Button("Salvar") {
-                        var tree = Tree(name: treeName, date: .now, tag: tags, advices: [])
+                        var tree = TreeFB(name: treeName, date: .now, tag: tags, advices: [])
                         
                         // save current user location in Tree object
                         let coordinate = Location(lat: lat, lgt: long)
@@ -55,7 +55,7 @@ struct TreeRegistrationView: View {
                         let treeService = TreeServices()
                         
                         // create new tree
-                        treeService.create(tree: tree) { error in
+                        treeService.create(tree: tree, treeImages: []) { error in
                             if let error = error {
                                 print("Não foi possível criar a árvore \(error.localizedDescription)")
                                 self.presentAlert = false
