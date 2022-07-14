@@ -10,50 +10,46 @@ import SwiftUI
 struct RecentList: View {
     weak var navigationController: UINavigationController?
 
-    let allTrees: [[String]]
+    let allTrees: [TreeFB]
 
-    init ( allTrees: [[String]]) {
+    init ( allTrees: [TreeFB]) {
         self.allTrees = allTrees
+    }
+    
+    func rowFor(tree: TreeFB) -> some View {
+        HStack {
+            Image("treeExample")
+                .resizable()
+                .scaledToFill()
+                .frame(width: 50, height: 50)
+                .clipShape(Circle())
+            
+            VStack {
+                Text(tree.name)
+                    .font(.headline)
+                    .lineLimit(1)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
+                //TODO: Change for adress string
+                Text(tree.name)
+                    .font(.caption)
+                    .lineLimit(1)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .foregroundColor(.secondary)
+            }
+        }
     }
 
     var body: some View {
-        Text("Recentes")
-            .bold()
-            .font(.system(size: 15))
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .foregroundColor(.gray)
-            .padding([.leading], 9)
-        ScrollView {
-            ForEach(0..<allTrees.count, id: \.self) { index in
-                HStack {
-                    Image(allTrees[index][2])
-                        .resizable()
-                        .scaledToFit()
-                        .cornerRadius(100)
-                    VStack {
-                        Text(allTrees[index][0])
-                            .font(.system(size: 17))
-                            .lineLimit(1)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding([.leading], 9)
-                        Text(allTrees[index][1])
-                            .font(.system(size: 11))
-                            .lineLimit(1)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding([.leading], 9)
-                            .foregroundColor(.gray)
-                    }
-                } .frame(height: 55, alignment: .center)
+        List {
+            ForEach(allTrees.prefix(3)) { tree in
+                rowFor(tree: tree)
             }
-        }.padding([.leading], 17)
-            .cornerRadius(10)
-            .background(Constants.white)
-    }
-}
-
-extension RecentList {
-    struct Constants {
-        static let white: Color = Color(uiColor: .init(red: 255/255, green: 255/255, blue: 255/255, alpha: 1))
+        }
+        .onAppear(perform: {
+                UITableView.appearance().contentInset.top = -35
+                UITableView.appearance().isScrollEnabled = false
+        })
     }
 }
 

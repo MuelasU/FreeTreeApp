@@ -41,7 +41,8 @@ protocol UpdatableIdentifiable: Identifiable {
     var id: Self.ID { get set }
 }
 
-struct Tree: Storable, UpdatableIdentifiable {
+struct TreeFB: Storable, UpdatableIdentifiable, Equatable {
+    
     typealias Item = Self
     static var itemName: String = "tree"
     @DocumentID var id: String?
@@ -50,7 +51,8 @@ struct Tree: Storable, UpdatableIdentifiable {
     let tag: [String]
     let advices: [TreeAdvice]
     var coordinates: Location = Location(lat: 0, lgt: 0)
-    private var images: [String] = []
+    //uuid de cada imagem
+    var imagesID: [String] = []
 
     init(name: String, date: Date, tag: [String], advices: [TreeAdvice]) {
         self.name = name
@@ -59,13 +61,22 @@ struct Tree: Storable, UpdatableIdentifiable {
         self.advices = advices
     }
 
-    var treeImages: [UIImage?] {
-        get { images.map { UIImage(named: $0) } }
-        // TODO: implement set logic: save images
-    }
-
     var location: CLLocationCoordinate2D {
         get { CLLocationCoordinate2D(latitude: coordinates.lat, longitude: coordinates.lgt) }
         set { coordinates = Location(lat: newValue.latitude, lgt: newValue.longitude) }
+    }
+    
+    static func == (lhs: TreeFB, rhs: TreeFB) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
+
+struct Tree {
+    let tree: TreeFB
+    let images: [UIImage]
+    
+    init(tree: TreeFB, images: [UIImage]) {
+        self.tree = tree
+        self.images = images
     }
 }
