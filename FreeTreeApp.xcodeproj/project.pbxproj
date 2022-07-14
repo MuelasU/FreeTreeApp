@@ -37,6 +37,9 @@
 		732A94B72869D05B0097AFFA /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732A94B62869D05B0097AFFA /* MapView.swift */; };
 		732A94B92869D0C10097AFFA /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732A94B82869D0C10097AFFA /* MapViewController.swift */; };
 		AB4C0659B110DB0F1DB71F73 /* Pods_FreeTreeApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55DD6D7363232430C92C35B0 /* Pods_FreeTreeApp.framework */; };
+		EEFB7CD4287D909600F88D10 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEFB7CD3287D909600F88D10 /* DetailsView.swift */; };
+		EEFB7CD7287D988E00F88D10 /* TagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEFB7CD6287D988E00F88D10 /* TagsView.swift */; };
+		EEFB7CD9287D98D100F88D10 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEFB7CD8287D98D100F88D10 /* Tag.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +71,9 @@
 		59B4C0052863594C00563E60 /* TreeServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeServices.swift; sourceTree = "<group>"; };
 		732A94B62869D05B0097AFFA /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		732A94B82869D0C10097AFFA /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		EEFB7CD3287D909600F88D10 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
+		EEFB7CD6287D988E00F88D10 /* TagsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsView.swift; sourceTree = "<group>"; };
+		EEFB7CD8287D98D100F88D10 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		F12C4569DD3D0F4FF5BAE880 /* Pods-FreeTreeApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FreeTreeApp.debug.xcconfig"; path = "Target Support Files/Pods-FreeTreeApp/Pods-FreeTreeApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -122,6 +128,7 @@
 		28C0B8EE2861EA6000F48FCA /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				EEFB7CD2287D906800F88D10 /* DetailsView */,
 				3F95B1162874814300BEDF69 /* Utils */,
 				236B75F52869EAD8009885DF /* HomeView */,
 				732A94BA2869D0DB0097AFFA /* ViewMap */,
@@ -162,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				3F7E8FC8286204810057B59E /* Data */,
+				EEFB7CD8287D98D100F88D10 /* Tag.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -249,6 +257,15 @@
 				28C0B8F02861EA8100F48FCA /* ExampleView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		EEFB7CD2287D906800F88D10 /* DetailsView */ = {
+			isa = PBXGroup;
+			children = (
+				EEFB7CD3287D909600F88D10 /* DetailsView.swift */,
+				EEFB7CD6287D988E00F88D10 /* TagsView.swift */,
+			);
+			path = DetailsView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -384,15 +401,18 @@
 				3F95B1182874815900BEDF69 /* AnimationCompletion.swift in Sources */,
 				23DE3AE228707095007EA77A /* HomeView.swift in Sources */,
 				3F7E8FCA286204910057B59E /* Tree.swift in Sources */,
+				EEFB7CD9287D98D100F88D10 /* Tag.swift in Sources */,
 				3F95B1152874601F00BEDF69 /* Sheet.swift in Sources */,
 				3F3EFDF628648EC90093F657 /* Storable.swift in Sources */,
 				3F7E8FCA286204910057B59E /* Tree.swift in Sources */,
 				732A94B72869D05B0097AFFA /* MapView.swift in Sources */,
+				EEFB7CD7287D988E00F88D10 /* TagsView.swift in Sources */,
 				23742B90287316B700A83327 /* FavoriteList.swift in Sources */,
 				23742B92287316DC00A83327 /* RecentList.swift in Sources */,
 				732A94B92869D0C10097AFFA /* MapViewController.swift in Sources */,
 				28C0B8F52861F95200F48FCA /* UIColor+Extensions.swift in Sources */,
 				23742B9628732BFF00A83327 /* ExampleSwiftUIView.swift in Sources */,
+				EEFB7CD4287D909600F88D10 /* DetailsView.swift in Sources */,
 				59B4C0062863594C00563E60 /* TreeServices.swift in Sources */,
 				28C0B8EA2861E9F600F48FCA /* ViewCoding.swift in Sources */,
 				3FF4B61128608DA800E3C0E5 /* SceneDelegate.swift in Sources */,

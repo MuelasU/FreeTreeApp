@@ -29,7 +29,7 @@ class MapViewController: UIViewController {
     
     private lazy var sheetController: UIViewController = {
         let sheet = Sheet(delegate: self, height: sheetHeightMode) {
-            HomeView(viewModel: .init())
+            DetailsView()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
 
