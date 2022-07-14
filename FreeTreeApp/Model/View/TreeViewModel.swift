@@ -8,15 +8,15 @@
 import Foundation
 
 class TreeViewModel: ObservableObject {
-    @Published var store: [Tree] = [] {
+    @Published var store: [TreeFB] = [] {
         didSet {
             //Update published
             favorites = favoritesTrees
         }
     }
-    @Published var favorites: [Tree] = []
+    @Published var favorites: [TreeFB] = []
     
-    func addToFavorites(tree: Tree) {
+    func addToFavorites(tree: TreeFB) {
         if var favorites =  favoritesId {
             favorites.append(tree.id!)
             //Update user defaults
@@ -29,7 +29,7 @@ class TreeViewModel: ObservableObject {
     }
     
     //TODO: Test it
-    func removeFromFavorites(tree: Tree) {
+    func removeFromFavorites(tree: TreeFB) {
         if
             var userFavorites = favoritesId,
             let idx = userFavorites.firstIndex(of: tree.id!)
@@ -52,7 +52,7 @@ class TreeViewModel: ObservableObject {
         Configuration.user.array(forKey: Configuration.favoritesKey) as? [String]
     }
     
-    private var favoritesTrees: [Tree] {
+    private var favoritesTrees: [TreeFB] {
         guard let favoritesId = favoritesId else {
             return []
         }

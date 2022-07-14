@@ -12,7 +12,7 @@ struct AddFavorites: View {
     
     @Binding var showAddFavoritesSheet: Bool
     
-    private func treeRow(tree: Tree) -> some View {
+    private func treeRow(tree: TreeFB) -> some View {
         HStack {
             Image("treeExample")
                 .resizable()
@@ -43,7 +43,7 @@ struct AddFavorites: View {
         }
     }
     
-    private var unfavorites: [Tree] {
+    private var unfavorites: [TreeFB] {
         treeViewModel.store.filter { tree in
             !treeViewModel.favorites.contains { $0.id == tree.id }
         }

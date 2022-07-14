@@ -9,7 +9,6 @@ import SwiftUI
 
 struct FavoriteList: View {
     weak var navigationController: UINavigationController?
-    let allTrees: [TreeFB]
     
     @ObservedObject var treeViewModel: TreeViewModel
     @State var showAddFavoritesSheet = false

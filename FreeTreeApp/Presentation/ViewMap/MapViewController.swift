@@ -154,11 +154,6 @@ class MapViewController: UIViewController {
             completionHandler("Wasn't able to get your location")
         }
     }
-            
-    @objc func openSwiftUIScreen() {
-        let swiftUIViewController = UIHostingController(rootView: HomeView(navigationController: self.navigationController, viewModel: .init(), treesStorage: treesStorage))
-        self.navigationController?.pushViewController(swiftUIViewController, animated: true)
-    }
 
     public func getTrees(completion: @escaping ([TreeFB]?) -> Void) {
         let treeServices = TreeServices()
