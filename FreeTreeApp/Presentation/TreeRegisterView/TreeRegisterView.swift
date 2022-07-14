@@ -55,7 +55,7 @@ struct TreeRegistrationView: View {
                         let treeService = TreeServices()
                         
                         // create new tree
-                        treeService.create(tree: tree, treeImages: []) { error in
+                        treeService.create(tree: tree, treeImages: selectedImages) { error in
                             if let error = error {
                                 print("Não foi possível criar a árvore \(error.localizedDescription)")
                                 self.presentAlert = false
@@ -103,14 +103,18 @@ struct TreeRegistrationView: View {
                             .frame(height: 100)
                     }
                     
-                    Section() {
-                        Button("Adicionar Imagem") {
-                            showingImagePicker = true
+                    Section(header: Text("Fotos")) {
+                        HStack{
+                            Image(systemName: "plus.circle.fill")
+                                .foregroundColor(.green)
+                            Button("Adicionar Fotos") {
+                                showingImagePicker = true
+                            }
                         }
                     }
                     
                     if !selectedImages.isEmpty {
-                        Section(header: Text("Fotos"), footer:
+                        Section(footer:
                                     ScrollView(.horizontal, showsIndicators: true) {
                             HStack {
                                 ForEach(selectedImages, id: \.self) { image in
@@ -136,9 +140,6 @@ struct TreeRegistrationView: View {
     
     func loadImage() {
         guard let inputImage = inputImage else { return }
-//        selectedImages.append(inputImage)
         selectedImages.insert(inputImage, at: 0)
-        print("COUNT")
-        print(selectedImages.count)
     }
 }
