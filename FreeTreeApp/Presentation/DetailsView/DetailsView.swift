@@ -77,11 +77,10 @@ struct DetailsView: View {
                 Button(action: {
                     let shareImage = images[0]
                     let shareText = "Venha se conectar com a natureza você também!. Disponível para iOS 15.0 na App Store: https://apps.apple.com/app/XXXXXXXX"
-                    
-                    let shareItem = shareImage.isEmpty ? [shareText] :[shareText, UIImage(contentsOfFile: shareImage)!]
+                    let shareItem = shareImage.isEmpty ? [shareText] :[shareText, UIImage(named: shareImage)!]
                     let activityVC = UIActivityViewController(activityItems: shareItem, applicationActivities: nil)
                     
-                    UIApplication.shared.windows.first?.rootViewController?.present(activityVC, animated: true, completion: nil)
+                    UIApplication.shared.windows.first?.rootViewController?.present(activityVC, animated: true)
                     
                 },label: {
                     Image(systemName: "square.and.arrow.up" )
