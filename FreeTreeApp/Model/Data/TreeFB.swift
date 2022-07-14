@@ -41,7 +41,7 @@ protocol UpdatableIdentifiable: Identifiable {
     var id: Self.ID { get set }
 }
 
-struct Tree: Storable, UpdatableIdentifiable {
+struct TreeFB: Storable, UpdatableIdentifiable {
     typealias Item = Self
     static var itemName: String = "tree"
     @DocumentID var id: String?

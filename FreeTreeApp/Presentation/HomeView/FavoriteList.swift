@@ -9,11 +9,12 @@ import SwiftUI
 
 struct FavoriteList: View {
     weak var navigationController: UINavigationController?
+    let allTrees: [TreeFB]
     
     @ObservedObject var treeViewModel: TreeViewModel
     @State var showAddFavoritesSheet = false
 
-    func cellFor(tree: Tree) -> some View {
+    func cellFor(tree: TreeFB) -> some View {
         return ZStack(alignment: .bottom) {
             Image("treeExample")
                 .resizable()
