@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct DetailsView: View {
     
@@ -74,9 +75,14 @@ struct DetailsView: View {
                 Spacer().frame(width: 10)
                 
                 Button(action: {
-                    let text = "Venha se conectar com a natureza você também!. Disponível para iOS 15.0 na App Store: https://apps.apple.com/app/XXXXXXXX"
-                    // Add activity call here
-                     
+                    let shareImage = images[0]
+                    let shareText = "Venha se conectar com a natureza você também!. Disponível para iOS 15.0 na App Store: https://apps.apple.com/app/XXXXXXXX"
+                    
+                    let shareItem = shareImage.isEmpty ? [shareText] :[shareText, UIImage(contentsOfFile: shareImage)!]
+                    let activityVC = UIActivityViewController(activityItems: shareItem, applicationActivities: nil)
+                    
+                    UIApplication.shared.windows.first?.rootViewController?.present(activityVC, animated: true, completion: nil)
+                    
                 },label: {
                     Image(systemName: "square.and.arrow.up" )
                         .font(Font.system(size: 20, weight: .regular))
@@ -105,12 +111,12 @@ struct DetailsView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 8) {
                     ForEach(images, id:\.self){ image in
-                    Image(image)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 200, height: 200)
-                        .clipShape(RoundedRectangle(cornerRadius: 5))
-                     }
+                        Image(image)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 200, height: 200)
+                            .clipShape(RoundedRectangle(cornerRadius: 5))
+                    }
                 }
             }
             
