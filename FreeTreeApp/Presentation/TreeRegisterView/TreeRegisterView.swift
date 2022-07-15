@@ -27,6 +27,8 @@ struct TreeRegistrationView: View {
     @State private var numberOfTags: Int = 0
     
     @State private var showingImagePicker = false
+    @State private var inputImage: UIImage?
+    @State private var selectedImages: [UIImage] = []
     
     var body: some View {
         ZStack {
@@ -53,7 +55,7 @@ struct TreeRegistrationView: View {
                         let treeService = TreeServices()
                         
                         // create new tree
-                        treeService.create(tree: tree, treeImages: []) { error in
+                        treeService.create(tree: tree, treeImages: selectedImages) { error in
                             if let error = error {
                                 print("Não foi possível criar a árvore \(error.localizedDescription)")
                                 self.presentAlert = false
@@ -65,10 +67,11 @@ struct TreeRegistrationView: View {
                     }
                     .padding(.trailing, 16)
                     .disabled(treeName.isEmpty)
-                }.padding(.top, 16)
+                }
+                .padding(.top, 16)
                 
                 Form {
-                    Section {
+                    Section(header: Text("")) {
                         TextField("Name", text: $treeName)
                             .frame(height: 44)
                             .background(Color.white)
@@ -99,8 +102,44 @@ struct TreeRegistrationView: View {
                         TextEditor(text: $complement)
                             .frame(height: 100)
                     }
+                    
+                    Section(header: Text("Fotos")) {
+                        HStack{
+                            Image(systemName: "plus.circle.fill")
+                                .foregroundColor(.green)
+                            Button("Adicionar Fotos") {
+                                showingImagePicker = true
+                            }
+                        }
+                    }
+                    
+                    if !selectedImages.isEmpty {
+                        Section(footer:
+                                    ScrollView(.horizontal, showsIndicators: true) {
+                            HStack {
+                                ForEach(selectedImages, id: \.self) { image in
+                                    Image(uiImage: image)
+                                        .resizable()
+                                        .frame(width: 130, height: 150)
+                                        .cornerRadius(10)
+                                }
+                            }
+                        }
+                        ) {
+                            EmptyView()
+                        }
+                    }
                 }
             }
+            .onChange(of: inputImage) { _ in loadImage() }
+            .sheet(isPresented: $showingImagePicker) {
+                ImagePicker(image: $inputImage)
+            }
         }
+    }
+    
+    func loadImage() {
+        guard let inputImage = inputImage else { return }
+        selectedImages.insert(inputImage, at: 0)
     }
 }
