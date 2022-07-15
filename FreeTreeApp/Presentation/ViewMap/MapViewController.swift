@@ -15,9 +15,9 @@ class TreesStorage: ObservableObject {
 
 class MapViewController: UIViewController {
     // TODO: Remove trees and use json
-    let tree1 = TreeAnnotation(title: "Odin Tree", status: 1, coordinate: CLLocationCoordinate2D(latitude: -22.9519, longitude: -43.2105))
-    let tree2 = TreeAnnotation(title: "Erci Tree", status: 2, coordinate: CLLocationCoordinate2D(latitude: -22.950, longitude: -43.2105))
-    let tree3 = TreeAnnotation(title: "Carol Tree", status: 3, coordinate: CLLocationCoordinate2D(latitude: -22.9490, longitude: -43.2105))
+    let tree1 = TreeAnnotation(title: "Odin Tree", status: 1, coordinate: CLLocationCoordinate2D(latitude: -22.81359, longitude: -47.06185))
+    let tree2 = TreeAnnotation(title: "Erci Tree", status: 2, coordinate: CLLocationCoordinate2D(latitude: -22.81179, longitude: -47.06565))
+    let tree3 = TreeAnnotation(title: "Carol Tree", status: 3, coordinate: CLLocationCoordinate2D(latitude: -22.81519, longitude: -47.06225))
     fileprivate var locationManager: CLLocationManager = CLLocationManager()
     var mapViewConfig: MapViewConfig?
     var treesViewModel = TreeViewModel()
@@ -94,6 +94,11 @@ class MapViewController: UIViewController {
     @objc func showRegisterTreeVC () {
         lookUpCurrentLocation { address in
             let bridge = TreeRegisterViewModel()
+            bridge.closeAction = {
+                self.getTrees(completion: { trees in
+                    print("Get \(String(describing: trees?.count)) trees")
+                })
+            }
             let userLong = self.locationManager.location?.coordinate.longitude as? Double ?? 0
             let userLat = self.locationManager.location?.coordinate.latitude as? Double ?? 0
             
