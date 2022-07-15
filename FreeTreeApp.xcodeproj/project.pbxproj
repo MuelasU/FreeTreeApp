@@ -48,6 +48,8 @@
 		EEFB7CD4287D909600F88D10 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEFB7CD3287D909600F88D10 /* DetailsView.swift */; };
 		EEFB7CD7287D988E00F88D10 /* TagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEFB7CD6287D988E00F88D10 /* TagsView.swift */; };
 		EEFB7CD9287D98D100F88D10 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEFB7CD8287D98D100F88D10 /* Tag.swift */; };
+		EEBD82F2287319FE006AE4FA /* TreeAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBD82F1287319FE006AE4FA /* TreeAnnotation.swift */; };
+		EEBD82F428731A50006AE4FA /* TreeMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBD82F328731A50006AE4FA /* TreeMarkerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +92,9 @@
 		EEFB7CD3287D909600F88D10 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 		EEFB7CD6287D988E00F88D10 /* TagsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsView.swift; sourceTree = "<group>"; };
 		EEFB7CD8287D98D100F88D10 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
+		738B86DF287871F4002602AB /* TreeRegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeRegisterView.swift; sourceTree = "<group>"; };
+		EEBD82F1287319FE006AE4FA /* TreeAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeAnnotation.swift; sourceTree = "<group>"; };
+		EEBD82F328731A50006AE4FA /* TreeMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeMarkerView.swift; sourceTree = "<group>"; };
 		F12C4569DD3D0F4FF5BAE880 /* Pods-FreeTreeApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FreeTreeApp.debug.xcconfig"; path = "Target Support Files/Pods-FreeTreeApp/Pods-FreeTreeApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -147,6 +152,7 @@
 			children = (
 				738B86DE287871C7002602AB /* TreeRegisterView */,
 				EEFB7CD2287D906800F88D10 /* DetailsView */,
+				738B86DE287871C7002602AB /* TreeRegisterView */,
 				3F95B1162874814300BEDF69 /* Utils */,
 				236B75F52869EAD8009885DF /* HomeView */,
 				732A94BA2869D0DB0097AFFA /* ViewMap */,
@@ -199,6 +205,7 @@
 				3F7E8FC8286204810057B59E /* Data */,
 				EEBD82F1287319FE006AE4FA /* TreeAnnotation.swift */,
 				EEFB7CD8287D98D100F88D10 /* Tag.swift */,
+				EEBD82F1287319FE006AE4FA /* TreeAnnotation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -314,6 +321,13 @@
 				EEFB7CD6287D988E00F88D10 /* TagsView.swift */,
 			);
 			path = DetailsView;
+		EEBD82F028731939006AE4FA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				732A94B62869D05B0097AFFA /* MapView.swift */,
+				EEBD82F328731A50006AE4FA /* TreeMarkerView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -456,6 +470,10 @@
 				3F6537DB287EE99500EB8379 /* TreeViewModel.swift in Sources */,
 				3F7E8FCA286204910057B59E /* Tree.swift in Sources */,
 				EEFB7CD9287D98D100F88D10 /* Tag.swift in Sources */,
+				3F7E8FCA286204910057B59E /* TreeFB.swift in Sources */,
+				3F3EFDF628648EC90093F657 /* Storable.swift in Sources */,
+				2353297C287459FD002601C9 /* SearchResultList.swift in Sources */,
+				3F7E8FCA286204910057B59E /* TreeFB.swift in Sources */,
 				3F95B1152874601F00BEDF69 /* Sheet.swift in Sources */,
 				3F3EFDF628648EC90093F657 /* Storable.swift in Sources */,
 				3F7E8FCA286204910057B59E /* TreeFB.swift in Sources */,
@@ -616,7 +634,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = P952S3W7DW;
+				DEVELOPMENT_TEAM = 957V8XAP33;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FreeTreeApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -645,7 +663,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = P952S3W7DW;
+				DEVELOPMENT_TEAM = 957V8XAP33;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FreeTreeApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
